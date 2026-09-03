@@ -10,5 +10,7 @@ aspnet-core/src/BlogApplication.Migrator/Logs/Logs.txt
 aspnet-core/build/outputs/
 aspnet-core/docker/mvc/Mvc-Logs/
 
-instructions.md
 prd.md
+QWEN.md 
+schema.md
+.qwen/
