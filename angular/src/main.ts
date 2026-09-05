@@ -68,6 +68,10 @@ const bootstrap = () => {
             providePrimeNG({
                 theme: {
                     preset: Lara,
+                    options: {
+                        // dark mode is driven by the app-level data-theme attribute (prd.md §6.3)
+                        darkModeSelector: '[data-theme="dark"]',
+                    },
                 },
             }),
         ],

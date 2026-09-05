@@ -6,7 +6,7 @@
                     <h1>{{ 'Roles' | localize }}</h1>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="javascript:;" class="btn bg-blue" (click)="createRole()">
+                    <a href="javascript:;" class="btn btn-primary" (click)="createRole()">
                         <i class="fa fa-plus-square"></i>
                         {{ 'Create' | localize }}
                     </a>
@@ -23,7 +23,7 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button type="button" class="btn bg-blue" (click)="list()">
+                                    <button type="button" class="btn btn-primary" (click)="list()">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -105,7 +105,7 @@
                         <!--<Primeng-TurboTable-End>-->
                     </div>
                 </div>
-                <div class="card-footer table-card-footer bg-white border-top">
+                <div class="card-footer table-card-footer border-top">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
                             <button class="btn btn-secondary" (click)="refresh()">

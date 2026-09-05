@@ -2,10 +2,6 @@ import { AppComponentBase } from 'shared/app-component-base';
 import { Component, Injector, ChangeDetectorRef } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 
-export class EntityDto {
-    id: number;
-}
-
 @Component({
     template: '',
 })
@@ -13,7 +9,7 @@ export abstract class PagedListingComponentBase<TEntityDto> extends AppComponent
     public pageSize = 10;
     public pageNumber = 1;
     public totalPages = 1;
-    public totalItems: number;
+    public totalItems = 0;
     public isTableLoading = false;
     protected cd: ChangeDetectorRef;
 

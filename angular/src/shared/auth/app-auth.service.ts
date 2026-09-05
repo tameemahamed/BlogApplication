@@ -12,9 +12,9 @@ import {
 
 @Injectable()
 export class AppAuthService {
-    authenticateModel: AuthenticateModel;
-    authenticateResult: AuthenticateResultModel;
-    rememberMe: boolean;
+    authenticateModel: AuthenticateModel = new AuthenticateModel();
+    authenticateResult: AuthenticateResultModel | null = null;
+    rememberMe = false;
 
     constructor(
         private _tokenAuthService: TokenAuthServiceProxy,

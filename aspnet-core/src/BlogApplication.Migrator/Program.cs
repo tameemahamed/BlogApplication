@@ -26,7 +26,7 @@ public class Program
 
             bootstrapper.Initialize();
 
-            using (var migrateExecuter = bootstrapper.IocManager.ResolveAsDisposable<MultiTenantMigrateExecuter>())
+            using (var migrateExecuter = bootstrapper.IocManager.ResolveAsDisposable<MigrateExecuter>())
             {
                 var migrationSucceeded = migrateExecuter.Object.Run(_quietMode);
 

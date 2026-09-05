@@ -7,7 +7,7 @@ public static class AppRoleConfig
 {
     public static void Configure(IRoleManagementConfig roleManagementConfig)
     {
-        // Static host roles
+        // Static host roles (single-tenant application)
 
         roleManagementConfig.StaticRoles.Add(
             new StaticRoleDefinition(
@@ -16,12 +16,24 @@ public static class AppRoleConfig
             )
         );
 
-        // Static tenant roles
+        roleManagementConfig.StaticRoles.Add(
+            new StaticRoleDefinition(
+                StaticRoleNames.Host.Moderator,
+                MultiTenancySides.Host
+            )
+        );
 
         roleManagementConfig.StaticRoles.Add(
             new StaticRoleDefinition(
-                StaticRoleNames.Tenants.Admin,
-                MultiTenancySides.Tenant
+                StaticRoleNames.Host.Author,
+                MultiTenancySides.Host
+            )
+        );
+
+        roleManagementConfig.StaticRoles.Add(
+            new StaticRoleDefinition(
+                StaticRoleNames.Host.User,
+                MultiTenancySides.Host
             )
         );
     }

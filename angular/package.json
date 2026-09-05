@@ -11,6 +11,7 @@
         "ng": "ng",
         "start": "ng serve --host 0.0.0.0 --port 4200 --no-hmr",
         "test": "ng test",
+        "nswag": "cd nswag/ && refresh.bat",
         "prettier": "npx prettier --write ."
     },
     "type": "module",

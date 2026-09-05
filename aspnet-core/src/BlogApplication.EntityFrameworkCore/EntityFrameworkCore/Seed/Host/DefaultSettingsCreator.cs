@@ -18,19 +18,14 @@ public class DefaultSettingsCreator
 
     public void Create()
     {
-        int? tenantId = null;
-
-        if (BlogApplicationConsts.MultiTenancyEnabled == false)
-        {
-            tenantId = MultiTenancyConsts.DefaultTenantId;
-        }
+        // Host settings (single-tenant application: settings always belong to the host)
 
         // Emailing
-        AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "admin@mydomain.com", tenantId);
-        AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "mydomain.com mailer", tenantId);
+        AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "admin@mydomain.com", null);
+        AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "mydomain.com mailer", null);
 
         // Languages
-        AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);
+        AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", null);
     }
 
     private void AddSettingIfNotExists(string name, string value, int? tenantId = null)

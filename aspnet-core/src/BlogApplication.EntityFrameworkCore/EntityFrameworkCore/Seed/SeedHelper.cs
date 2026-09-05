@@ -3,7 +3,6 @@ using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
 using Abp.MultiTenancy;
 using BlogApplication.EntityFrameworkCore.Seed.Host;
-using BlogApplication.EntityFrameworkCore.Seed.Tenants;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Transactions;
@@ -21,12 +20,8 @@ public static class SeedHelper
     {
         context.SuppressAutoSetTenantId = true;
 
-        // Host seed
+        // Host seed (single-tenant application)
         new InitialHostDbBuilder(context).Create();
-
-        // Default tenant seed (in host database).
-        new DefaultTenantBuilder(context).Create();
-        new TenantRoleAndUserBuilder(context, 1).Create();
     }
 
     private static void WithDbContext<TDbContext>(IIocResolver iocResolver, Action<TDbContext> contextAction)

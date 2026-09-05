@@ -67,8 +67,8 @@ export class CreateRoleDialogComponent extends AppComponentBase implements OnIni
         return this.defaultPermissionCheckedStatus;
     }
 
-    onPermissionChange(permission: PermissionDto, $event) {
-        this.checkedPermissionsMap[permission.name] = $event.target.checked;
+    onPermissionChange(permission: PermissionDto, $event: Event): void {
+        this.checkedPermissionsMap[permission.name] = ($event.target as HTMLInputElement).checked;
     }
 
     getCheckedPermissions(): string[] {

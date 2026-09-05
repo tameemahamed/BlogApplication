@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HeaderLeftNavbarComponent } from './header-left-navbar.component';
 import { HeaderLanguageMenuComponent } from './header-language-menu.component';
+import { HeaderThemeToggleComponent } from './header-theme-toggle.component';
 import { HeaderUserMenuComponent } from './header-user-menu.component';
 
 @Component({
@@ -8,6 +9,6 @@ import { HeaderUserMenuComponent } from './header-user-menu.component';
     templateUrl: './header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [HeaderLeftNavbarComponent, HeaderLanguageMenuComponent, HeaderUserMenuComponent],
+    imports: [HeaderLeftNavbarComponent, HeaderLanguageMenuComponent, HeaderThemeToggleComponent, HeaderUserMenuComponent],
 })
 export class HeaderComponent {}

@@ -1,5 +1,4 @@
 ﻿using Abp.Localization;
-using Abp.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +13,22 @@ public class DefaultLanguagesCreator
 
     private static List<ApplicationLanguage> GetInitialLanguages()
     {
-        var tenantId = BlogApplicationConsts.MultiTenancyEnabled ? null : (int?)MultiTenancyConsts.DefaultTenantId;
+        var tenantId = (int?)null;
         return new List<ApplicationLanguage>
         {
-            new ApplicationLanguage(tenantId, "en", "English", "famfamfam-flags us"),
-            new ApplicationLanguage(tenantId, "ar", "العربية", "famfamfam-flags sa"),
-            new ApplicationLanguage(tenantId, "de", "German", "famfamfam-flags de"),
-            new ApplicationLanguage(tenantId, "it", "Italiano", "famfamfam-flags it"),
-            new ApplicationLanguage(tenantId, "fa", "فارسی", "famfamfam-flags ir"),
-            new ApplicationLanguage(tenantId, "fr", "Français", "famfamfam-flags fr"),
-            new ApplicationLanguage(tenantId, "pt-BR", "Português", "famfamfam-flags br"),
-            new ApplicationLanguage(tenantId, "tr", "Türkçe", "famfamfam-flags tr"),
-            new ApplicationLanguage(tenantId, "ru", "Русский", "famfamfam-flags ru"),
-            new ApplicationLanguage(tenantId, "zh-Hans", "简体中文", "famfamfam-flags cn"),
-            new ApplicationLanguage(tenantId, "es-MX", "Español México", "famfamfam-flags mx"),
-            new ApplicationLanguage(tenantId, "nl", "Nederlands", "famfamfam-flags nl"),
-            new ApplicationLanguage(tenantId, "ja", "日本語", "famfamfam-flags jp")
+            new ApplicationLanguage(tenantId, "en", "English", null),
+            new ApplicationLanguage(tenantId, "ar", "العربية", null),
+            new ApplicationLanguage(tenantId, "de", "German", null),
+            new ApplicationLanguage(tenantId, "it", "Italiano", null),
+            new ApplicationLanguage(tenantId, "fa", "فارسی", null),
+            new ApplicationLanguage(tenantId, "fr", "Français", null),
+            new ApplicationLanguage(tenantId, "pt-BR", "Português", null),
+            new ApplicationLanguage(tenantId, "tr", "Türkçe", null),
+            new ApplicationLanguage(tenantId, "ru", "Русский", null),
+            new ApplicationLanguage(tenantId, "zh-Hans", "简体中文", null),
+            new ApplicationLanguage(tenantId, "es-MX", "Español México", null),
+            new ApplicationLanguage(tenantId, "nl", "Nederlands", null),
+            new ApplicationLanguage(tenantId, "ja", "日本語", null)
         };
     }
 

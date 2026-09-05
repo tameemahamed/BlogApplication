@@ -28,15 +28,16 @@ public class BlogApplicationCoreModule : AbpModule
 
         BlogApplicationLocalizationConfigurer.Configure(Configuration.Localization);
 
-        // Enable this line to create a multi-tenant application.
-        Configuration.MultiTenancy.IsEnabled = BlogApplicationConsts.MultiTenancyEnabled;
+        // Single-tenant application (see prd.md, Epic 1). The Tenant entity stays mapped
+        // because AbpZeroDbContext requires it, but no tenant context ever exists.
+        Configuration.MultiTenancy.IsEnabled = false;
 
         // Configure roles
         AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
 
         Configuration.Settings.Providers.Add<AppSettingProvider>();
 
-        Configuration.Localization.Languages.Add(new LanguageInfo("fa", "فارسی", "famfamfam-flags ir"));
+        Configuration.Localization.Languages.Add(new LanguageInfo("fa", "فارسی", null));
 
         Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = BlogApplicationConsts.DefaultPassPhrase;
         SimpleStringCipher.DefaultPassPhrase = BlogApplicationConsts.DefaultPassPhrase;

@@ -40,7 +40,7 @@ export class AppRouteGuard {
         }
 
         if (this._permissionChecker.isGranted('Pages.Users')) {
-            return '/app/admin/users';
+            return '/app/users';
         }
 
         return '/app/home';

@@ -78,8 +78,8 @@ export class CreateUserDialogComponent extends AppComponentBase implements OnIni
         return this.defaultRoleCheckedStatus;
     }
 
-    onRoleChange(role: RoleDto, $event) {
-        this.checkedRolesMap[role.normalizedName] = $event.target.checked;
+    onRoleChange(role: RoleDto, $event: Event): void {
+        this.checkedRolesMap[role.normalizedName] = ($event.target as HTMLInputElement).checked;
     }
 
     getCheckedRoles(): string[] {

@@ -13,7 +13,7 @@ import { FooterComponent } from './layout/footer.component';
     imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent extends AppComponentBase implements OnInit {
-    sidebarExpanded: boolean;
+    sidebarExpanded = false;
 
     constructor(
         injector: Injector,
@@ -30,17 +30,6 @@ export class AppComponent extends AppComponentBase implements OnInit {
 
         abp.event.on('abp.notifications.received', (userNotification) => {
             abp.notifications.showUiNotifyForUserNotification(userNotification);
-
-            // Desktop notification
-            Push.create('AbpZeroTemplate', {
-                body: userNotification.notification.data.message,
-                icon: abp.appPath + 'assets/app-logo-small.png',
-                timeout: 6000,
-                onClick: function () {
-                    window.focus();
-                    this.close();
-                },
-            });
         });
 
         this._layoutStore.sidebarExpanded.subscribe((value) => {

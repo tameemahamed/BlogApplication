@@ -33,12 +33,6 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard],
                     },
                     {
-                        path: 'tenants',
-                        loadChildren: () => import('./tenants/tenants.module').then((m) => m.TenantsModule),
-                        data: { permission: 'Pages.Tenants' },
-                        canActivate: [AppRouteGuard],
-                    },
-                    {
                         path: 'update-password',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
                         canActivate: [AppRouteGuard],

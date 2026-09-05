@@ -1,6 +1,5 @@
 ﻿using Abp.Authorization;
 using Abp.Authorization.Users;
-using Abp.MultiTenancy;
 using Abp.Runtime.Security;
 using BlogApplication.Authentication.JwtBearer;
 using BlogApplication.Authorization;
@@ -21,18 +20,15 @@ namespace BlogApplication.Controllers
     public class TokenAuthController : BlogApplicationControllerBase
     {
         private readonly LogInManager _logInManager;
-        private readonly ITenantCache _tenantCache;
         private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
         private readonly TokenAuthConfiguration _configuration;
 
         public TokenAuthController(
             LogInManager logInManager,
-            ITenantCache tenantCache,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
             TokenAuthConfiguration configuration)
         {
             _logInManager = logInManager;
-            _tenantCache = tenantCache;
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _configuration = configuration;
         }
@@ -42,8 +38,7 @@ namespace BlogApplication.Controllers
         {
             var loginResult = await GetLoginResultAsync(
                 model.UserNameOrEmailAddress,
-                model.Password,
-                GetTenancyNameOrNull()
+                model.Password
             );
 
             var accessToken = CreateAccessToken(CreateJwtClaims(loginResult.Identity));
@@ -57,26 +52,17 @@ namespace BlogApplication.Controllers
             };
         }
 
-        private string GetTenancyNameOrNull()
+        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password)
         {
-            if (!AbpSession.TenantId.HasValue)
-            {
-                return null;
-            }
-
-            return _tenantCache.GetOrNull(AbpSession.TenantId.Value)?.TenancyName;
-        }
-
-        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
-        {
-            var loginResult = await _logInManager.LoginAsync(usernameOrEmailAddress, password, tenancyName);
+            // Single-tenant application: no tenancy name, always host login.
+            var loginResult = await _logInManager.LoginAsync(usernameOrEmailAddress, password, null);
 
             switch (loginResult.Result)
             {
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, null);
             }
         }
 

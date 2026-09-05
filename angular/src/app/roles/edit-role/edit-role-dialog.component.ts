@@ -34,10 +34,11 @@ export class EditRoleDialogComponent extends AppComponentBase implements OnInit 
     @Output() onSave = new EventEmitter<any>();
 
     saving = false;
-    id: number;
+    // Set by the dialog opener before the dialog is shown.
+    id!: number;
     role = new RoleEditDto();
-    permissions: FlatPermissionDto[];
-    grantedPermissionNames: string[];
+    permissions!: FlatPermissionDto[];
+    grantedPermissionNames!: string[];
     checkedPermissionsMap: { [key: string]: boolean } = {};
 
     constructor(
@@ -69,8 +70,8 @@ export class EditRoleDialogComponent extends AppComponentBase implements OnInit 
         return _includes(this.grantedPermissionNames, permissionName);
     }
 
-    onPermissionChange(permission: FlatPermissionDto, $event) {
-        this.checkedPermissionsMap[permission.name] = $event.target.checked;
+    onPermissionChange(permission: FlatPermissionDto, $event: Event): void {
+        this.checkedPermissionsMap[permission.name] = ($event.target as HTMLInputElement).checked;
     }
 
     getCheckedPermissions(): string[] {

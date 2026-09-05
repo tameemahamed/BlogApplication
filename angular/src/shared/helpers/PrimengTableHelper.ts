@@ -8,11 +8,11 @@ export class PrimengTableHelper {
 
     defaultRecordsCountPerPage = 10;
 
-    resizableColumns: false;
+    resizableColumns = false;
 
     totalRecordsCount = 0;
 
-    records: any[];
+    records: any[] = [];
 
     isLoading = false;
 
@@ -69,7 +69,7 @@ export class PrimengTableHelper {
             return 0;
         }
 
-        return event.rows;
+        return event.rows ?? 0;
     }
 
     getSkipCount(paginator: Paginator, event: LazyLoadEvent): number {
@@ -81,7 +81,7 @@ export class PrimengTableHelper {
             return 0;
         }
 
-        return event.first;
+        return event.first ?? 0;
     }
 
     shouldResetPaging(event: LazyLoadEvent): boolean {

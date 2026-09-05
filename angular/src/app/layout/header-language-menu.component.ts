@@ -12,8 +12,8 @@ import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective
     imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective],
 })
 export class HeaderLanguageMenuComponent extends AppComponentBase implements OnInit {
-    languages: abp.localization.ILanguageInfo[];
-    currentLanguage: abp.localization.ILanguageInfo;
+    languages: abp.localization.ILanguageInfo[] = [];
+    currentLanguage!: abp.localization.ILanguageInfo;
 
     constructor(
         injector: Injector,

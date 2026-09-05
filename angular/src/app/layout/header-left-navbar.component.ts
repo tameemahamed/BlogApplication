@@ -11,7 +11,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     imports: [RouterLink, LocalizePipe],
 })
 export class HeaderLeftNavbarComponent implements OnInit {
-    sidebarExpanded: boolean;
+    sidebarExpanded = false;
 
     constructor(private _layoutStore: LayoutStoreService) {}
 

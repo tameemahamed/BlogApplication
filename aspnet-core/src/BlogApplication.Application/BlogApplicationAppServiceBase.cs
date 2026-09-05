@@ -2,7 +2,6 @@
 using Abp.IdentityFramework;
 using Abp.Runtime.Session;
 using BlogApplication.Authorization.Users;
-using BlogApplication.MultiTenancy;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading.Tasks;
@@ -14,8 +13,6 @@ namespace BlogApplication;
 /// </summary>
 public abstract class BlogApplicationAppServiceBase : ApplicationService
 {
-    public TenantManager TenantManager { get; set; }
-
     public UserManager UserManager { get; set; }
 
     protected BlogApplicationAppServiceBase()
@@ -32,11 +29,6 @@ public abstract class BlogApplicationAppServiceBase : ApplicationService
         }
 
         return user;
-    }
-
-    protected virtual Task<Tenant> GetCurrentTenantAsync()
-    {
-        return TenantManager.GetByIdAsync(AbpSession.GetTenantId());
     }
 
     protected virtual void CheckErrors(IdentityResult identityResult)

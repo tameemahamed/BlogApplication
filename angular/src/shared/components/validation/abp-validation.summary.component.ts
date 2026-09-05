@@ -9,8 +9,8 @@ import { AbpValidationError } from './abp-validation.api';
     standalone: true,
 })
 export class AbpValidationSummaryComponent extends AppComponentBase implements OnInit {
-    @Input() control: AbstractControl;
-    @Input() controlEl: ElementRef;
+    @Input() control?: AbstractControl;
+    @Input() controlEl?: ElementRef;
 
     defaultValidationErrors: Partial<AbpValidationError>[] = [
         { name: 'required', localizationKey: 'ThisFieldIsRequired' },
@@ -58,7 +58,7 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
     }
 
     ngOnInit() {
-        if (this.controlEl) {
+        if (this.controlEl && this.control) {
             this.control.valueChanges.subscribe(() => {
                 if (this.control.valid && (this.control.dirty || this.control.touched)) {
                     this._renderer.removeClass(this.controlEl, 'is-invalid');
@@ -72,7 +72,8 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
             this._renderer.addClass(this.controlEl, 'is-invalid');
         }
 
-        const propertyValue = this.control.errors[error.name][error.propertyKey];
+        const errorValue = this.control?.errors?.[error.name];
+        const propertyValue = errorValue ? errorValue[error.propertyKey] : undefined;
         return propertyValue ? this.l(error.localizationKey, propertyValue) : this.l(error.localizationKey);
     }
 }

@@ -7,7 +7,6 @@ import {
     NotifyService,
     SettingService,
     MessageService,
-    AbpMultiTenancyService,
 } from 'abp-ng2-module';
 
 import { AppSessionService } from '@shared/session/app-session.service';
@@ -22,7 +21,6 @@ export abstract class AppComponentBase {
     notify: NotifyService;
     setting: SettingService;
     message: MessageService;
-    multiTenancy: AbpMultiTenancyService;
     appSession: AppSessionService;
     elementRef: ElementRef;
     primengTableHelper: PrimengTableHelper;
@@ -34,7 +32,6 @@ export abstract class AppComponentBase {
         this.notify = injector.get(NotifyService);
         this.setting = injector.get(SettingService);
         this.message = injector.get(MessageService);
-        this.multiTenancy = injector.get(AbpMultiTenancyService);
         this.appSession = injector.get(AppSessionService);
         this.elementRef = injector.get(ElementRef);
         this.primengTableHelper = new PrimengTableHelper();

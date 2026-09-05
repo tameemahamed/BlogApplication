@@ -42,7 +42,7 @@ export class EqualValidator implements Validator {
         }
 
         // value equal and reverse
-        if (control2 && value === control2.value && this.isReverse) {
+        if (control2 && value === control2.value && this.isReverse && control2.errors) {
             delete control2.errors['validateEqual'];
             if (!Object.keys(control2.errors).length) {
                 control2.setErrors(null);

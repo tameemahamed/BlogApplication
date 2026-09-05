@@ -27,7 +27,7 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
     users: UserDto[] = [];
     keyword = '';
-    isActive: boolean | null;
+    isActive: boolean | undefined;
     advancedFiltersVisible = false;
 
     constructor(

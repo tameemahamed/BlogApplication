@@ -231,7 +231,7 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
         }
 
         var roles = await _userManager.GetRolesAsync(currentUser);
-        if (!roles.Contains(StaticRoleNames.Tenants.Admin))
+        if (!roles.Contains(StaticRoleNames.Host.Admin))
         {
             throw new UserFriendlyException("Only administrators may reset passwords.");
         }

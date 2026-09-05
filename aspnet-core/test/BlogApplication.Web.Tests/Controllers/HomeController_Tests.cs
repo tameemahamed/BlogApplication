@@ -11,7 +11,7 @@ public class HomeController_Tests : BlogApplicationWebTestBase
     [Fact]
     public async Task Index_Test()
     {
-        await AuthenticateAsync(null, new AuthenticateModel
+        await AuthenticateAsync(new AuthenticateModel
         {
             UserNameOrEmailAddress = "admin",
             Password = "123qwe"

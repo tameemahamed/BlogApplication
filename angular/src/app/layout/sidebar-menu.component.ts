@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import { Router, RouterEvent, NavigationEnd, PRIMARY_OUTLET, RouterLink } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Router, NavigationEnd, PRIMARY_OUTLET, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuItem } from '@shared/layout/menu-item';
 import { NgTemplateOutlet } from '@angular/common';
@@ -14,10 +13,9 @@ import { CollapseDirective } from 'ngx-bootstrap/collapse';
     imports: [NgTemplateOutlet, RouterLink, CollapseDirective],
 })
 export class SidebarMenuComponent extends AppComponentBase implements OnInit {
-    menuItems: MenuItem[];
+    menuItems: MenuItem[] = [];
     menuItemsMap: { [key: number]: MenuItem } = {};
     activatedMenuItems: MenuItem[] = [];
-    routerEvents: BehaviorSubject<RouterEvent> = new BehaviorSubject(undefined);
     homeRoute = '/app/about';
 
     constructor(
@@ -31,41 +29,23 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         this.menuItems = this.getMenuItems();
         this.patchMenuItems(this.menuItems);
 
-        this.router.events.subscribe((event: NavigationEnd) => {
-            const currentUrl = event.url !== '/' ? event.url : this.homeRoute;
-            const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root.children[PRIMARY_OUTLET];
-            if (primaryUrlSegmentGroup) {
-                this.activateMenuItems('/' + primaryUrlSegmentGroup.toString());
-            }
-        });
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd))
+            .subscribe((event: NavigationEnd) => {
+                const currentUrl = event.url !== '/' ? event.url : this.homeRoute;
+                const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root.children[PRIMARY_OUTLET];
+                if (primaryUrlSegmentGroup) {
+                    this.activateMenuItems('/' + primaryUrlSegmentGroup.toString());
+                }
+            });
     }
 
     getMenuItems(): MenuItem[] {
         return [
-            new MenuItem(this.l('About'), '/app/about', 'fas fa-info-circle'),
-            new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
-            new MenuItem(this.l('Roles'), '/app/roles', 'fas fa-theater-masks', 'Pages.Roles'),
-            new MenuItem(this.l('Tenants'), '/app/tenants', 'fas fa-building', 'Pages.Tenants'),
-            new MenuItem(this.l('Users'), '/app/users', 'fas fa-users', 'Pages.Users'),
-            new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
-                new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [
-                    new MenuItem('Home', 'https://aspnetboilerplate.com?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem('Templates', 'https://aspnetboilerplate.com/Templates?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem('Samples', 'https://aspnetboilerplate.com/Samples?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem(
-                        'Documents',
-                        'https://aspnetboilerplate.com/Pages/Documents?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                ]),
-                new MenuItem('ASP.NET Zero', '', 'fas fa-dot-circle', '', [
-                    new MenuItem('Home', 'https://aspnetzero.com?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem('Features', 'https://aspnetzero.com/Features?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem('Pricing', 'https://aspnetzero.com/Pricing?ref=abptmpl#pricing', 'far fa-circle'),
-                    new MenuItem('Faq', 'https://aspnetzero.com/Faq?ref=abptmpl', 'far fa-circle'),
-                    new MenuItem('Documents', 'https://aspnetzero.com/Documents?ref=abptmpl', 'far fa-circle'),
-                ]),
-            ]),
+            new MenuItem(this.l('HomePage'), '/app/home'),
+            new MenuItem(this.l('About'), '/app/about'),
+            new MenuItem(this.l('Roles'), '/app/roles', 'Pages.Roles'),
+            new MenuItem(this.l('Users'), '/app/users', 'Pages.Users'),
         ];
     }
 

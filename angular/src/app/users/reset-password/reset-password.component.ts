@@ -22,8 +22,9 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
 })
 export class ResetPasswordDialogComponent extends AppComponentBase implements OnInit {
     public isLoading = false;
-    public resetPasswordDto: ResetPasswordDto;
-    id: number;
+    // Set by the dialog opener before the dialog is shown.
+    public id!: number;
+    public resetPasswordDto!: ResetPasswordDto;
 
     constructor(
         injector: Injector,

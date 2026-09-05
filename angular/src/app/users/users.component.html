@@ -6,7 +6,7 @@
                     <h1>{{ 'Users' | localize }}</h1>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="javascript:;" class="btn bg-blue" (click)="createUser()">
+                    <a href="javascript:;" class="btn btn-primary" (click)="createUser()">
                         <i class="fa fa-plus-square"></i>
                         {{ 'Create' | localize }}
                     </a>
@@ -23,7 +23,7 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button type="button" class="btn bg-blue" (click)="list()">
+                                    <button type="button" class="btn btn-primary" (click)="list()">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -103,7 +103,7 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn bg-blue">
+                                <button type="button" class="btn btn-primary">
                                     {{ 'Search' | localize }}
                                 </button>
                                 <button type="button" class="btn btn-default float-right" (click)="clearFilters()">
@@ -203,7 +203,7 @@
                     </div>
                     <!--<Primeng-TurboTable-End>-->
                 </div>
-                <div class="card-footer table-card-footer bg-white border-top">
+                <div class="card-footer table-card-footer border-top">
                     <div class="row">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
                             <button class="btn btn-secondary" (click)="refresh()">

@@ -1,23 +1,18 @@
-import { AbpMultiTenancyService } from 'abp-ng2-module';
 import { Injectable } from '@angular/core';
 import {
     ApplicationInfoDto,
     GetCurrentLoginInformationsOutput,
     SessionServiceProxy,
-    TenantLoginInfoDto,
     UserLoginInfoDto,
 } from '@shared/service-proxies/service-proxies';
 
 @Injectable()
 export class AppSessionService {
-    private _user: UserLoginInfoDto;
-    private _tenant: TenantLoginInfoDto;
-    private _application: ApplicationInfoDto;
+    // Set by init() before the app renders (APP_INITIALIZER awaits it).
+    private _user!: UserLoginInfoDto;
+    private _application!: ApplicationInfoDto;
 
-    constructor(
-        private _sessionService: SessionServiceProxy,
-        private _abpMultiTenancyService: AbpMultiTenancyService
-    ) {}
+    constructor(private _sessionService: SessionServiceProxy) {}
 
     get application(): ApplicationInfoDto {
         return this._application;
@@ -27,25 +22,12 @@ export class AppSessionService {
         return this._user;
     }
 
-    get userId(): number {
+    get userId(): number | null {
         return this.user ? this.user.id : null;
     }
 
-    get tenant(): TenantLoginInfoDto {
-        return this._tenant;
-    }
-
-    get tenantId(): number {
-        return this.tenant ? this.tenant.id : null;
-    }
-
     getShownLoginName(): string {
-        const userName = this._user.userName;
-        if (!this._abpMultiTenancyService.isEnabled) {
-            return userName;
-        }
-
-        return (this._tenant ? this._tenant.tenancyName : '.') + '\\' + userName;
+        return this._user.userName;
     }
 
     init(): Promise<boolean> {
@@ -57,7 +39,6 @@ export class AppSessionService {
                     (result: GetCurrentLoginInformationsOutput) => {
                         this._application = result.application;
                         this._user = result.user;
-                        this._tenant = result.tenant;
 
                         resolve(true);
                     },
@@ -66,25 +47,5 @@ export class AppSessionService {
                     }
                 );
         });
-    }
-
-    changeTenantIfNeeded(tenantId?: number): boolean {
-        if (this.isCurrentTenant(tenantId)) {
-            return false;
-        }
-
-        abp.multiTenancy.setTenantIdCookie(tenantId);
-        location.reload();
-        return true;
-    }
-
-    private isCurrentTenant(tenantId?: number) {
-        if (!tenantId && this.tenant) {
-            return false;
-        } else if (tenantId && (!this.tenant || this.tenant.id !== tenantId)) {
-            return false;
-        }
-
-        return true;
     }
 }

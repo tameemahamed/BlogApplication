@@ -9,8 +9,8 @@ import { filter as _filter } from 'lodash-es';
     standalone: true,
 })
 export class AccountLanguagesComponent extends AppComponentBase implements OnInit {
-    languages: abp.localization.ILanguageInfo[];
-    currentLanguage: abp.localization.ILanguageInfo;
+    languages: abp.localization.ILanguageInfo[] = [];
+    currentLanguage!: abp.localization.ILanguageInfo;
 
     constructor(injector: Injector) {
         super(injector);

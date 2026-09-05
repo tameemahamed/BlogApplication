@@ -8,7 +8,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     imports: [NgxPaginationModule],
 })
 export class AbpPaginationControlsComponent {
-    @Input() id: string;
+    @Input() id?: string;
     @Input() maxSize = 7;
     @Input() previousLabel = 'Previous';
     @Input() nextLabel = 'Next';

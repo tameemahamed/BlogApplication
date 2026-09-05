@@ -20,11 +20,6 @@ public class SessionAppService : BlogApplicationAppServiceBase, ISessionAppServi
             }
         };
 
-        if (AbpSession.TenantId.HasValue)
-        {
-            output.Tenant = ObjectMapper.Map<TenantLoginInfoDto>(await GetCurrentTenantAsync());
-        }
-
         if (AbpSession.UserId.HasValue)
         {
             output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());

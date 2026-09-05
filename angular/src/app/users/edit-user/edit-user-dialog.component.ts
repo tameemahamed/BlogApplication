@@ -30,7 +30,8 @@ export class EditUserDialogComponent extends AppComponentBase implements OnInit 
     user = new UserDto();
     roles: RoleDto[] = [];
     checkedRolesMap: { [key: string]: boolean } = {};
-    id: number;
+    // Set by the dialog opener before the dialog is shown.
+    id!: number;
 
     constructor(
         injector: Injector,
@@ -63,8 +64,8 @@ export class EditUserDialogComponent extends AppComponentBase implements OnInit 
         return _includes(this.user.roleNames, normalizedName);
     }
 
-    onRoleChange(role: RoleDto, $event) {
-        this.checkedRolesMap[role.normalizedName] = $event.target.checked;
+    onRoleChange(role: RoleDto, $event: Event): void {
+        this.checkedRolesMap[role.normalizedName] = ($event.target as HTMLInputElement).checked;
     }
 
     getCheckedRoles(): string[] {

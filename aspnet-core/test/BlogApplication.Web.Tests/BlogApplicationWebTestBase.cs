@@ -1,8 +1,6 @@
 ﻿using Abp.AspNetCore.TestBase;
 using Abp.Authorization.Users;
-using Abp.Extensions;
 using Abp.Json;
-using Abp.MultiTenancy;
 using Abp.Web.Models;
 using BlogApplication.EntityFrameworkCore;
 using BlogApplication.Models.TokenAuth;
@@ -74,21 +72,10 @@ public abstract class BlogApplicationWebTestBase : AbpAspNetCoreIntegratedTestBa
     /// /api/TokenAuth/Authenticate
     /// TokenAuthController
     /// </summary>
-    /// <param name="tenancyName"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    protected async Task AuthenticateAsync(string tenancyName, AuthenticateModel input)
+    protected async Task AuthenticateAsync(AuthenticateModel input)
     {
-        if (tenancyName.IsNullOrWhiteSpace())
-        {
-            var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
-            if (tenant != null)
-            {
-                AbpSession.TenantId = tenant.Id;
-                Client.DefaultRequestHeaders.Add("Abp-TenantId", tenant.Id.ToString());  //Set TenantId
-            }
-        }
-
         var response = await Client.PostAsync("/api/TokenAuth/Authenticate",
             new StringContent(input.ToJsonString(), Encoding.UTF8, "application/json"));
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -110,11 +97,6 @@ public abstract class BlogApplicationWebTestBase : AbpAspNetCoreIntegratedTestBa
         LoginAsHost(AbpUserBase.AdminUserName);
     }
 
-    protected void LoginAsDefaultTenantAdmin()
-    {
-        LoginAsTenant(AbpTenantBase.DefaultTenantName, AbpUserBase.AdminUserName);
-    }
-
     protected void LoginAsHost(string userName)
     {
         AbpSession.TenantId = null;
@@ -126,28 +108,6 @@ public abstract class BlogApplicationWebTestBase : AbpAspNetCoreIntegratedTestBa
         if (user == null)
         {
             throw new Exception("There is no user: " + userName + " for host.");
-        }
-
-        AbpSession.UserId = user.Id;
-    }
-
-    protected void LoginAsTenant(string tenancyName, string userName)
-    {
-        var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
-        if (tenant == null)
-        {
-            throw new Exception("There is no tenant: " + tenancyName);
-        }
-
-        AbpSession.TenantId = tenant.Id;
-
-        var user =
-            UsingDbContext(
-                context =>
-                    context.Users.FirstOrDefault(u => u.TenantId == AbpSession.TenantId && u.UserName == userName));
-        if (user == null)
-        {
-            throw new Exception("There is no user: " + userName + " for tenant: " + tenancyName);
         }
 
         AbpSession.UserId = user.Id;

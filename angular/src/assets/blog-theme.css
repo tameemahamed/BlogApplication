@@ -1,0 +1,423 @@
+/* ==========================================================================
+   AbpBlog design tokens and app-shell theming (prd.md §6)
+
+   The six color tokens are the only colors permitted in the UI. Components
+   must reference these custom properties - never raw hex values. `--border`
+   and `--accent-contrast` are derived from palette tokens (muted text at
+   reduced opacity; the background color on top of the accent).
+   ========================================================================== */
+
+:root {
+    --bg: #f9f9fb;
+    --surface: #ffffff;
+    --text-primary: #1f2937;
+    --text-muted: #6b7280;
+    --accent: #4f46e5;
+    --link: #4338ca;
+    --border: rgba(107, 114, 128, 0.2);
+    --accent-contrast: #ffffff;
+}
+
+[data-theme='dark'] {
+    --bg: #121212;
+    --surface: #1e1e24;
+    --text-primary: #e5e7eb;
+    --text-muted: #9ca3af;
+    --accent: #818cf8;
+    --link: #a5b4fc;
+    --border: rgba(156, 163, 175, 0.25);
+    --accent-contrast: #121212;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link);
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   App shell - header
+   -------------------------------------------------------------------------- */
+
+.main-header {
+    background-color: var(--surface) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--text-muted);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+    color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   App shell - sidebar
+   -------------------------------------------------------------------------- */
+
+.main-sidebar {
+    background-color: var(--surface) !important;
+}
+
+.brand-link {
+    background-color: var(--surface) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand-text {
+    color: var(--text-primary);
+}
+
+.sidebar .user-panel .info a {
+    color: var(--text-primary);
+}
+
+.nav-sidebar .nav-link {
+    color: var(--text-muted);
+}
+
+.nav-sidebar .nav-link > p {
+    color: inherit;
+}
+
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link:focus {
+    color: var(--text-primary);
+}
+
+.nav-sidebar .nav-item .nav-link.active,
+.nav-sidebar .nav-item.menu-open .nav-link {
+    background-color: transparent;
+    color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   App shell - content and footer
+   -------------------------------------------------------------------------- */
+
+.content-wrapper {
+    background-color: var(--bg);
+}
+
+.main-footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Cards (login box, dialogs, list pages)
+   -------------------------------------------------------------------------- */
+
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.card-header,
+.card-footer {
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.login-page {
+    background-color: var(--bg) !important;
+}
+
+.login-logo a {
+    color: var(--accent);
+}
+
+/* AdminLTE styles .login-card-body directly (white background, gray text),
+   so the generic .card rules above never reach it */
+.login-card-body,
+.register-card-body {
+    background-color: var(--surface);
+    color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Dialogs (ngx-bootstrap modals) and tabs
+   -------------------------------------------------------------------------- */
+
+.modal-content {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: none; /* elevation comes from the surface color, not shadows (§6.2) */
+    color: var(--text-primary);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+.modal-title {
+    color: var(--text-primary);
+}
+
+.close {
+    text-shadow: none;
+}
+
+.close:hover {
+    color: var(--text-primary);
+}
+
+/* ngx-bootstrap tabset (dialog tab headers) */
+.nav-tabs {
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-tabs .nav-link {
+    color: var(--text-muted);
+    border-color: transparent;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+    color: var(--text-primary);
+    border-color: var(--border) var(--border) transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--accent);
+    background-color: var(--surface);
+    border-color: var(--border) var(--border) var(--surface);
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.form-control {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    background-color: var(--surface);
+    border-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.input-group-text {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.form-group.required .col-form-label:after {
+    color: var(--text-muted);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: var(--bg);
+    color: var(--text-muted);
+}
+
+/* Checkboxes and radios (list filters, role and permission checkboxes in dialogs) */
+.custom-control-label::before {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+.custom-control-input:disabled ~ .custom-control-label {
+    color: var(--text-muted);
+}
+
+.custom-control-input:disabled ~ .custom-control-label::before {
+    background-color: var(--bg);
+    border-color: var(--border);
+}
+
+/* Native checkboxes/radios rendered without custom-control markup */
+input[type='checkbox'],
+input[type='radio'] {
+    accent-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons - flat solid fills only, no gradients (prd.md §6.1)
+   -------------------------------------------------------------------------- */
+
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+    filter: brightness(0.93);
+}
+
+.btn-default {
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.btn-default:hover,
+.btn-default:focus {
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--text-primary);
+    filter: brightness(0.93);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:not(:disabled):not(.disabled):active {
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--text-primary);
+    filter: brightness(0.93);
+}
+
+/* --------------------------------------------------------------------------
+   Dropdowns
+   -------------------------------------------------------------------------- */
+
+.dropdown-menu {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.dropdown-item {
+    color: var(--text-primary);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--bg);
+    color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Tables and pagination
+   -------------------------------------------------------------------------- */
+
+.table {
+    color: var(--text-primary);
+}
+
+.table thead th,
+.table td,
+.table th {
+    border-color: var(--border);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--bg);
+    color: var(--text-primary);
+}
+
+.pagination .page-link {
+    background-color: var(--surface);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--bg);
+    color: var(--link);
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
+
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last,
+.p-paginator .p-paginator-current {
+    color: var(--text-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   SweetAlert (abp.notify / abp.message)
+   -------------------------------------------------------------------------- */
+
+.swal2-popup {
+    background-color: var(--surface);
+    color: var(--text-primary);
+}
+
+.swal2-title,
+.swal2-html-container {
+    color: var(--text-primary);
+}
+
+.swal2-actions button.swal2-confirm {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+    box-shadow: none;
+}
+
+.swal2-actions button.swal2-cancel {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.close {
+    color: var(--text-primary);
+}

@@ -13,7 +13,7 @@ import { SidebarMenuComponent } from './sidebar-menu.component';
     imports: [SidebarLogoComponent, SidebarUserPanelComponent, SidebarMenuComponent],
 })
 export class SidebarComponent implements OnInit {
-    sidebarExpanded: boolean;
+    sidebarExpanded = false;
 
     constructor(
         private renderer: Renderer2,
