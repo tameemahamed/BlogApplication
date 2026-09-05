@@ -5,18 +5,25 @@ import { PostServiceProxy, CreatePostInput } from '@shared/service-proxies/servi
 import { FormsModule } from '@angular/forms';
 import { AbpModalHeaderComponent } from '../../../shared/components/modal/abp-modal-header.component';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
-import { AbpModalFooterComponent } from '../../../shared/components/modal/abp-modal-footer.component';
+import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
     templateUrl: './create-post-dialog.component.html',
     standalone: true,
-    imports: [FormsModule, AbpModalHeaderComponent, AbpValidationSummaryComponent, AbpModalFooterComponent, LocalizePipe],
+    imports: [
+        FormsModule,
+        AbpModalHeaderComponent,
+        AbpValidationSummaryComponent,
+        MarkdownPipe,
+        LocalizePipe,
+    ],
 })
 export class CreatePostDialogComponent extends AppComponentBase {
     @Output() onSave = new EventEmitter<any>();
 
     saving = false;
+    previewMode = false;
     post = new CreatePostInput();
 
     constructor(
@@ -28,19 +35,33 @@ export class CreatePostDialogComponent extends AppComponentBase {
         super(injector);
     }
 
-    save(): void {
+    save(submitForReview: boolean): void {
         this.saving = true;
 
         this._postService.create(this.post).subscribe(
-            () => {
-                this.notify.info(this.l('PostCreated'));
-                this.bsModalRef.hide();
-                this.onSave.emit();
+            (result) => {
+                if (submitForReview) {
+                    this._postService.submit(result.id).subscribe(
+                        () => this.completeAfterSave(this.l('PostSubmitted')),
+                        // the draft was created; submit can be retried from the workspace
+                        () => this.completeAfterSave(this.l('PostCreated'))
+                    );
+                } else {
+                    this.completeAfterSave(this.l('PostCreated'));
+                }
             },
-            () => {
-                this.saving = false;
-                this.cd.detectChanges();
-            }
+            () => this.saveFailed()
         );
+    }
+
+    private completeAfterSave(message: string): void {
+        this.notify.info(message);
+        this.bsModalRef.hide();
+        this.onSave.emit();
+    }
+
+    private saveFailed(): void {
+        this.saving = false;
+        this.cd.detectChanges();
     }
 }

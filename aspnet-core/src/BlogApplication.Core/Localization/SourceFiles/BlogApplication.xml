@@ -158,6 +158,10 @@
     <text name="UnknownAuthor" value="Unknown author" />
     <text name="NoPosts" value="You have not created any posts yet." />
     <text name="NoPendingReviewPosts" value="There are no posts waiting for review." />
+    <text name="Write" value="Write" />
+    <text name="Preview" value="Preview" />
+    <text name="SaveAsDraft" value="Save as draft" />
+    <text name="ApprovedPostEditHint" value="Saving this post will return it to review." />
     <text name="Previous" value="Previous" />
     <text name="Next" value="Next" />
   </texts>

@@ -440,3 +440,80 @@ input[type='radio'] {
 .freeze-ui:before {
     border-color: transparent var(--accent) var(--accent);
 }
+
+/* --------------------------------------------------------------------------
+   Rendered Markdown (editor preview, post detail, comments - prd.md Epic 3)
+   -------------------------------------------------------------------------- */
+
+.markdown-preview {
+    color: var(--text-primary);
+    overflow-wrap: break-word;
+    min-height: 2rem;
+}
+
+.markdown-preview p {
+    margin-bottom: 0.75rem;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+    color: var(--text-primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.markdown-preview a {
+    color: var(--link);
+}
+
+.markdown-preview pre {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    overflow-x: auto;
+}
+
+.markdown-preview code {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.2rem;
+    color: var(--text-primary);
+    padding: 0.1rem 0.3rem;
+}
+
+.markdown-preview pre code {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.markdown-preview blockquote {
+    border-left: 3px solid var(--accent);
+    color: var(--text-muted);
+    padding-left: 1rem;
+    margin: 0.75rem 0;
+}
+
+.markdown-preview img {
+    max-width: 100%;
+}
+
+.markdown-preview table {
+    border-collapse: collapse;
+    margin-bottom: 0.75rem;
+}
+
+.markdown-preview th,
+.markdown-preview td {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+}
+
+.markdown-preview hr {
+    border-top: 1px solid var(--border);
+}

@@ -2,6 +2,7 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Entities;
 using Abp.Runtime.Session;
+using Abp.Runtime.Validation;
 using Abp.UI;
 using BlogApplication.Authorization.Roles;
 using BlogApplication.Authorization.Users;
@@ -73,6 +74,19 @@ public class PostAppService_Tests : BlogApplicationTestBase
     {
         var post = await CreatePostAsync("!!!");
         post.Slug.ShouldBe("post");
+    }
+
+    // prd.md E3-S4: oversized content is rejected server-side with a localized message
+    [Fact]
+    public async Task Should_Reject_Oversized_Content()
+    {
+        var input = new CreatePostInput
+        {
+            Title = "Oversized",
+            ContentMarkdown = new string('x', PostConsts.MaxContentLength + 1)
+        };
+
+        await Should.ThrowAsync<AbpValidationException>(() => _postAppService.CreateAsync(input));
     }
 
     [Fact]

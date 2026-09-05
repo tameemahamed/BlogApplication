@@ -1,4 +1,4 @@
-<form class="form-horizontal" autocomplete="off" #postForm="ngForm" (ngSubmit)="save()">
+<form class="form-horizontal" autocomplete="off" #postForm="ngForm" (ngSubmit)="save(false)">
     <abp-modal-header [title]="'NewPost' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
     <div class="modal-body">
         <div class="form-group row required">
@@ -38,6 +38,26 @@
                 {{ 'PostContent' | localize }}
             </label>
             <div class="col-md-9">
+                <div class="d-flex justify-content-end mb-1">
+                    <div class="btn-group">
+                        <button
+                            type="button"
+                            class="btn btn-sm"
+                            [class.btn-primary]="!previewMode"
+                            [class.btn-default]="previewMode"
+                            (click)="previewMode = false">
+                            {{ 'Write' | localize }}
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-sm"
+                            [class.btn-primary]="previewMode"
+                            [class.btn-default]="!previewMode"
+                            (click)="previewMode = true">
+                            {{ 'Preview' | localize }}
+                        </button>
+                    </div>
+                </div>
                 <textarea
                     class="form-control"
                     name="contentMarkdown"
@@ -45,15 +65,38 @@
                     rows="12"
                     required
                     maxlength="50000"
+                    [class.d-none]="previewMode"
                     [(ngModel)]="post.contentMarkdown"
                     #contentModel="ngModel"
                     #contentEl></textarea>
+                @if (previewMode) {
+                    <div
+                        class="markdown-preview border rounded p-3"
+                        [innerHtml]="post.contentMarkdown | markdown"></div>
+                }
                 <abp-validation-summary [control]="contentModel" [controlEl]="contentEl"></abp-validation-summary>
             </div>
         </div>
     </div>
-    <abp-modal-footer
-        [cancelDisabled]="saving"
-        [saveDisabled]="!postForm.form.valid || saving"
-        (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" [disabled]="saving" (click)="bsModalRef.hide()">
+            {{ 'Cancel' | localize }}
+        </button>
+        <div>
+            <button
+                type="button"
+                class="btn btn-default mr-1"
+                [disabled]="!postForm.form.valid || saving"
+                (click)="save(false)">
+                {{ 'SaveAsDraft' | localize }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                [disabled]="!postForm.form.valid || saving"
+                (click)="save(true)">
+                {{ 'SubmitForReview' | localize }}
+            </button>
+        </div>
+    </div>
 </form>

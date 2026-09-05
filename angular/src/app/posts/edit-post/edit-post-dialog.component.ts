@@ -5,18 +5,19 @@ import { PostServiceProxy, UpdatePostInput } from '@shared/service-proxies/servi
 import { FormsModule } from '@angular/forms';
 import { AbpModalHeaderComponent } from '../../../shared/components/modal/abp-modal-header.component';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
-import { AbpModalFooterComponent } from '../../../shared/components/modal/abp-modal-footer.component';
+import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
     templateUrl: './edit-post-dialog.component.html',
     standalone: true,
-    imports: [FormsModule, AbpModalHeaderComponent, AbpValidationSummaryComponent, AbpModalFooterComponent, LocalizePipe],
+    imports: [FormsModule, AbpModalHeaderComponent, AbpValidationSummaryComponent, MarkdownPipe, LocalizePipe],
 })
 export class EditPostDialogComponent extends AppComponentBase implements OnInit {
     @Output() onSave = new EventEmitter<any>();
 
     saving = false;
+    previewMode = false;
     // Set by the dialog opener before the dialog is shown.
     id!: string;
     post = new UpdatePostInput();
@@ -46,20 +47,39 @@ export class EditPostDialogComponent extends AppComponentBase implements OnInit 
         });
     }
 
-    save(): void {
+    // Draft, Rejected and Archived posts can be submitted for review;
+    // PendingReview posts can only be saved, and saving an Approved post
+    // sends it back to review (prd.md A4)
+    get canSubmit(): boolean {
+        return this.status === 0 || this.status === 3 || this.status === 4;
+    }
+
+    save(submitForReview: boolean): void {
         this.saving = true;
 
         this._postService.update(this.post).subscribe(
             () => {
-                this.notify.info(this.l('PostUpdated'));
-                this.bsModalRef.hide();
-                this.onSave.emit();
+                if (submitForReview) {
+                    this._postService.submit(this.post.id).subscribe(
+                        () => this.completeAfterSave(this.l('PostSubmitted')),
+                        // the changes were saved; submit can be retried from the workspace
+                        () => this.completeAfterSave(this.l('PostUpdated'))
+                    );
+                } else {
+                    this.completeAfterSave(this.l('PostUpdated'));
+                }
             },
             () => {
                 this.saving = false;
                 this.cd.detectChanges();
             }
         );
+    }
+
+    private completeAfterSave(message: string): void {
+        this.notify.info(message);
+        this.bsModalRef.hide();
+        this.onSave.emit();
     }
 
     getStatusLabel(): string {
