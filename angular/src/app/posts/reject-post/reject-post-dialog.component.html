@@ -1,0 +1,26 @@
+<form class="form-horizontal" autocomplete="off" #rejectForm="ngForm" (ngSubmit)="save()">
+    <abp-modal-header [title]="'RejectPost' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <div class="modal-body">
+        <p class="text-muted">{{ 'RejectPostReasonHint' | localize }}</p>
+        <div class="form-group required">
+            <label for="reason">
+                {{ 'RejectionReason' | localize }}
+            </label>
+            <textarea
+                class="form-control"
+                name="reason"
+                id="reason"
+                rows="4"
+                required
+                maxlength="1000"
+                [(ngModel)]="reason"
+                #reasonModel="ngModel"
+                #reasonEl></textarea>
+            <abp-validation-summary [control]="reasonModel" [controlEl]="reasonEl"></abp-validation-summary>
+        </div>
+    </div>
+    <abp-modal-footer
+        [cancelDisabled]="saving"
+        [saveDisabled]="!rejectForm.form.valid || saving"
+        (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+</form>

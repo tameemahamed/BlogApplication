@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppRouteGuard } from '@shared/auth/auth-route-guard';
+import { PostsComponent } from './posts.component';
+import { ReviewQueueComponent } from './review-queue/review-queue.component';
+
+const routes: Routes = [
+    {
+        path: '',
+        component: PostsComponent,
+        pathMatch: 'full',
+        canActivate: [AppRouteGuard],
+        data: { permission: 'Pages.Blog.Posts.Create' },
+    },
+    {
+        path: 'review',
+        component: ReviewQueueComponent,
+        canActivate: [AppRouteGuard],
+        data: { permission: 'Pages.Blog.Posts.Approve' },
+    },
+];
+
+@NgModule({
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
+})
+export class PostsRoutingModule {}

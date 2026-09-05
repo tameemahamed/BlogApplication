@@ -21,6 +21,11 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard],
                     },
                     {
+                        path: 'posts',
+                        loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule),
+                        canActivate: [AppRouteGuard],
+                    },
+                    {
                         path: 'users',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
                         data: { permission: 'Pages.Users' },

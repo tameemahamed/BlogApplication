@@ -6,12 +6,12 @@
                     <li class="page-item" [class.disabled]="p.isFirstPage()">
                         @if (!p.isFirstPage()) {
                             <a class="page-link" href="javascript:;" (click)="p.previous()">
-                                <i class="fas fa-chevron-left"></i>
+                                {{ previousLabel }}
                             </a>
                         }
                         @if (p.isFirstPage()) {
                             <a class="page-link" href="javascript:;">
-                                <i class="fas fa-chevron-left"></i>
+                                {{ previousLabel }}
                             </a>
                         }
                     </li>
@@ -30,12 +30,12 @@
                     <li class="page-item" [class.disabled]="p.isLastPage()">
                         @if (!p.isLastPage()) {
                             <a class="page-link" href="javascript:;" (click)="p.next()">
-                                <i class="fas fa-chevron-right"></i>
+                                {{ nextLabel }}
                             </a>
                         }
                         @if (p.isLastPage()) {
                             <a class="page-link" href="javascript:;">
-                                <i class="fas fa-chevron-right"></i>
+                                {{ nextLabel }}
                             </a>
                         }
                     </li>

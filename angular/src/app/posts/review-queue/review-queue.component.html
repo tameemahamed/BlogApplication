@@ -1,0 +1,104 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{ 'ReviewQueue' | localize }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2 pb-3">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PostTitle' | localize }}</th>
+                                <th>{{ 'PostExcerpt' | localize }}</th>
+                                <th>{{ 'Author' | localize }}</th>
+                                <th>{{ 'CreatedDate' | localize }}</th>
+                                <th class="text-right">{{ 'Actions' | localize }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (isTableLoading) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'PleaseWait' | localize }}
+                                    </td>
+                                </tr>
+                            } @else if (posts.length === 0) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'NoPendingReviewPosts' | localize }}
+                                    </td>
+                                </tr>
+                            } @else {
+                                @for (
+                                    post of posts
+                                        | paginate: {
+                                                id: 'reviewQueuePagination',
+                                                itemsPerPage: pageSize,
+                                                currentPage: pageNumber,
+                                                totalItems: totalItems
+                                            };
+                                    track post
+                                ) {
+                                    <tr>
+                                        <td>{{ post.title }}</td>
+                                        <td class="text-truncate" style="max-width: 320px">
+                                            @if (post.excerpt) {
+                                                {{ post.excerpt }}
+                                            }
+                                            @if (!post.excerpt) {
+                                                {{ post.contentMarkdown | slice: 0:160 }}
+                                            }
+                                        </td>
+                                        <td>{{ post.authorUserName }}</td>
+                                        <td>{{ post.creationTime | date: 'yyyy-MM-dd' }}</td>
+                                        <td class="text-right">
+                                            <button
+                                                type="button"
+                                                class="btn btn-default btn-sm"
+                                                (click)="approvePost(post)">
+                                                {{ 'Approve' | localize }}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-default btn-sm"
+                                                (click)="rejectPost(post)">
+                                                {{ 'Reject' | localize }}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-default btn-sm"
+                                                (click)="delete(post)">
+                                                {{ 'Delete' | localize }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+                            {{ 'TotalRecordsCount' | localize: totalItems }}
+                        </div>
+                        <div class="col-sm-6 col-12 text-right">
+                            <abp-pagination-controls
+                                [id]="'reviewQueuePagination'"
+                                [previousLabel]="'Previous' | localize"
+                                [nextLabel]="'Next' | localize"
+                                (pageChange)="pageChanged($event)"></abp-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

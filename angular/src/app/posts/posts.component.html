@@ -1,0 +1,140 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ 'MyPosts' | localize }}</h1>
+                </div>
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-primary" (click)="createPost()">
+                        {{ 'NewPost' | localize }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2 pb-3">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-right">
+                            <select
+                                class="form-control d-inline-block w-auto"
+                                name="statusFilter"
+                                [(ngModel)]="statusFilter"
+                                (ngChange)="statusFilterChanged()">
+                                <option [ngValue]="undefined">{{ 'All' | localize }}</option>
+                                <option [ngValue]="0">{{ 'PostStatusDraft' | localize }}</option>
+                                <option [ngValue]="1">{{ 'PostStatusPendingReview' | localize }}</option>
+                                <option [ngValue]="2">{{ 'PostStatusApproved' | localize }}</option>
+                                <option [ngValue]="3">{{ 'PostStatusRejected' | localize }}</option>
+                                <option [ngValue]="4">{{ 'PostStatusArchived' | localize }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PostTitle' | localize }}</th>
+                                <th>{{ 'PostStatus' | localize }}</th>
+                                <th>{{ 'CreatedDate' | localize }}</th>
+                                <th>{{ 'PublishDate' | localize }}</th>
+                                <th class="text-right">{{ 'Actions' | localize }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (isTableLoading) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'PleaseWait' | localize }}
+                                    </td>
+                                </tr>
+                            } @else if (posts.length === 0) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'NoPosts' | localize }}
+                                    </td>
+                                </tr>
+                            } @else {
+                                @for (
+                                    post of posts
+                                        | paginate: {
+                                                id: 'myPostsPagination',
+                                                itemsPerPage: pageSize,
+                                                currentPage: pageNumber,
+                                                totalItems: totalItems
+                                            };
+                                    track post
+                                ) {
+                                    <tr>
+                                        <td>{{ post.title }}</td>
+                                        <td>{{ getStatusLabel(post.status) }}</td>
+                                        <td>{{ post.creationTime | date: 'yyyy-MM-dd' }}</td>
+                                        <td>
+                                            @if (post.publishedAt) {
+                                                {{ post.publishedAt | date: 'yyyy-MM-dd' }}
+                                            }
+                                            @if (!post.publishedAt) {
+                                                -
+                                            }
+                                        </td>
+                                        <td class="text-right">
+                                            <button
+                                                type="button"
+                                                class="btn btn-default btn-sm"
+                                                (click)="editPost(post)">
+                                                {{ 'Edit' | localize }}
+                                            </button>
+                                            @if (post.status === 0 || post.status === 3 || post.status === 4) {
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-default btn-sm"
+                                                    (click)="submitPost(post)">
+                                                    {{ 'SubmitForReview' | localize }}
+                                                </button>
+                                            }
+                                            @if (post.status === 2) {
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-default btn-sm"
+                                                    (click)="archivePost(post)">
+                                                    {{ 'ArchivePost' | localize }}
+                                                </button>
+                                            }
+                                            @if (post.status !== 2) {
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-default btn-sm"
+                                                    (click)="delete(post)">
+                                                    {{ 'Delete' | localize }}
+                                                </button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+                            {{ 'TotalRecordsCount' | localize: totalItems }}
+                        </div>
+                        <div class="col-sm-6 col-12 text-right">
+                            <abp-pagination-controls
+                                [id]="'myPostsPagination'"
+                                [previousLabel]="'Previous' | localize"
+                                [nextLabel]="'Next' | localize"
+                                (pageChange)="pageChanged($event)"></abp-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

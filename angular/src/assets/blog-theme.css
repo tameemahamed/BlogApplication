@@ -421,3 +421,22 @@ input[type='radio'] {
 .close {
     color: var(--text-primary);
 }
+
+/* --------------------------------------------------------------------------
+   Freeze-ui (bootstrap-time busy overlay from app-initializer) - tokenized
+   so the pre-app loading state follows the theme instead of the library's
+   hardcoded white background and blue spinner
+   -------------------------------------------------------------------------- */
+
+.freeze-ui {
+    background-color: var(--bg);
+}
+
+.freeze-ui:after {
+    color: var(--text-muted);
+    font-family: inherit;
+}
+
+.freeze-ui:before {
+    border-color: transparent var(--accent) var(--accent);
+}

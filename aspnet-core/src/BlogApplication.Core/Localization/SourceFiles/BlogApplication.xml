@@ -113,5 +113,52 @@
     <text name="403PageHeader">Forbidden</text>
     <text name="403PageDescription">You don't have permission to access this resource. Please contact your administrator.</text>
     <text name="403PageButton">Go back to Dashboard</text>
+    <text name="Posts" value="Posts" />
+    <text name="MyPosts" value="My posts" />
+    <text name="ReviewQueue" value="Review queue" />
+    <text name="NewPost" value="New post" />
+    <text name="CreatePost" value="Create post" />
+    <text name="EditPost" value="Edit post" />
+    <text name="PostTitle" value="Title" />
+    <text name="PostExcerpt" value="Excerpt" />
+    <text name="PostContent" value="Content (Markdown)" />
+    <text name="PostStatus" value="Status" />
+    <text name="PostStatusDraft" value="Draft" />
+    <text name="PostStatusPendingReview" value="Pending review" />
+    <text name="PostStatusApproved" value="Approved" />
+    <text name="PostStatusRejected" value="Rejected" />
+    <text name="PostStatusArchived" value="Archived" />
+    <text name="SubmitForReview" value="Submit for review" />
+    <text name="Approve" value="Approve" />
+    <text name="Reject" value="Reject" />
+    <text name="ApprovePost" value="Approve post" />
+    <text name="RejectPost" value="Reject post" />
+    <text name="ArchivePost" value="Archive" />
+    <text name="RejectionReason" value="Rejection reason" />
+    <text name="RejectPostReasonHint" value="Explain why this post is being rejected. The reason is shown to the author." />
+    <text name="RejectionFeedback" value="Reviewer feedback" />
+    <text name="Author" value="Author" />
+    <text name="CreatedDate" value="Created" />
+    <text name="PublishDate" value="Published" />
+    <text name="PostSubmitConfirmMessage" value="Submit post {0} for review?" />
+    <text name="PostApproveConfirmMessage" value="Approve and publish post {0}?" />
+    <text name="PostArchiveWarningMessage" value="Post {0} will be unpublished and archived." />
+    <text name="PostDeleteWarningMessage" value="Post {0} will be deleted." />
+    <text name="PostIsNotSubmittable" value="Only draft, rejected or archived posts can be submitted for review." />
+    <text name="PostIsNotPendingReview" value="This post is not pending review." />
+    <text name="PostIsNotApproved" value="This post is not approved." />
+    <text name="PostModifyNotAllowed" value="You can only modify your own posts." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Approved posts cannot be deleted by their author. Archive the post instead." />
+    <text name="PostCreated" value="The post has been created as a draft." />
+    <text name="PostUpdated" value="The post has been updated." />
+    <text name="PostSubmitted" value="The post has been submitted for review." />
+    <text name="PostApproved" value="The post has been approved and published." />
+    <text name="PostRejected" value="The post has been rejected." />
+    <text name="PostArchived" value="The post has been archived." />
+    <text name="UnknownAuthor" value="Unknown author" />
+    <text name="NoPosts" value="You have not created any posts yet." />
+    <text name="NoPendingReviewPosts" value="There are no posts waiting for review." />
+    <text name="Previous" value="Previous" />
+    <text name="Next" value="Next" />
   </texts>
 </localizationDictionary>

@@ -1,0 +1,59 @@
+<form class="form-horizontal" autocomplete="off" #postForm="ngForm" (ngSubmit)="save()">
+    <abp-modal-header [title]="'NewPost' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="title">
+                {{ 'PostTitle' | localize }}
+            </label>
+            <div class="col-md-9">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    id="title"
+                    required
+                    maxlength="200"
+                    [(ngModel)]="post.title"
+                    #titleModel="ngModel"
+                    #titleEl />
+                <abp-validation-summary [control]="titleModel" [controlEl]="titleEl"></abp-validation-summary>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="excerpt">
+                {{ 'PostExcerpt' | localize }}
+            </label>
+            <div class="col-md-9">
+                <textarea
+                    class="form-control"
+                    name="excerpt"
+                    id="excerpt"
+                    rows="2"
+                    maxlength="500"
+                    [(ngModel)]="post.excerpt"></textarea>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="contentMarkdown">
+                {{ 'PostContent' | localize }}
+            </label>
+            <div class="col-md-9">
+                <textarea
+                    class="form-control"
+                    name="contentMarkdown"
+                    id="contentMarkdown"
+                    rows="12"
+                    required
+                    maxlength="50000"
+                    [(ngModel)]="post.contentMarkdown"
+                    #contentModel="ngModel"
+                    #contentEl></textarea>
+                <abp-validation-summary [control]="contentModel" [controlEl]="contentEl"></abp-validation-summary>
+            </div>
+        </div>
+    </div>
+    <abp-modal-footer
+        [cancelDisabled]="saving"
+        [saveDisabled]="!postForm.form.valid || saving"
+        (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+</form>
