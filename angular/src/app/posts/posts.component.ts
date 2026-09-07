@@ -10,13 +10,14 @@ import { AbpPaginationControlsComponent } from '@shared/components/pagination/ab
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
     templateUrl: './posts.component.html',
     animations: [appModuleAnimation()],
     standalone: true,
-    imports: [FormsModule, NgxPaginationModule, AbpPaginationControlsComponent, DatePipe, LocalizePipe],
+    imports: [FormsModule, NgxPaginationModule, AbpPaginationControlsComponent, DatePipe, RouterLink, LocalizePipe],
 })
 export class PostsComponent extends PagedListingComponentBase<PostDto> implements OnInit {
     posts: PostDto[] = [];

@@ -8,6 +8,8 @@ namespace BlogApplication.Posts.Dto;
 /// </summary>
 public class PublicPostDetailDto : EntityDto<Guid>
 {
+    public long AuthorId { get; set; }
+
     public string Title { get; set; }
 
     public string Slug { get; set; }

@@ -162,6 +162,20 @@
     <text name="Preview" value="Preview" />
     <text name="SaveAsDraft" value="Save as draft" />
     <text name="ApprovedPostEditHint" value="Saving this post will return it to review." />
+    <text name="Comments" value="Comments" />
+    <text name="Reply" value="Reply" />
+    <text name="WriteAComment" value="Write a comment" />
+    <text name="WriteAReply" value="Write a reply" />
+    <text name="NoCommentsYet" value="No comments yet." />
+    <text name="Edited" value="Edited" />
+    <text name="CommentDeleted" value="The comment has been deleted." />
+    <text name="CommentUpdated" value="The comment has been updated." />
+    <text name="CommentModifyNotAllowed" value="You can only edit your own comments." />
+    <text name="CommentDeleteNotAllowed" value="You can only delete your own comments, or comments on your own posts." />
+    <text name="PostNotApprovedForComments" value="Comments are only allowed on published posts." />
+    <text name="CommentDeleteWarningMessage" value="The comment and its replies will be removed." />
+    <text name="PostNotFound" value="This post does not exist or is not published." />
+    <text name="View" value="View" />
     <text name="Previous" value="Previous" />
     <text name="Next" value="Next" />
   </texts>

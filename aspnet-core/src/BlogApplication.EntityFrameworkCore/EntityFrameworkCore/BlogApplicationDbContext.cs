@@ -1,6 +1,7 @@
 ﻿using Abp.Zero.EntityFrameworkCore;
 using BlogApplication.Authorization.Roles;
 using BlogApplication.Authorization.Users;
+using BlogApplication.Comments;
 using BlogApplication.MultiTenancy;
 using BlogApplication.Posts;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
     /* Define a DbSet for each entity of the application */
 
     public DbSet<Post> Posts { get; set; }
+
+    public DbSet<Comment> Comments { get; set; }
 
     public BlogApplicationDbContext(DbContextOptions<BlogApplicationDbContext> options)
         : base(options)
@@ -48,6 +51,37 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
             b.HasIndex(p => new { p.Status, p.PublishedAt })
                 .HasDatabaseName("IX_Posts_Status_PublishedAt")
                 .HasFilter("\"IsDeleted\" = false");
+        });
+
+        builder.Entity<Comment>(b =>
+        {
+            b.ToTable("Comments");
+            b.Property(c => c.ContentMarkdown).IsRequired().HasMaxLength(CommentConsts.MaxContentLength);
+
+            b.HasOne<Post>()
+                .WithMany()
+                .HasForeignKey(c => c.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            b.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            b.HasOne<Comment>()
+                .WithMany()
+                .HasForeignKey(c => c.ParentCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasIndex(c => new { c.PostId, c.ParentCommentId })
+                .HasDatabaseName("IX_Comments_PostId_ParentCommentId")
+                .HasFilter("\"IsDeleted\" = false");
+            b.HasIndex(c => c.ParentCommentId)
+                .HasDatabaseName("IX_Comments_ParentCommentId")
+                .HasFilter("\"IsDeleted\" = false");
+            b.HasIndex(c => c.UserId)
+                .HasDatabaseName("IX_Comments_UserId")
+                .HasFilter("\"IsDeleted\" = false");
+            b.HasIndex(c => c.CreationTime)
+                .HasDatabaseName("IX_Comments_CreationTime");
         });
     }
 }

@@ -1,0 +1,33 @@
+<div>
+    <div class="d-flex justify-content-end mb-1">
+        <div class="btn-group">
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="!previewMode"
+                [class.btn-default]="previewMode"
+                (click)="previewMode = false">
+                {{ 'Write' | localize }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-primary]="previewMode"
+                [class.btn-default]="!previewMode"
+                (click)="previewMode = true">
+                {{ 'Preview' | localize }}
+            </button>
+        </div>
+    </div>
+    <textarea
+        class="form-control"
+        [rows]="rows"
+        [attr.maxlength]="maxlength"
+        [placeholder]="placeholder"
+        [value]="value"
+        [class.d-none]="previewMode"
+        (input)="onInput($event)"></textarea>
+    @if (previewMode) {
+        <div class="markdown-preview border rounded p-3" [innerHtml]="value | markdown"></div>
+    }
+</div>

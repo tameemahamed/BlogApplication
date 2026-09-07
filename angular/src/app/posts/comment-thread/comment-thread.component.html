@@ -1,0 +1,166 @@
+<div class="mt-4">
+    <h5>
+        {{ 'Comments' | localize }}
+        ({{ thread?.totalCount ?? 0 }})
+    </h5>
+
+    @if (canComment()) {
+        <div class="mb-4">
+            <markdown-input
+                [(value)]="newComment"
+                [rows]="4"
+                [placeholder]="'WriteAComment' | localize"></markdown-input>
+            <button
+                type="button"
+                class="btn btn-primary btn-sm mt-2"
+                [disabled]="submitting || !newComment.trim()"
+                (click)="submitComment()">
+                {{ 'Save' | localize }}
+            </button>
+        </div>
+    }
+
+    @if (loading) {
+        <p class="text-muted">
+            {{ 'PleaseWait' | localize }}
+        </p>
+    } @else if (thread && thread.comments.length === 0) {
+        <p class="text-muted">
+            {{ 'NoCommentsYet' | localize }}
+        </p>
+    } @else {
+        @for (top of thread!.comments; track top.id) {
+            <div class="border-top pt-3 mt-3">
+                @if (editingCommentId === top.id) {
+                    <markdown-input [(value)]="editValue" [rows]="4"></markdown-input>
+                    <div class="mt-2">
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-sm mr-1"
+                            [disabled]="submitting || !editValue.trim()"
+                            (click)="saveEdit()">
+                            {{ 'Save' | localize }}
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" [disabled]="submitting" (click)="cancelEdit()">
+                            {{ 'Cancel' | localize }}
+                        </button>
+                    </div>
+                } @else {
+                    <div class="d-flex align-items-baseline">
+                        <strong>{{ top.userName }}</strong>
+                        <span class="text-muted small ml-2">
+                            {{ top.creationTime | date: 'yyyy-MM-dd HH:mm' }}
+                        </span>
+                        @if (top.isEdited) {
+                            <span class="text-muted small ml-1">({{ 'Edited' | localize }})</span>
+                        }
+                    </div>
+                    <div class="markdown-preview mt-1" [innerHtml]="top.contentMarkdown | markdown"></div>
+                    <div class="mt-1">
+                        @if (canReply()) {
+                            <button type="button" class="btn btn-default btn-sm" (click)="startReply(top)">
+                                {{ 'Reply' | localize }}
+                            </button>
+                        }
+                        @if (canEdit(top)) {
+                            <button type="button" class="btn btn-default btn-sm" (click)="startEdit(top)">
+                                {{ 'Edit' | localize }}
+                            </button>
+                        }
+                        @if (canDelete(top)) {
+                            <button type="button" class="btn btn-default btn-sm" (click)="deleteComment(top)">
+                                {{ 'Delete' | localize }}
+                            </button>
+                        }
+                    </div>
+                }
+
+                @if (replyingTo === top.id) {
+                    <div class="mt-2">
+                        <markdown-input
+                            [(value)]="replyText"
+                            [rows]="3"
+                            [placeholder]="'WriteAReply' | localize"></markdown-input>
+                        <div class="mt-2">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm mr-1"
+                                [disabled]="submitting || !replyText.trim()"
+                                (click)="submitReply()">
+                                {{ 'Reply' | localize }}
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" [disabled]="submitting" (click)="cancelReply()">
+                                {{ 'Cancel' | localize }}
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                @for (reply of top.replies ?? []; track reply.id) {
+                    <div class="ml-4 mt-3">
+                        @if (editingCommentId === reply.id) {
+                            <markdown-input [(value)]="editValue" [rows]="4"></markdown-input>
+                            <div class="mt-2">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary btn-sm mr-1"
+                                    [disabled]="submitting || !editValue.trim()"
+                                    (click)="saveEdit()">
+                                    {{ 'Save' | localize }}
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-default btn-sm"
+                                    [disabled]="submitting"
+                                    (click)="cancelEdit()">
+                                    {{ 'Cancel' | localize }}
+                                </button>
+                            </div>
+                        } @else {
+                            <div class="d-flex align-items-baseline">
+                                <strong>{{ reply.userName }}</strong>
+                                @if (reply.parentCommentId !== top.id) {
+                                    <span class="text-muted small ml-1">{{ '@' + parentUserName(reply, top) }}</span>
+                                }
+                                <span class="text-muted small ml-2">
+                                    {{ reply.creationTime | date: 'yyyy-MM-dd HH:mm' }}
+                                </span>
+                                @if (reply.isEdited) {
+                                    <span class="text-muted small ml-1">({{ 'Edited' | localize }})</span>
+                                }
+                            </div>
+                            <div class="markdown-preview mt-1" [innerHtml]="reply.contentMarkdown | markdown"></div>
+                            <div class="mt-1">
+                                @if (canReply()) {
+                                    <button type="button" class="btn btn-default btn-sm" (click)="startReply(reply)">
+                                        {{ 'Reply' | localize }}
+                                    </button>
+                                }
+                                @if (canEdit(reply)) {
+                                    <button type="button" class="btn btn-default btn-sm" (click)="startEdit(reply)">
+                                        {{ 'Edit' | localize }}
+                                    </button>
+                                }
+                                @if (canDelete(reply)) {
+                                    <button type="button" class="btn btn-default btn-sm" (click)="deleteComment(reply)">
+                                        {{ 'Delete' | localize }}
+                                    </button>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        @if ((thread?.topLevelCount ?? 0) > pageSize) {
+            <div class="mt-3 d-flex justify-content-center">
+                <abp-pagination-controls
+                    [id]="'commentThreadPagination'"
+                    [previousLabel]="'Previous' | localize"
+                    [nextLabel]="'Next' | localize"
+                    (pageChange)="pageChanged($event)"></abp-pagination-controls>
+            </div>
+        }
+    }
+</div>

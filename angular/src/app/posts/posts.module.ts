@@ -7,6 +7,8 @@ import { CreatePostDialogComponent } from './create-post/create-post-dialog.comp
 import { EditPostDialogComponent } from './edit-post/edit-post-dialog.component';
 import { RejectPostDialogComponent } from './reject-post/reject-post-dialog.component';
 import { ReviewQueueComponent } from './review-queue/review-queue.component';
+import { PostDetailComponent } from './detail/post-detail.component';
+import { CommentThreadComponent } from './comment-thread/comment-thread.component';
 
 @NgModule({
     imports: [
@@ -18,6 +20,8 @@ import { ReviewQueueComponent } from './review-queue/review-queue.component';
         EditPostDialogComponent,
         RejectPostDialogComponent,
         ReviewQueueComponent,
+        PostDetailComponent,
+        CommentThreadComponent,
     ],
 })
 export class PostsModule {}

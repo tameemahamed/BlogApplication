@@ -1,0 +1,45 @@
+<div>
+    @if (loading) {
+        <p class="text-muted mt-4">
+            {{ 'PleaseWait' | localize }}
+        </p>
+    } @else if (!post) {
+        <div class="mt-4">
+            <h1>404</h1>
+            <p class="text-muted">
+                {{ 'PostNotFound' | localize }}
+            </p>
+        </div>
+    } @else {
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>{{ post.title }}</h1>
+                        <p class="text-muted">
+                            {{ 'Author' | localize }}: {{ post.authorUserName }}
+                            @if (post.publishedAt) {
+                                — {{ 'PublishDate' | localize }}:
+                                {{ post.publishedAt | date: 'yyyy-MM-dd' }}
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content px-2 pb-4">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        @if (post.excerpt) {
+                            <p class="text-muted">{{ post.excerpt }}</p>
+                        }
+                        <div class="markdown-preview" [innerHtml]="post.contentMarkdown | markdown"></div>
+                    </div>
+                </div>
+
+                <comment-thread [postId]="post.id" [postAuthorId]="post.authorId"></comment-thread>
+            </div>
+        </section>
+    }
+</div>
