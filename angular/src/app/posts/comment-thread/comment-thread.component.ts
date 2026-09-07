@@ -10,6 +10,7 @@ import {
     UpdateCommentInput,
 } from '@shared/service-proxies/service-proxies';
 import { MarkdownInputComponent } from '@shared/markdown-input/markdown-input.component';
+import { UpvoteButtonComponent } from '@shared/upvote/upvote-button.component';
 import { AbpPaginationControlsComponent } from '@shared/components/pagination/abp-pagination-controls.component';
 import { DatePipe } from '@angular/common';
 import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
@@ -24,7 +25,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     selector: 'comment-thread',
     templateUrl: './comment-thread.component.html',
     standalone: true,
-    imports: [AbpPaginationControlsComponent, MarkdownInputComponent, DatePipe, MarkdownPipe, LocalizePipe],
+    imports: [AbpPaginationControlsComponent, MarkdownInputComponent, UpvoteButtonComponent, DatePipe, MarkdownPipe, LocalizePipe],
 })
 export class CommentThreadComponent extends AppComponentBase implements OnInit {
     @Input() postId!: string;

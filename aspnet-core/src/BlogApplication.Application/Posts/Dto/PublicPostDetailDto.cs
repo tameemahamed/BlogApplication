@@ -21,4 +21,12 @@ public class PublicPostDetailDto : EntityDto<Guid>
     public string AuthorUserName { get; set; }
 
     public DateTime? PublishedAt { get; set; }
+
+    /// <summary>
+    /// Populated by PostAppService (prd.md E5-S3). The flag is null for
+    /// anonymous callers (prd.md A1).
+    /// </summary>
+    public int UpvoteCount { get; set; }
+
+    public bool? UpvotedByCurrentUser { get; set; }
 }

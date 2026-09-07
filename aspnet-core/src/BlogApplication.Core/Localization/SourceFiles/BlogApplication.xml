@@ -105,7 +105,6 @@
     <text name="EditComments">Edit comments</text>
     <text name="DeleteComments">Delete comments</text>
     <text name="CreateReplies">Create replies</text>
-    <text name="Upvote">Upvote content</text>
     <text name="ManageBans">Manage user bans</text>
     <text name="Menu">Menu</text>
     <text name="SwitchToDarkMode">Dark mode</text>
@@ -176,6 +175,9 @@
     <text name="CommentDeleteWarningMessage" value="The comment and its replies will be removed." />
     <text name="PostNotFound" value="This post does not exist or is not published." />
     <text name="View" value="View" />
+    <text name="Upvote" value="Upvote" />
+    <text name="Upvoted" value="Upvoted" />
+    <text name="Upvotes" value="Upvotes" />
     <text name="Previous" value="Previous" />
     <text name="Next" value="Next" />
   </texts>

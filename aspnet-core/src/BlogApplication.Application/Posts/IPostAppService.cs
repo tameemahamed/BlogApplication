@@ -12,6 +12,8 @@ public interface IPostAppService : IApplicationService
 
     Task<PostDto> GetForEditAsync(Guid id);
 
+    Task<PostDto> GetAsync(Guid id);
+
     Task UpdateAsync(UpdatePostInput input);
 
     Task SubmitAsync(Guid id);
@@ -28,7 +30,7 @@ public interface IPostAppService : IApplicationService
 
     Task<PagedResultDto<PostDto>> GetPendingReviewPostsAsync(PagedResultRequestDto input);
 
-    Task<PagedResultDto<PublicPostListDto>> GetPublicPostsAsync(PagedResultRequestDto input);
+    Task<PagedResultDto<PublicPostListDto>> GetPublicPostsAsync(GetPublicPostsInput input);
 
     Task<PublicPostDetailDto> GetPublicPostBySlugAsync(string slug);
 }

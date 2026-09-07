@@ -4,6 +4,7 @@ using BlogApplication.Authorization.Users;
 using BlogApplication.Comments;
 using BlogApplication.MultiTenancy;
 using BlogApplication.Posts;
+using BlogApplication.Upvotes;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApplication.EntityFrameworkCore;
@@ -15,6 +16,8 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
     public DbSet<Post> Posts { get; set; }
 
     public DbSet<Comment> Comments { get; set; }
+
+    public DbSet<Upvote> Upvotes { get; set; }
 
     public BlogApplicationDbContext(DbContextOptions<BlogApplicationDbContext> options)
         : base(options)
@@ -82,6 +85,24 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
                 .HasFilter("\"IsDeleted\" = false");
             b.HasIndex(c => c.CreationTime)
                 .HasDatabaseName("IX_Comments_CreationTime");
+        });
+
+        builder.Entity<Upvote>(b =>
+        {
+            b.ToTable("Upvotes");
+
+            // No soft-delete filter: a toggled-off upvote is physically deleted,
+            // so the plain unique index frees the slot for a re-upvote (prd.md D3/D4)
+            b.HasIndex(v => new { v.UserId, v.TargetType, v.TargetId })
+                .IsUnique()
+                .HasDatabaseName("UX_Upvotes_UserId_TargetType_TargetId");
+            b.HasIndex(v => new { v.TargetType, v.TargetId })
+                .HasDatabaseName("IX_Upvotes_TargetType_TargetId");
+
+            b.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

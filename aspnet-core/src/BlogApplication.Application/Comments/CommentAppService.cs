@@ -7,6 +7,7 @@ using BlogApplication.Authorization;
 using BlogApplication.Authorization.Users;
 using BlogApplication.Comments.Dto;
 using BlogApplication.Posts;
+using BlogApplication.Upvotes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
     private readonly IRepository<Comment, Guid> _commentRepository;
     private readonly IRepository<Post, Guid> _postRepository;
     private readonly IRepository<User, long> _userRepository;
+    private readonly IRepository<Upvote, Guid> _upvoteRepository;
     private readonly IPermissionChecker _permissionChecker;
     private readonly IGuidGenerator _guidGenerator;
 
@@ -27,12 +29,14 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
         IRepository<Comment, Guid> commentRepository,
         IRepository<Post, Guid> postRepository,
         IRepository<User, long> userRepository,
+        IRepository<Upvote, Guid> upvoteRepository,
         IPermissionChecker permissionChecker,
         IGuidGenerator guidGenerator)
     {
         _commentRepository = commentRepository;
         _postRepository = postRepository;
         _userRepository = userRepository;
+        _upvoteRepository = upvoteRepository;
         _permissionChecker = permissionChecker;
         _guidGenerator = guidGenerator;
     }
@@ -136,6 +140,9 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
             .ToListAsync();
 
         var userNames = await GetUserNamesAsync(comments.Select(c => c.UserId).Distinct());
+        var (upvoteCounts, myUpvotes) = await GetUpvoteDataAsync(
+            UpvoteTargetType.Comment,
+            comments.Select(c => c.Id));
 
         var topLevel = comments
             .Where(c => c.ParentCommentId == null)
@@ -156,9 +163,9 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
             .Take(pageSize)
             .Select(top =>
             {
-                var dto = MapDto(top, userNames) as TopLevelCommentDto;
+                var dto = MapDto(top, userNames, upvoteCounts, myUpvotes) as TopLevelCommentDto;
                 var replies = new List<CommentDto>();
-                CollectDescendants(top.Id, childrenMap, replies, userNames);
+                CollectDescendants(top.Id, childrenMap, replies, userNames, upvoteCounts, myUpvotes);
                 dto.Replies = replies;
                 return dto;
             })
@@ -239,7 +246,9 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
         Guid parentId,
         Dictionary<Guid, List<Comment>> childrenMap,
         List<CommentDto> replies,
-        Dictionary<long, string> userNames)
+        Dictionary<long, string> userNames,
+        Dictionary<Guid, int> upvoteCounts,
+        HashSet<Guid> myUpvotes)
     {
         if (!childrenMap.TryGetValue(parentId, out var children))
         {
@@ -248,9 +257,41 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
 
         foreach (var child in children)
         {
-            replies.Add(MapDto(child, userNames));
-            CollectDescendants(child.Id, childrenMap, replies, userNames);
+            replies.Add(MapDto(child, userNames, upvoteCounts, myUpvotes));
+            CollectDescendants(child.Id, childrenMap, replies, userNames, upvoteCounts, myUpvotes);
         }
+    }
+
+    private async Task<(Dictionary<Guid, int> Counts, HashSet<Guid> Mine)> GetUpvoteDataAsync(
+        UpvoteTargetType targetType,
+        IEnumerable<Guid> targetIds)
+    {
+        var ids = targetIds.ToList();
+        if (!ids.Any())
+        {
+            return (new Dictionary<Guid, int>(), new HashSet<Guid>());
+        }
+
+        var counts = await _upvoteRepository
+            .GetAll()
+            .Where(u => u.TargetType == (int)targetType && ids.Contains(u.TargetId))
+            .GroupBy(u => u.TargetId)
+            .ToDictionaryAsync(g => g.Key, g => g.Count());
+
+        var mine = new HashSet<Guid>();
+        if (AbpSession.UserId.HasValue)
+        {
+            var myUpvotes = await _upvoteRepository
+                .GetAll()
+                .Where(u => u.UserId == AbpSession.UserId.Value &&
+                            u.TargetType == (int)targetType &&
+                            ids.Contains(u.TargetId))
+                .Select(u => u.TargetId)
+                .ToListAsync();
+            mine = new HashSet<Guid>(myUpvotes);
+        }
+
+        return (counts, mine);
     }
 
     private async Task<Post> GetApprovedPostOrThrowAsync(Guid postId)
@@ -293,11 +334,19 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
             ContentMarkdown = comment.ContentMarkdown,
             IsEdited = comment.IsEdited,
             CreationTime = comment.CreationTime,
-            Replies = new List<CommentDto>()
+            Replies = new List<CommentDto>(),
+            // the creating user is authenticated by definition and a fresh
+            // comment carries no upvotes
+            UpvoteCount = 0,
+            UpvotedByCurrentUser = false
         };
     }
 
-    private TopLevelCommentDto MapDto(Comment comment, Dictionary<long, string> userNames)
+    private TopLevelCommentDto MapDto(
+        Comment comment,
+        Dictionary<long, string> userNames,
+        Dictionary<Guid, int> upvoteCounts,
+        HashSet<Guid> myUpvotes)
     {
         return new TopLevelCommentDto
         {
@@ -309,7 +358,12 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
             ContentMarkdown = comment.ContentMarkdown,
             IsEdited = comment.IsEdited,
             CreationTime = comment.CreationTime,
-            Replies = new List<CommentDto>()
+            Replies = new List<CommentDto>(),
+            // the flag is null for anonymous callers (prd.md A1)
+            UpvoteCount = upvoteCounts.GetValueOrDefault(comment.Id),
+            UpvotedByCurrentUser = AbpSession.UserId.HasValue
+                ? myUpvotes.Contains(comment.Id)
+                : (bool?)null
         };
     }
 }

@@ -18,4 +18,12 @@ public class CommentDto : EntityDto<Guid>
     public bool IsEdited { get; set; }
 
     public DateTime CreationTime { get; set; }
+
+    /// <summary>
+    /// Populated by CommentAppService (prd.md E5-S3). The flag is null for
+    /// anonymous callers (prd.md A1).
+    /// </summary>
+    public int UpvoteCount { get; set; }
+
+    public bool? UpvotedByCurrentUser { get; set; }
 }

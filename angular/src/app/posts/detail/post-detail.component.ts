@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { PostServiceProxy, PublicPostDetailDto } from '@shared/service-proxies/service-proxies';
 import { CommentThreadComponent } from '../comment-thread/comment-thread.component';
+import { UpvoteButtonComponent } from '@shared/upvote/upvote-button.component';
 import { DatePipe } from '@angular/common';
 import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -14,7 +15,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
 @Component({
     templateUrl: './post-detail.component.html',
     standalone: true,
-    imports: [CommentThreadComponent, DatePipe, MarkdownPipe, LocalizePipe],
+    imports: [CommentThreadComponent, UpvoteButtonComponent, DatePipe, MarkdownPipe, LocalizePipe],
 })
 export class PostDetailComponent extends AppComponentBase implements OnInit {
     post: PublicPostDetailDto | undefined;

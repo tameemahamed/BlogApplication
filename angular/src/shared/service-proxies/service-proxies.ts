@@ -567,6 +567,62 @@ export class PostServiceProxy {
     }
 
     /**
+     * @param id (optional) 
+     * @return OK
+     */
+    get(id: string | undefined): Observable<PostDto> {
+        let url_ = this.baseUrl + "/api/services/app/Post/Get?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGet(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<PostDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<PostDto>;
+        }));
+    }
+
+    protected processGet(response: HttpResponseBase): Observable<PostDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PostDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return OK
      */
@@ -1006,12 +1062,17 @@ export class PostServiceProxy {
     }
 
     /**
+     * @param sortByUpvotes (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getPublicPosts(skipCount: number | undefined, maxResultCount: number | undefined): Observable<PublicPostListDtoPagedResultDto> {
+    getPublicPosts(sortByUpvotes: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PublicPostListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Post/GetPublicPosts?";
+        if (sortByUpvotes === null)
+            throw new Error("The parameter 'sortByUpvotes' cannot be null.");
+        else if (sortByUpvotes !== undefined)
+            url_ += "SortByUpvotes=" + encodeURIComponent("" + sortByUpvotes) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)
@@ -1709,6 +1770,74 @@ export class TokenAuthServiceProxy {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthenticateResultModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
+export class UpvoteServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    toggle(body: ToggleUpvoteInput | undefined): Observable<ToggleUpvoteOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Upvote/Toggle";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggle(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggle(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ToggleUpvoteOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ToggleUpvoteOutput>;
+        }));
+    }
+
+    protected processToggle(response: HttpResponseBase): Observable<ToggleUpvoteOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ToggleUpvoteOutput.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -2660,6 +2789,8 @@ export class CommentDto implements ICommentDto {
     contentMarkdown: string | undefined;
     isEdited: boolean;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 
     constructor(data?: ICommentDto) {
         if (data) {
@@ -2680,6 +2811,8 @@ export class CommentDto implements ICommentDto {
             this.contentMarkdown = _data["contentMarkdown"];
             this.isEdited = _data["isEdited"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
         }
     }
 
@@ -2700,6 +2833,8 @@ export class CommentDto implements ICommentDto {
         data["contentMarkdown"] = this.contentMarkdown;
         data["isEdited"] = this.isEdited;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
         return data;
     }
 
@@ -2720,6 +2855,8 @@ export interface ICommentDto {
     contentMarkdown: string | undefined;
     isEdited: boolean;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 }
 
 export class CommentThreadDto implements ICommentThreadDto {
@@ -3394,6 +3531,8 @@ export class PostDto implements IPostDto {
     rejectionReason: string | undefined;
     publishedAt: moment.Moment | undefined;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 
     constructor(data?: IPostDto) {
         if (data) {
@@ -3417,6 +3556,8 @@ export class PostDto implements IPostDto {
             this.rejectionReason = _data["rejectionReason"];
             this.publishedAt = _data["publishedAt"] ? moment(_data["publishedAt"].toString()) : <any>undefined;
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
         }
     }
 
@@ -3440,6 +3581,8 @@ export class PostDto implements IPostDto {
         data["rejectionReason"] = this.rejectionReason;
         data["publishedAt"] = this.publishedAt ? this.publishedAt.toISOString() : <any>undefined;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
         return data;
     }
 
@@ -3463,6 +3606,8 @@ export interface IPostDto {
     rejectionReason: string | undefined;
     publishedAt: moment.Moment | undefined;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 }
 
 export class PostDtoPagedResultDto implements IPostDtoPagedResultDto {
@@ -3529,6 +3674,8 @@ export class PublicPostDetailDto implements IPublicPostDetailDto {
     contentMarkdown: string | undefined;
     authorUserName: string | undefined;
     publishedAt: moment.Moment | undefined;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 
     constructor(data?: IPublicPostDetailDto) {
         if (data) {
@@ -3549,6 +3696,8 @@ export class PublicPostDetailDto implements IPublicPostDetailDto {
             this.contentMarkdown = _data["contentMarkdown"];
             this.authorUserName = _data["authorUserName"];
             this.publishedAt = _data["publishedAt"] ? moment(_data["publishedAt"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
         }
     }
 
@@ -3569,6 +3718,8 @@ export class PublicPostDetailDto implements IPublicPostDetailDto {
         data["contentMarkdown"] = this.contentMarkdown;
         data["authorUserName"] = this.authorUserName;
         data["publishedAt"] = this.publishedAt ? this.publishedAt.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
         return data;
     }
 
@@ -3589,6 +3740,8 @@ export interface IPublicPostDetailDto {
     contentMarkdown: string | undefined;
     authorUserName: string | undefined;
     publishedAt: moment.Moment | undefined;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 }
 
 export class PublicPostListDto implements IPublicPostListDto {
@@ -3598,6 +3751,8 @@ export class PublicPostListDto implements IPublicPostListDto {
     excerpt: string | undefined;
     authorUserName: string | undefined;
     publishedAt: moment.Moment | undefined;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 
     constructor(data?: IPublicPostListDto) {
         if (data) {
@@ -3616,6 +3771,8 @@ export class PublicPostListDto implements IPublicPostListDto {
             this.excerpt = _data["excerpt"];
             this.authorUserName = _data["authorUserName"];
             this.publishedAt = _data["publishedAt"] ? moment(_data["publishedAt"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
         }
     }
 
@@ -3634,6 +3791,8 @@ export class PublicPostListDto implements IPublicPostListDto {
         data["excerpt"] = this.excerpt;
         data["authorUserName"] = this.authorUserName;
         data["publishedAt"] = this.publishedAt ? this.publishedAt.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
         return data;
     }
 
@@ -3652,6 +3811,8 @@ export interface IPublicPostListDto {
     excerpt: string | undefined;
     authorUserName: string | undefined;
     publishedAt: moment.Moment | undefined;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
 }
 
 export class PublicPostListDtoPagedResultDto implements IPublicPostListDtoPagedResultDto {
@@ -4263,6 +4424,108 @@ export interface IRoleListDtoListResultDto {
     items: RoleListDto[] | undefined;
 }
 
+export class ToggleUpvoteInput implements IToggleUpvoteInput {
+    targetType: number;
+    targetId: string;
+
+    constructor(data?: IToggleUpvoteInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.targetType = _data["targetType"];
+            this.targetId = _data["targetId"];
+        }
+    }
+
+    static fromJS(data: any): ToggleUpvoteInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new ToggleUpvoteInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["targetType"] = this.targetType;
+        data["targetId"] = this.targetId;
+        return data;
+    }
+
+    clone(): ToggleUpvoteInput {
+        const json = this.toJSON();
+        let result = new ToggleUpvoteInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IToggleUpvoteInput {
+    targetType: number;
+    targetId: string;
+}
+
+export class ToggleUpvoteOutput implements IToggleUpvoteOutput {
+    targetType: number;
+    targetId: string;
+    upvoted: boolean;
+    upvoteCount: number;
+
+    constructor(data?: IToggleUpvoteOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.targetType = _data["targetType"];
+            this.targetId = _data["targetId"];
+            this.upvoted = _data["upvoted"];
+            this.upvoteCount = _data["upvoteCount"];
+        }
+    }
+
+    static fromJS(data: any): ToggleUpvoteOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new ToggleUpvoteOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["targetType"] = this.targetType;
+        data["targetId"] = this.targetId;
+        data["upvoted"] = this.upvoted;
+        data["upvoteCount"] = this.upvoteCount;
+        return data;
+    }
+
+    clone(): ToggleUpvoteOutput {
+        const json = this.toJSON();
+        let result = new ToggleUpvoteOutput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IToggleUpvoteOutput {
+    targetType: number;
+    targetId: string;
+    upvoted: boolean;
+    upvoteCount: number;
+}
+
 export class TopLevelCommentDto implements ITopLevelCommentDto {
     id: string;
     postId: string;
@@ -4272,6 +4535,8 @@ export class TopLevelCommentDto implements ITopLevelCommentDto {
     contentMarkdown: string | undefined;
     isEdited: boolean;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
     replies: CommentDto[] | undefined;
 
     constructor(data?: ITopLevelCommentDto) {
@@ -4293,6 +4558,8 @@ export class TopLevelCommentDto implements ITopLevelCommentDto {
             this.contentMarkdown = _data["contentMarkdown"];
             this.isEdited = _data["isEdited"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
             if (Array.isArray(_data["replies"])) {
                 this.replies = [] as any;
                 for (let item of _data["replies"])
@@ -4318,6 +4585,8 @@ export class TopLevelCommentDto implements ITopLevelCommentDto {
         data["contentMarkdown"] = this.contentMarkdown;
         data["isEdited"] = this.isEdited;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
         if (Array.isArray(this.replies)) {
             data["replies"] = [];
             for (let item of this.replies)
@@ -4343,6 +4612,8 @@ export interface ITopLevelCommentDto {
     contentMarkdown: string | undefined;
     isEdited: boolean;
     creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
     replies: CommentDto[] | undefined;
 }
 

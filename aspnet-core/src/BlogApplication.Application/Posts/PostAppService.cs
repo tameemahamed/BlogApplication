@@ -11,6 +11,7 @@ using Abp.UI;
 using BlogApplication.Authorization;
 using BlogApplication.Authorization.Users;
 using BlogApplication.Posts.Dto;
+using BlogApplication.Upvotes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
 {
     private readonly IRepository<Post, Guid> _postRepository;
     private readonly IRepository<User, long> _userRepository;
+    private readonly IRepository<Upvote, Guid> _upvoteRepository;
     private readonly ISlugGenerator _slugGenerator;
     private readonly IPermissionChecker _permissionChecker;
     private readonly IGuidGenerator _guidGenerator;
@@ -30,12 +32,14 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
     public PostAppService(
         IRepository<Post, Guid> postRepository,
         IRepository<User, long> userRepository,
+        IRepository<Upvote, Guid> upvoteRepository,
         ISlugGenerator slugGenerator,
         IPermissionChecker permissionChecker,
         IGuidGenerator guidGenerator)
     {
         _postRepository = postRepository;
         _userRepository = userRepository;
+        _upvoteRepository = upvoteRepository;
         _slugGenerator = slugGenerator;
         _permissionChecker = permissionChecker;
         _guidGenerator = guidGenerator;
@@ -72,6 +76,29 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
         await CheckModifyPermissionAsync(post);
 
         return await MapToDtoAsync(post);
+    }
+
+    [AbpAuthorize]
+    public async Task<PostDto> GetAsync(Guid id)
+    {
+        var post = await _postRepository.GetAsync(id);
+
+        // Approved posts are visible to any authenticated user; non-approved
+        // posts only to their author and moderators/admins (prd.md E4 detail
+        // view) - non-visible posts are treated as nonexistent (no leak)
+        var canView =
+            post.Status == PostStatus.Approved ||
+            post.AuthorId == AbpSession.GetUserId() ||
+            await _permissionChecker.IsGrantedAsync(PermissionNames.Blog.Posts_Approve);
+
+        if (!canView)
+        {
+            throw new EntityNotFoundException(typeof(Post), id);
+        }
+
+        var authorNames = await GetAuthorUserNamesAsync(new[] { post });
+        var (upvoteCounts, myUpvotes) = await GetUpvoteDataAsync(UpvoteTargetType.Post, new[] { post.Id });
+        return PatchUpvoteData(MapToDto(post, GetAuthorName(authorNames, post.AuthorId)), upvoteCounts, myUpvotes);
     }
 
     [AbpAuthorize(PermissionNames.Blog.Posts_Edit)]
@@ -198,7 +225,13 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
             .PageBy(input)
             .ToListAsync();
 
-        var items = posts.Select(p => MapToDto(p, author.UserName)).ToList();
+        var (upvoteCounts, myUpvotes) = await GetUpvoteDataAsync(
+            UpvoteTargetType.Post,
+            posts.Select(p => p.Id));
+
+        var items = posts
+            .Select(p => PatchUpvoteData(MapToDto(p, author.UserName), upvoteCounts, myUpvotes))
+            .ToList();
         return new PagedResultDto<PostDto>(totalCount, items);
     }
 
@@ -217,20 +250,54 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
     }
 
     [AbpAllowAnonymous]
-    public async Task<PagedResultDto<PublicPostListDto>> GetPublicPostsAsync(PagedResultRequestDto input)
+    public async Task<PagedResultDto<PublicPostListDto>> GetPublicPostsAsync(GetPublicPostsInput input)
     {
-        var query = _postRepository.GetAll().Where(p => p.Status == PostStatus.Approved);
+        var currentUserId = AbpSession.UserId;
+        var postUpvotes = _upvoteRepository.GetAll().Where(u => u.TargetType == (int)UpvoteTargetType.Post);
+
+        // Correlated subqueries deliver counts and the "did I upvote" flag in
+        // one query - required for top-sorting (prd.md E5-S5)
+        var query = _postRepository
+            .GetAll()
+            .Where(p => p.Status == PostStatus.Approved)
+            .Select(p => new
+            {
+                Post = p,
+                UpvoteCount = postUpvotes.Count(u => u.TargetId == p.Id),
+                UpvotedByMe = currentUserId.HasValue &&
+                              postUpvotes.Any(u => u.TargetId == p.Id && u.UserId == currentUserId.Value)
+            });
+
+        if (input.SortByUpvotes)
+        {
+            query = query
+                .OrderByDescending(x => x.UpvoteCount)
+                .ThenByDescending(x => x.Post.PublishedAt);
+        }
+        else
+        {
+            query = query.OrderByDescending(x => x.Post.PublishedAt);
+        }
 
         var totalCount = await query.CountAsync();
-        var posts = await query
-            .OrderByDescending(p => p.PublishedAt)
-            .PageBy(input)
+        var page = await query
+            .Skip(input.SkipCount)
+            .Take(input.MaxResultCount)
             .ToListAsync();
 
-        var authorNames = await GetAuthorUserNamesAsync(posts);
-        return new PagedResultDto<PublicPostListDto>(
-            totalCount,
-            posts.Select(p => MapToPublicListDto(p, authorNames)).ToList());
+        var authorNames = await GetAuthorUserNamesAsync(page.Select(x => x.Post));
+        var items = page
+            .Select(x =>
+            {
+                var dto = MapToPublicListDto(x.Post, authorNames);
+                dto.UpvoteCount = x.UpvoteCount;
+                // anonymous callers get no flag (prd.md A1)
+                dto.UpvotedByCurrentUser = currentUserId.HasValue ? x.UpvotedByMe : null;
+                return dto;
+            })
+            .ToList();
+
+        return new PagedResultDto<PublicPostListDto>(totalCount, items);
     }
 
     [AbpAllowAnonymous]
@@ -245,8 +312,22 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
             throw new EntityNotFoundException(typeof(Post), slug);
         }
 
+        var currentUserId = AbpSession.UserId;
+        var upvoteCount = await _upvoteRepository
+            .GetAll()
+            .CountAsync(u => u.TargetType == (int)UpvoteTargetType.Post && u.TargetId == post.Id);
+        var upvotedByMe = currentUserId.HasValue && await _upvoteRepository
+            .GetAll()
+            .AnyAsync(u => u.TargetType == (int)UpvoteTargetType.Post &&
+                           u.TargetId == post.Id &&
+                           u.UserId == currentUserId.Value);
+
         var authorNames = await GetAuthorUserNamesAsync(new[] { post });
-        return MapToPublicDetailDto(post, authorNames);
+        var dto = MapToPublicDetailDto(post, authorNames);
+        dto.UpvoteCount = upvoteCount;
+        // anonymous callers get no flag (prd.md A1)
+        dto.UpvotedByCurrentUser = currentUserId.HasValue ? upvotedByMe : null;
+        return dto;
     }
 
     /// <summary>
@@ -317,6 +398,48 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
     {
         var dto = ObjectMapper.Map<PublicPostDetailDto>(post);
         dto.AuthorUserName = GetAuthorName(authorNames, post.AuthorId);
+        return dto;
+    }
+
+    private async Task<(Dictionary<Guid, int> Counts, HashSet<Guid> Mine)> GetUpvoteDataAsync(
+        UpvoteTargetType targetType,
+        IEnumerable<Guid> targetIds)
+    {
+        var ids = targetIds.ToList();
+        if (!ids.Any())
+        {
+            return (new Dictionary<Guid, int>(), new HashSet<Guid>());
+        }
+
+        var counts = await _upvoteRepository
+            .GetAll()
+            .Where(u => u.TargetType == (int)targetType && ids.Contains(u.TargetId))
+            .GroupBy(u => u.TargetId)
+            .ToDictionaryAsync(g => g.Key, g => g.Count());
+
+        var mine = new HashSet<Guid>();
+        if (AbpSession.UserId.HasValue)
+        {
+            var myUpvotes = await _upvoteRepository
+                .GetAll()
+                .Where(u => u.UserId == AbpSession.UserId.Value &&
+                            u.TargetType == (int)targetType &&
+                            ids.Contains(u.TargetId))
+                .Select(u => u.TargetId)
+                .ToListAsync();
+            mine = new HashSet<Guid>(myUpvotes);
+        }
+
+        return (counts, mine);
+    }
+
+    private PostDto PatchUpvoteData(
+        PostDto dto,
+        Dictionary<Guid, int> upvoteCounts,
+        HashSet<Guid> myUpvotes)
+    {
+        dto.UpvoteCount = upvoteCounts.GetValueOrDefault(dto.Id);
+        dto.UpvotedByCurrentUser = myUpvotes.Contains(dto.Id);
         return dto;
     }
 }

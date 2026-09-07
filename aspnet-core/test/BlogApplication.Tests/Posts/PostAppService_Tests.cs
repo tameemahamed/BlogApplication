@@ -230,7 +230,7 @@ public class PostAppService_Tests : BlogApplicationTestBase
         AbpSession.UserId = null;
 
         var publicPosts = await _postAppService.GetPublicPostsAsync(
-            new PagedResultRequestDto { SkipCount = 0, MaxResultCount = 10 });
+            new GetPublicPostsInput { SkipCount = 0, MaxResultCount = 10 });
         publicPosts.TotalCount.ShouldBe(0);
         publicPosts.Items.ShouldBeEmpty();
 
@@ -243,7 +243,7 @@ public class PostAppService_Tests : BlogApplicationTestBase
 
         AbpSession.UserId = null;
         var after = await _postAppService.GetPublicPostsAsync(
-            new PagedResultRequestDto { SkipCount = 0, MaxResultCount = 10 });
+            new GetPublicPostsInput { SkipCount = 0, MaxResultCount = 10 });
         after.TotalCount.ShouldBe(1);
         after.Items[0].Slug.ShouldBe(submitted.Slug);
         after.Items[0].AuthorUserName.ShouldNotBeNullOrWhiteSpace();

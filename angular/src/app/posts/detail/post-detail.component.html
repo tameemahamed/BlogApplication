@@ -23,6 +23,14 @@
                                 {{ post.publishedAt | date: 'yyyy-MM-dd' }}
                             }
                         </p>
+                        <div class="mt-1">
+                            <upvote-button
+                                targetType="post"
+                                [targetId]="post.id"
+                                [upvoteCount]="post.upvoteCount"
+                                [upvoted]="post.upvotedByCurrentUser">
+                            </upvote-button>
+                        </div>
                     </div>
                 </div>
             </div>

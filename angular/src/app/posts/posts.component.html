@@ -41,6 +41,7 @@
                             <tr>
                                 <th>{{ 'PostTitle' | localize }}</th>
                                 <th>{{ 'PostStatus' | localize }}</th>
+                                <th>{{ 'Upvotes' | localize }}</th>
                                 <th>{{ 'CreatedDate' | localize }}</th>
                                 <th>{{ 'PublishDate' | localize }}</th>
                                 <th class="text-right">{{ 'Actions' | localize }}</th>
@@ -49,13 +50,13 @@
                         <tbody>
                             @if (isTableLoading) {
                                 <tr>
-                                    <td colspan="5" class="text-muted">
+                                    <td colspan="6" class="text-muted">
                                         {{ 'PleaseWait' | localize }}
                                     </td>
                                 </tr>
                             } @else if (posts.length === 0) {
                                 <tr>
-                                    <td colspan="5" class="text-muted">
+                                    <td colspan="6" class="text-muted">
                                         {{ 'NoPosts' | localize }}
                                     </td>
                                 </tr>
@@ -73,6 +74,7 @@
                                     <tr>
                                         <td>{{ post.title }}</td>
                                         <td>{{ getStatusLabel(post.status) }}</td>
+                                        <td>{{ post.upvoteCount }}</td>
                                         <td>{{ post.creationTime | date: 'yyyy-MM-dd' }}</td>
                                         <td>
                                             @if (post.publishedAt) {

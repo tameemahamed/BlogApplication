@@ -57,6 +57,13 @@
                     </div>
                     <div class="markdown-preview mt-1" [innerHtml]="top.contentMarkdown | markdown"></div>
                     <div class="mt-1">
+                        <upvote-button
+                            class="mr-1"
+                            targetType="comment"
+                            [targetId]="top.id"
+                            [upvoteCount]="top.upvoteCount"
+                            [upvoted]="top.upvotedByCurrentUser">
+                        </upvote-button>
                         @if (canReply()) {
                             <button type="button" class="btn btn-default btn-sm" (click)="startReply(top)">
                                 {{ 'Reply' | localize }}
@@ -131,6 +138,13 @@
                             </div>
                             <div class="markdown-preview mt-1" [innerHtml]="reply.contentMarkdown | markdown"></div>
                             <div class="mt-1">
+                                <upvote-button
+                                    class="mr-1"
+                                    targetType="comment"
+                                    [targetId]="reply.id"
+                                    [upvoteCount]="reply.upvoteCount"
+                                    [upvoted]="reply.upvotedByCurrentUser">
+                                </upvote-button>
                                 @if (canReply()) {
                                     <button type="button" class="btn btn-default btn-sm" (click)="startReply(reply)">
                                         {{ 'Reply' | localize }}
