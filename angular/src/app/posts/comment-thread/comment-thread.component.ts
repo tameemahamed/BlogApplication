@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Injector, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
+    BanUserInput,
     CommentDto,
     CommentServiceProxy,
     CommentThreadDto,
@@ -8,9 +10,11 @@ import {
     CreateReplyInput,
     TopLevelCommentDto,
     UpdateCommentInput,
+    UserBanServiceProxy,
 } from '@shared/service-proxies/service-proxies';
 import { MarkdownInputComponent } from '@shared/markdown-input/markdown-input.component';
 import { UpvoteButtonComponent } from '@shared/upvote/upvote-button.component';
+import { ActiveBansBannerComponent } from '@shared/bans/active-bans-banner.component';
 import { AbpPaginationControlsComponent } from '@shared/components/pagination/abp-pagination-controls.component';
 import { DatePipe } from '@angular/common';
 import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
@@ -25,7 +29,16 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     selector: 'comment-thread',
     templateUrl: './comment-thread.component.html',
     standalone: true,
-    imports: [AbpPaginationControlsComponent, MarkdownInputComponent, UpvoteButtonComponent, DatePipe, MarkdownPipe, LocalizePipe],
+    imports: [
+        AbpPaginationControlsComponent,
+        FormsModule,
+        MarkdownInputComponent,
+        UpvoteButtonComponent,
+        ActiveBansBannerComponent,
+        DatePipe,
+        MarkdownPipe,
+        LocalizePipe,
+    ],
 })
 export class CommentThreadComponent extends AppComponentBase implements OnInit {
     @Input() postId!: string;
@@ -43,9 +56,18 @@ export class CommentThreadComponent extends AppComponentBase implements OnInit {
     editingCommentId: string | undefined;
     editValue = '';
 
+    // inline ban form (prd.md E6-S2): opened from a comment's action row,
+    // targets that comment's author; several abilities can be banned at once
+    banningCommentId: string | undefined;
+    readonly banTypes = [0, 1, 2];
+    banTypeSelection: boolean[] = [false, false, false];
+    banReason = '';
+    banning = false;
+
     constructor(
         injector: Injector,
         private _commentService: CommentServiceProxy,
+        private _userBanService: UserBanServiceProxy,
         private cd: ChangeDetectorRef
     ) {
         super(injector);
@@ -94,6 +116,11 @@ export class CommentThreadComponent extends AppComponentBase implements OnInit {
             this.postAuthorId === this.appSession.userId ||
             this.permission.isGranted('Pages.Blog.Posts.Approve')
         );
+    }
+
+    // prd.md E6-S2: moderators/admins ban users directly from comment context
+    canManageBans(): boolean {
+        return this.permission.isGranted('Pages.Blog.Bans.Manage');
     }
 
     // ---- actions ------------------------------------------------------------
@@ -207,6 +234,64 @@ export class CommentThreadComponent extends AppComponentBase implements OnInit {
                 });
             }
         });
+    }
+
+    // ---- bans (prd.md E6-S2) -------------------------------------------------
+
+    startBan(comment: CommentDto): void {
+        this.banningCommentId = comment.id;
+        this.banTypeSelection = [false, false, false];
+        this.banReason = '';
+    }
+
+    cancelBanForm(): void {
+        this.banningCommentId = undefined;
+        this.banTypeSelection = [false, false, false];
+        this.banReason = '';
+    }
+
+    selectedBanTypes(): number[] {
+        return this.banTypes.filter((t) => this.banTypeSelection[t]);
+    }
+
+    // BanType.Comment = 0, Reply = 1, Upvote = 2 (int-backed on the wire)
+    banTypeLabel(banType: number): string {
+        switch (banType) {
+            case 0:
+                return this.l('BanTypeComment');
+            case 1:
+                return this.l('BanTypeReply');
+            default:
+                return this.l('BanTypeUpvote');
+        }
+    }
+
+    submitBan(comment: CommentDto): void {
+        const banTypes = this.selectedBanTypes();
+        if (banTypes.length === 0 || !this.banReason.trim()) {
+            return;
+        }
+
+        this.banning = true;
+        this._userBanService
+            .ban(
+                new BanUserInput({
+                    userId: comment.userId,
+                    banTypes: banTypes,
+                    reason: this.banReason,
+                })
+            )
+            .subscribe(
+                () => {
+                    this.notify.success(this.l('BanSuccess'));
+                    this.cancelBanForm();
+                },
+                () => {}
+            )
+            .add(() => {
+                this.banning = false;
+                this.cd.detectChanges();
+            });
     }
 
     // ---- display helpers ----------------------------------------------------

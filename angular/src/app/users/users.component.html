@@ -192,6 +192,14 @@
                                             <i class="fas fa-lock"></i>
                                             {{ 'ResetPassword' | localize }}
                                         </button>
+                                        @if (canManageBans()) {
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm bg-secondary mx-2"
+                                                (click)="showBansDialog(record)">
+                                                {{ 'Bans' | localize }}
+                                            </button>
+                                        }
                                     </td>
                                 </tr>
                             </ng-template>

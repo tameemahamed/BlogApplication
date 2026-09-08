@@ -1,6 +1,7 @@
 ﻿using Abp.Zero.EntityFrameworkCore;
 using BlogApplication.Authorization.Roles;
 using BlogApplication.Authorization.Users;
+using BlogApplication.Bans;
 using BlogApplication.Comments;
 using BlogApplication.MultiTenancy;
 using BlogApplication.Posts;
@@ -18,6 +19,8 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
     public DbSet<Comment> Comments { get; set; }
 
     public DbSet<Upvote> Upvotes { get; set; }
+
+    public DbSet<UserBan> UserBans { get; set; }
 
     public BlogApplicationDbContext(DbContextOptions<BlogApplicationDbContext> options)
         : base(options)
@@ -102,6 +105,36 @@ public class BlogApplicationDbContext : AbpZeroDbContext<Tenant, Role, User, Blo
             b.HasOne<User>()
                 .WithMany()
                 .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        builder.Entity<UserBan>(b =>
+        {
+            b.ToTable("UserBans");
+            b.Property(v => v.Reason).IsRequired().HasMaxLength(UserBanConsts.MaxReasonLength);
+
+            // Ledger hygiene: at most one ACTIVE row per (user, type); the
+            // history may hold many lifted rows (schema 3.4)
+            b.HasIndex(v => new { v.UserId, v.BanType })
+                .IsUnique()
+                .HasDatabaseName("UX_UserBans_ActiveType")
+                .HasFilter("\"LiftedAt\" IS NULL");
+            b.HasIndex(v => v.UserId)
+                .HasDatabaseName("IX_UserBans_UserId");
+
+            // Ledger rows are never deleted; Restrict keeps accidental data
+            // loss impossible (prd.md D8)
+            b.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            b.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(v => v.BannedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            b.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(v => v.LiftedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
     }

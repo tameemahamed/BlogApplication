@@ -32,6 +32,12 @@ import { AppComponent } from './app.component';
                         canActivate: [AppRouteGuard],
                     },
                     {
+                        path: 'moderation',
+                        loadChildren: () => import('./moderation/moderation.module').then((m) => m.ModerationModule),
+                        data: { permission: 'Pages.Blog.Bans.Manage' },
+                        canActivate: [AppRouteGuard],
+                    },
+                    {
                         path: 'roles',
                         loadChildren: () => import('./roles/roles.module').then((m) => m.RolesModule),
                         data: { permission: 'Pages.Roles' },

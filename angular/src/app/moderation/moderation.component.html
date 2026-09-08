@@ -1,0 +1,212 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{ 'Moderation' | localize }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2 pb-3">
+        <div class="container-fluid">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ 'BannedUsers' | localize }}</h5>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'UserName' | localize }}</th>
+                                <th>{{ 'BanType' | localize }}</th>
+                                <th>{{ 'BanReason' | localize }}</th>
+                                <th>{{ 'BannedAt' | localize }}</th>
+                                <th class="text-right">{{ 'Actions' | localize }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (bansLoading) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'PleaseWait' | localize }}
+                                    </td>
+                                </tr>
+                            } @else if (bans.length === 0) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'NoBannedUsers' | localize }}
+                                    </td>
+                                </tr>
+                            } @else {
+                                @for (ban of bans; track ban.id) {
+                                    <tr>
+                                        <td>{{ ban.userName }}</td>
+                                        <td>{{ banTypeLabel(ban.banType) }}</td>
+                                        <td>{{ ban.reason }}</td>
+                                        <td>{{ ban.creationTime | date: 'yyyy-MM-dd' }}</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-default btn-sm" (click)="unban(ban)">
+                                                {{ 'Unban' | localize }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+                            {{ 'TotalRecordsCount' | localize: bansTotalItems }}
+                        </div>
+                        <div class="col-sm-6 col-12 text-right">
+                            @if (bansTotalItems > bansPageSize) {
+                                <abp-pagination-controls
+                                    [id]="'moderationBansPagination'"
+                                    [previousLabel]="'Previous' | localize"
+                                    [nextLabel]="'Next' | localize"
+                                    (pageChange)="bansPageChanged($event)"></abp-pagination-controls>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ 'RecentComments' | localize }}</h5>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PostTitle' | localize }}</th>
+                                <th>{{ 'Author' | localize }}</th>
+                                <th>{{ 'Comments' | localize }}</th>
+                                <th>{{ 'CreatedDate' | localize }}</th>
+                                <th class="text-right">{{ 'Actions' | localize }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (commentsLoading) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'PleaseWait' | localize }}
+                                    </td>
+                                </tr>
+                            } @else if (comments.length === 0) {
+                                <tr>
+                                    <td colspan="5" class="text-muted">
+                                        {{ 'NoRecentComments' | localize }}
+                                    </td>
+                                </tr>
+                            } @else {
+                                @for (comment of comments; track comment.id) {
+                                    <tr>
+                                        <td>{{ comment.postTitle }}</td>
+                                        <td>{{ comment.userName }}</td>
+                                        <td class="text-truncate" style="max-width: 320px">
+                                            {{ comment.contentMarkdown | slice: 0:160 }}
+                                        </td>
+                                        <td>{{ comment.creationTime | date: 'yyyy-MM-dd HH:mm' }}</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-default btn-sm" (click)="deleteComment(comment)">
+                                                {{ 'Delete' | localize }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+                            {{ 'TotalRecordsCount' | localize: commentsTotalItems }}
+                        </div>
+                        <div class="col-sm-6 col-12 text-right">
+                            @if (commentsTotalItems > commentsPageSize) {
+                                <abp-pagination-controls
+                                    [id]="'moderationCommentsPagination'"
+                                    [previousLabel]="'Previous' | localize"
+                                    [nextLabel]="'Next' | localize"
+                                    (pageChange)="commentsPageChanged($event)"></abp-pagination-controls>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ 'ReviewQueue' | localize }}</h5>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'PostTitle' | localize }}</th>
+                                <th>{{ 'Author' | localize }}</th>
+                                <th>{{ 'CreatedDate' | localize }}</th>
+                                <th class="text-right">{{ 'Actions' | localize }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (postsLoading) {
+                                <tr>
+                                    <td colspan="4" class="text-muted">
+                                        {{ 'PleaseWait' | localize }}
+                                    </td>
+                                </tr>
+                            } @else if (posts.length === 0) {
+                                <tr>
+                                    <td colspan="4" class="text-muted">
+                                        {{ 'NoPendingReviewPosts' | localize }}
+                                    </td>
+                                </tr>
+                            } @else {
+                                @for (post of posts; track post.id) {
+                                    <tr>
+                                        <td>{{ post.title }}</td>
+                                        <td>{{ post.authorUserName }}</td>
+                                        <td>{{ post.creationTime | date: 'yyyy-MM-dd' }}</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-default btn-sm" (click)="approvePost(post)">
+                                                {{ 'Approve' | localize }}
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm" (click)="rejectPost(post)">
+                                                {{ 'Reject' | localize }}
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm" (click)="deletePost(post)">
+                                                {{ 'Delete' | localize }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+                            {{ 'TotalRecordsCount' | localize: postsTotalItems }}
+                        </div>
+                        <div class="col-sm-6 col-12 text-right">
+                            @if (postsTotalItems > postsPageSize) {
+                                <abp-pagination-controls
+                                    [id]="'moderationPostsPagination'"
+                                    [previousLabel]="'Previous' | localize"
+                                    [nextLabel]="'Next' | localize"
+                                    (pageChange)="postsPageChanged($event)"></abp-pagination-controls>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

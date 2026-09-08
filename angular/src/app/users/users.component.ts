@@ -7,6 +7,7 @@ import { UserServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/servic
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
 import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
+import { UserBansDialogComponent } from './user-bans/user-bans-dialog.component';
 import { Table, TableModule } from 'primeng/table';
 import { LazyLoadEvent, PrimeTemplate } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
@@ -51,6 +52,21 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
     public resetPassword(user: UserDto): void {
         this.showResetPasswordUserDialog(user.id);
+    }
+
+    // prd.md E6-S2: ban management in user management
+    canManageBans(): boolean {
+        return this.permission.isGranted('Pages.Blog.Bans.Manage');
+    }
+
+    showBansDialog(user: UserDto): void {
+        this._modalService.show(UserBansDialogComponent, {
+            class: 'modal-lg',
+            initialState: {
+                id: user.id,
+                userName: user.userName,
+            },
+        });
     }
 
     clearFilters(): void {

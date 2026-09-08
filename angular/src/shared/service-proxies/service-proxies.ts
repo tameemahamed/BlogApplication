@@ -377,6 +377,67 @@ export class CommentServiceProxy {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getRecentCommentsForModeration(skipCount: number | undefined, maxResultCount: number | undefined): Observable<ModerationCommentDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Comment/GetRecentCommentsForModeration?";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetRecentCommentsForModeration(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetRecentCommentsForModeration(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ModerationCommentDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ModerationCommentDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetRecentCommentsForModeration(response: HttpResponseBase): Observable<ModerationCommentDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ModerationCommentDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -2478,6 +2539,302 @@ export class UserServiceProxy {
     }
 }
 
+@Injectable()
+export class UserBanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    ban(body: BanUserInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/UserBan/Ban";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processBan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processBan(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processBan(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    unban(body: UnbanInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/UserBan/Unban";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUnban(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUnban(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUnban(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getMyActiveBans(): Observable<ActiveUserBanDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/UserBan/GetMyActiveBans";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetMyActiveBans(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetMyActiveBans(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ActiveUserBanDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ActiveUserBanDto[]>;
+        }));
+    }
+
+    protected processGetMyActiveBans(response: HttpResponseBase): Observable<ActiveUserBanDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ActiveUserBanDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param userId (optional) 
+     * @param onlyActive (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getUserBans(userId: number | undefined, onlyActive: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<UserBanDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/UserBan/GetUserBans?";
+        if (userId === null)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else if (userId !== undefined)
+            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
+        if (onlyActive === null)
+            throw new Error("The parameter 'onlyActive' cannot be null.");
+        else if (onlyActive !== undefined)
+            url_ += "OnlyActive=" + encodeURIComponent("" + onlyActive) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUserBans(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUserBans(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<UserBanDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<UserBanDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetUserBans(response: HttpResponseBase): Observable<UserBanDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserBanDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+export class ActiveUserBanDto implements IActiveUserBanDto {
+    banType: number;
+    reason: string | undefined;
+    creationTime: moment.Moment;
+
+    constructor(data?: IActiveUserBanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.banType = _data["banType"];
+            this.reason = _data["reason"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ActiveUserBanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ActiveUserBanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["banType"] = this.banType;
+        data["reason"] = this.reason;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        return data;
+    }
+
+    clone(): ActiveUserBanDto {
+        const json = this.toJSON();
+        let result = new ActiveUserBanDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IActiveUserBanDto {
+    banType: number;
+    reason: string | undefined;
+    creationTime: moment.Moment;
+}
+
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string | undefined;
     releaseDate: moment.Moment;
@@ -2645,6 +3002,68 @@ export interface IAuthenticateResultModel {
     encryptedAccessToken: string | undefined;
     expireInSeconds: number;
     userId: number;
+}
+
+export class BanUserInput implements IBanUserInput {
+    userId: number;
+    banTypes: number[];
+    reason: string;
+
+    constructor(data?: IBanUserInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.banTypes = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userId = _data["userId"];
+            if (Array.isArray(_data["banTypes"])) {
+                this.banTypes = [] as any;
+                for (let item of _data["banTypes"])
+                    this.banTypes.push(item);
+            }
+            this.reason = _data["reason"];
+        }
+    }
+
+    static fromJS(data: any): BanUserInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new BanUserInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        if (Array.isArray(this.banTypes)) {
+            data["banTypes"] = [];
+            for (let item of this.banTypes)
+                data["banTypes"].push(item);
+        }
+        data["reason"] = this.reason;
+        return data;
+    }
+
+    clone(): BanUserInput {
+        const json = this.toJSON();
+        let result = new BanUserInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBanUserInput {
+    userId: number;
+    banTypes: number[];
+    reason: string;
 }
 
 export class ChangePasswordDto implements IChangePasswordDto {
@@ -3411,6 +3830,144 @@ export class Int64EntityDto implements IInt64EntityDto {
 
 export interface IInt64EntityDto {
     id: number;
+}
+
+export class ModerationCommentDto implements IModerationCommentDto {
+    id: string;
+    postId: string;
+    userId: number;
+    userName: string | undefined;
+    parentCommentId: string | undefined;
+    contentMarkdown: string | undefined;
+    isEdited: boolean;
+    creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
+    postTitle: string | undefined;
+
+    constructor(data?: IModerationCommentDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.postId = _data["postId"];
+            this.userId = _data["userId"];
+            this.userName = _data["userName"];
+            this.parentCommentId = _data["parentCommentId"];
+            this.contentMarkdown = _data["contentMarkdown"];
+            this.isEdited = _data["isEdited"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.upvoteCount = _data["upvoteCount"];
+            this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
+            this.postTitle = _data["postTitle"];
+        }
+    }
+
+    static fromJS(data: any): ModerationCommentDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModerationCommentDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["postId"] = this.postId;
+        data["userId"] = this.userId;
+        data["userName"] = this.userName;
+        data["parentCommentId"] = this.parentCommentId;
+        data["contentMarkdown"] = this.contentMarkdown;
+        data["isEdited"] = this.isEdited;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["upvoteCount"] = this.upvoteCount;
+        data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
+        data["postTitle"] = this.postTitle;
+        return data;
+    }
+
+    clone(): ModerationCommentDto {
+        const json = this.toJSON();
+        let result = new ModerationCommentDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IModerationCommentDto {
+    id: string;
+    postId: string;
+    userId: number;
+    userName: string | undefined;
+    parentCommentId: string | undefined;
+    contentMarkdown: string | undefined;
+    isEdited: boolean;
+    creationTime: moment.Moment;
+    upvoteCount: number;
+    upvotedByCurrentUser: boolean | undefined;
+    postTitle: string | undefined;
+}
+
+export class ModerationCommentDtoPagedResultDto implements IModerationCommentDtoPagedResultDto {
+    items: ModerationCommentDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IModerationCommentDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(ModerationCommentDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): ModerationCommentDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModerationCommentDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): ModerationCommentDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new ModerationCommentDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IModerationCommentDtoPagedResultDto {
+    items: ModerationCommentDto[] | undefined;
+    totalCount: number;
 }
 
 export class PermissionDto implements IPermissionDto {
@@ -4617,6 +5174,53 @@ export interface ITopLevelCommentDto {
     replies: CommentDto[] | undefined;
 }
 
+export class UnbanInput implements IUnbanInput {
+    userId: number;
+    banType: number;
+
+    constructor(data?: IUnbanInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userId = _data["userId"];
+            this.banType = _data["banType"];
+        }
+    }
+
+    static fromJS(data: any): UnbanInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new UnbanInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["banType"] = this.banType;
+        return data;
+    }
+
+    clone(): UnbanInput {
+        const json = this.toJSON();
+        let result = new UnbanInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUnbanInput {
+    userId: number;
+    banType: number;
+}
+
 export class UpdateCommentInput implements IUpdateCommentInput {
     id: string;
     contentMarkdown: string;
@@ -4717,6 +5321,136 @@ export interface IUpdatePostInput {
     title: string;
     excerpt: string | undefined;
     contentMarkdown: string;
+}
+
+export class UserBanDto implements IUserBanDto {
+    id: string;
+    userId: number;
+    userName: string | undefined;
+    banType: number;
+    reason: string | undefined;
+    creationTime: moment.Moment;
+    bannedByUserName: string | undefined;
+    liftedAt: moment.Moment | undefined;
+    liftedByUserName: string | undefined;
+
+    constructor(data?: IUserBanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userId = _data["userId"];
+            this.userName = _data["userName"];
+            this.banType = _data["banType"];
+            this.reason = _data["reason"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.bannedByUserName = _data["bannedByUserName"];
+            this.liftedAt = _data["liftedAt"] ? moment(_data["liftedAt"].toString()) : <any>undefined;
+            this.liftedByUserName = _data["liftedByUserName"];
+        }
+    }
+
+    static fromJS(data: any): UserBanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserBanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userId"] = this.userId;
+        data["userName"] = this.userName;
+        data["banType"] = this.banType;
+        data["reason"] = this.reason;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["bannedByUserName"] = this.bannedByUserName;
+        data["liftedAt"] = this.liftedAt ? this.liftedAt.toISOString() : <any>undefined;
+        data["liftedByUserName"] = this.liftedByUserName;
+        return data;
+    }
+
+    clone(): UserBanDto {
+        const json = this.toJSON();
+        let result = new UserBanDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUserBanDto {
+    id: string;
+    userId: number;
+    userName: string | undefined;
+    banType: number;
+    reason: string | undefined;
+    creationTime: moment.Moment;
+    bannedByUserName: string | undefined;
+    liftedAt: moment.Moment | undefined;
+    liftedByUserName: string | undefined;
+}
+
+export class UserBanDtoPagedResultDto implements IUserBanDtoPagedResultDto {
+    items: UserBanDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IUserBanDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(UserBanDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): UserBanDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserBanDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): UserBanDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new UserBanDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUserBanDtoPagedResultDto {
+    items: UserBanDto[] | undefined;
+    totalCount: number;
 }
 
 export class UserDto implements IUserDto {

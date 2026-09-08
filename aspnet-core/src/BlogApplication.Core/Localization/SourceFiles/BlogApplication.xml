@@ -178,6 +178,34 @@
     <text name="Upvote" value="Upvote" />
     <text name="Upvoted" value="Upvoted" />
     <text name="Upvotes" value="Upvotes" />
+    <text name="Moderation" value="Moderation" />
+    <text name="Bans" value="Bans" />
+    <text name="Ban" value="Ban" />
+    <text name="Unban" value="Unban" />
+    <text name="BanReason" value="Reason" />
+    <text name="BanType" value="Ban type" />
+    <text name="BanTypeComment" value="Commenting" />
+    <text name="BanTypeReply" value="Replying" />
+    <text name="BanTypeUpvote" value="Upvoting" />
+    <text name="BannedFromCommenting" value="Banned from commenting" />
+    <text name="BannedFromReplying" value="Banned from replying" />
+    <text name="BannedFromUpvoting" value="Banned from upvoting" />
+    <text name="ActiveRestrictions" value="Your active restrictions" />
+    <text name="ActiveBans" value="Active bans" />
+    <text name="BannedUsers" value="Banned users" />
+    <text name="RecentComments" value="Recent comments" />
+    <text name="BannedAt" value="Banned at" />
+    <text name="NoActiveBans" value="No active bans" />
+    <text name="NoBanOptionsLeft" value="All abilities are already banned." />
+    <text name="NoBannedUsers" value="No banned users" />
+    <text name="NoRecentComments" value="No comments" />
+    <text name="AlreadyBanned" value="This user already has an active ban of this type." />
+    <text name="SelectAtLeastOneBanType" value="Select at least one restriction to ban." />
+    <text name="CannotBanSelf" value="You cannot ban yourself." />
+    <text name="BanNotActive" value="There is no active ban of this type for this user." />
+    <text name="BanSuccess" value="Ban imposed." />
+    <text name="UnbanSuccess" value="Ban lifted." />
+    <text name="UnbanWarningMessage" value="Lift this ban? The user will regain this ability immediately." />
     <text name="Previous" value="Previous" />
     <text name="Next" value="Next" />
   </texts>

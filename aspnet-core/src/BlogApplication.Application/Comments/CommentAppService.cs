@@ -1,6 +1,8 @@
 using Abp;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Linq.Extensions;
 using Abp.Runtime.Session;
 using Abp.UI;
 using BlogApplication.Authorization;
@@ -177,6 +179,54 @@ public class CommentAppService : BlogApplicationAppServiceBase, ICommentAppServi
             TopLevelCount = topLevel.Count,
             Comments = page
         };
+    }
+
+    /// <summary>
+    /// Moderation overview feed (prd.md E6-S6): the newest comments across
+    /// all posts with their post title, for day-to-day content oversight.
+    /// </summary>
+    [AbpAuthorize(PermissionNames.Blog.Bans_Manage)]
+    public async Task<PagedResultDto<ModerationCommentDto>> GetRecentCommentsForModerationAsync(
+        PagedResultRequestDto input)
+    {
+        var query = _commentRepository.GetAll();
+
+        var totalCount = await query.CountAsync();
+        var comments = await query
+            .OrderByDescending(c => c.CreationTime)
+            .PageBy(input)
+            .ToListAsync();
+
+        var postIds = comments.Select(c => c.PostId).Distinct().ToList();
+        var postTitles = await _postRepository.GetAll()
+            .Where(p => postIds.Contains(p.Id))
+            .ToDictionaryAsync(p => p.Id, p => p.Title);
+
+        var userNames = await GetUserNamesAsync(comments.Select(c => c.UserId).Distinct());
+        var (upvoteCounts, myUpvotes) = await GetUpvoteDataAsync(
+            UpvoteTargetType.Comment,
+            comments.Select(c => c.Id));
+
+        var items = comments
+            .Select(c => new ModerationCommentDto
+            {
+                Id = c.Id,
+                PostId = c.PostId,
+                PostTitle = postTitles.GetValueOrDefault(c.PostId),
+                UserId = c.UserId,
+                UserName = userNames.GetValueOrDefault(c.UserId) ?? L("UnknownAuthor"),
+                ParentCommentId = c.ParentCommentId,
+                ContentMarkdown = c.ContentMarkdown,
+                IsEdited = c.IsEdited,
+                CreationTime = c.CreationTime,
+                UpvoteCount = upvoteCounts.GetValueOrDefault(c.Id),
+                UpvotedByCurrentUser = AbpSession.UserId.HasValue
+                    ? myUpvotes.Contains(c.Id)
+                    : (bool?)null
+            })
+            .ToList();
+
+        return new PagedResultDto<ModerationCommentDto>(totalCount, items);
     }
 
     /// <summary>

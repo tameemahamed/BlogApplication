@@ -46,6 +46,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             new MenuItem(this.l('About'), '/app/about'),
             new MenuItem(this.l('MyPosts'), '/app/posts', 'Pages.Blog.Posts.Create'),
             new MenuItem(this.l('ReviewQueue'), '/app/posts/review', 'Pages.Blog.Posts.Approve'),
+            new MenuItem(this.l('Moderation'), '/app/moderation', 'Pages.Blog.Bans.Manage'),
             new MenuItem(this.l('Roles'), '/app/roles', 'Pages.Roles'),
             new MenuItem(this.l('Users'), '/app/users', 'Pages.Users'),
         ];

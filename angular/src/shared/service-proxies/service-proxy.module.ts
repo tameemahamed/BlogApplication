@@ -15,6 +15,7 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.PostServiceProxy,
         ApiServiceProxies.CommentServiceProxy,
         ApiServiceProxies.UpvoteServiceProxy,
+        ApiServiceProxies.UserBanServiceProxy,
         { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
     ],
 })

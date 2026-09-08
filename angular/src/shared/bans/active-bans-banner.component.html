@@ -1,0 +1,10 @@
+@if (activeBans.length > 0) {
+    <div class="mb-4 p-3 border">
+        <strong>{{ 'ActiveRestrictions' | localize }}</strong>
+        @for (ban of activeBans; track ban.banType) {
+            <div class="text-muted small mt-1">
+                {{ banTypeLabel(ban.banType) }} — {{ ban.reason }}
+            </div>
+        }
+    </div>
+}

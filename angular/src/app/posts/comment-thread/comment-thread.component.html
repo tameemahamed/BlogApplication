@@ -4,6 +4,8 @@
         ({{ thread?.totalCount ?? 0 }})
     </h5>
 
+    <active-bans-banner></active-bans-banner>
+
     @if (canComment()) {
         <div class="mb-4">
             <markdown-input
@@ -79,6 +81,48 @@
                                 {{ 'Delete' | localize }}
                             </button>
                         }
+                        @if (canManageBans()) {
+                            <button type="button" class="btn btn-default btn-sm" (click)="startBan(top)">
+                                {{ 'Ban' | localize }}
+                            </button>
+                        }
+                    </div>
+                }
+
+                @if (banningCommentId === top.id) {
+                    <div class="mt-2 p-2 border">
+                        <div class="mb-1">{{ 'BanType' | localize }}</div>
+                        @for (t of banTypes; track t) {
+                            <div class="custom-control custom-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    [id]="'threadBanTop' + t"
+                                    [name]="'threadBanTop' + t"
+                                    [(ngModel)]="banTypeSelection[t]" />
+                                <label class="custom-control-label" [for]="'threadBanTop' + t">
+                                    {{ banTypeLabel(t) }}
+                                </label>
+                            </div>
+                        }
+                        <textarea
+                            class="form-control mt-2"
+                            rows="2"
+                            maxlength="1000"
+                            [placeholder]="'BanReason' | localize"
+                            [(ngModel)]="banReason"></textarea>
+                        <div class="mt-2">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm mr-1"
+                                [disabled]="banning || selectedBanTypes().length === 0 || !banReason.trim()"
+                                (click)="submitBan(top)">
+                                {{ 'Ban' | localize }}
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" [disabled]="banning" (click)="cancelBanForm()">
+                                {{ 'Cancel' | localize }}
+                            </button>
+                        </div>
                     </div>
                 }
 
@@ -160,6 +204,48 @@
                                         {{ 'Delete' | localize }}
                                     </button>
                                 }
+                                @if (canManageBans()) {
+                                    <button type="button" class="btn btn-default btn-sm" (click)="startBan(reply)">
+                                        {{ 'Ban' | localize }}
+                                    </button>
+                                }
+                            </div>
+                        }
+
+                        @if (banningCommentId === reply.id) {
+                            <div class="mt-2 p-2 border">
+                                <div class="mb-1">{{ 'BanType' | localize }}</div>
+                                @for (t of banTypes; track t) {
+                                    <div class="custom-control custom-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            class="custom-control-input"
+                                            [id]="'threadBanReply' + t"
+                                            [name]="'threadBanReply' + t"
+                                            [(ngModel)]="banTypeSelection[t]" />
+                                        <label class="custom-control-label" [for]="'threadBanReply' + t">
+                                            {{ banTypeLabel(t) }}
+                                        </label>
+                                    </div>
+                                }
+                                <textarea
+                                    class="form-control mt-2"
+                                    rows="2"
+                                    maxlength="1000"
+                                    [placeholder]="'BanReason' | localize"
+                                    [(ngModel)]="banReason"></textarea>
+                                <div class="mt-2">
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary btn-sm mr-1"
+                                        [disabled]="banning || selectedBanTypes().length === 0 || !banReason.trim()"
+                                        (click)="submitBan(reply)">
+                                        {{ 'Ban' | localize }}
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm" [disabled]="banning" (click)="cancelBanForm()">
+                                        {{ 'Cancel' | localize }}
+                                    </button>
+                                </div>
                             </div>
                         }
                     </div>
