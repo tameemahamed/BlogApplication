@@ -8,6 +8,9 @@
         (click)="toggle()">
         {{ (isUpvoted ? 'Upvoted' : 'Upvote') | localize }} ({{ count }})
     </button>
+} @else if (!isAuthenticated()) {
+    <span class="text-muted">{{ count }} {{ 'Upvotes' | localize }}</span>
+    <a class="ml-2 small" [routerLink]="['/account/login']">{{ 'LoginToUpvote' | localize }}</a>
 } @else {
     <span class="text-muted">{{ count }} {{ 'Upvotes' | localize }}</span>
 }

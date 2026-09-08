@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/app/about', pathMatch: 'full' },
     {
         path: 'account',
         loadChildren: () => import('account/account.module').then((m) => m.AccountModule), // Lazy load account module
@@ -10,7 +9,13 @@ const routes: Routes = [
     },
     {
         path: 'app',
-        loadChildren: () => import('app/app.module').then((m) => m.AppModule), // Lazy load account module
+        loadChildren: () => import('app/app.module').then((m) => m.AppModule), // Lazy load the workspace shell
+        data: { preload: true },
+    },
+    {
+        // public site (prd.md E7) - must stay LAST: it owns '' and '**'
+        path: '',
+        loadChildren: () => import('app/public/public.module').then((m) => m.PublicModule),
         data: { preload: true },
     },
 ];

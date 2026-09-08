@@ -6,6 +6,8 @@ using Abp.Runtime.Validation;
 using Abp.UI;
 using BlogApplication.Authorization.Roles;
 using BlogApplication.Authorization.Users;
+using BlogApplication.Comments;
+using BlogApplication.Comments.Dto;
 using BlogApplication.Posts;
 using BlogApplication.Posts.Dto;
 using Shouldly;
@@ -251,5 +253,37 @@ public class PostAppService_Tests : BlogApplicationTestBase
         var detail = await _postAppService.GetPublicPostBySlugAsync(submitted.Slug);
         detail.Title.ShouldBe("Submitted post");
         detail.ContentMarkdown.ShouldNotBeNullOrWhiteSpace();
+    }
+
+    // prd.md E7-S1: the public list carries comment and upvote counts
+    [Fact]
+    public async Task Public_List_Should_Carry_Comment_Counts()
+    {
+        await CreateAuthorAsync("author.counts");
+        LoginAsHost("author.counts");
+        var post = await CreatePostAsync("Counted");
+
+        LoginAsHostAdmin();
+        await _postAppService.ApproveAsync(post.Id);
+
+        // a top-level comment plus its reply both count, matching the thread total
+        var commentService = Resolve<ICommentAppService>();
+        var comment = await commentService.CreateCommentAsync(new CreateCommentInput
+        {
+            PostId = post.Id,
+            ContentMarkdown = "first comment"
+        });
+        await commentService.CreateReplyAsync(new CreateReplyInput
+        {
+            ParentCommentId = comment.Id,
+            ContentMarkdown = "a reply"
+        });
+
+        AbpSession.UserId = null;
+        var posts = await _postAppService.GetPublicPostsAsync(
+            new GetPublicPostsInput { SkipCount = 0, MaxResultCount = 10 });
+        posts.TotalCount.ShouldBe(1);
+        posts.Items[0].CommentCount.ShouldBe(2);
+        posts.Items[0].UpvoteCount.ShouldBe(0);
     }
 }

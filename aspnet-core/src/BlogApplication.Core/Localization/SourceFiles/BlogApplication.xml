@@ -206,6 +206,14 @@
     <text name="BanSuccess" value="Ban imposed." />
     <text name="UnbanSuccess" value="Ban lifted." />
     <text name="UnbanWarningMessage" value="Lift this ban? The user will regain this ability immediately." />
+    <text name="Newest" value="Newest" />
+    <text name="Top" value="Top" />
+    <text name="NoPublishedPosts" value="No posts have been published yet." />
+    <text name="LoadFailed" value="Could not load the content. Please try again." />
+    <text name="LoginToComment" value="You need an account to join the discussion." />
+    <text name="LoginToUpvote" value="Log in to upvote" />
+    <text name="PageNotFound" value="The page you are looking for does not exist." />
+    <text name="BackToPosts" value="Back to posts" />
     <text name="Previous" value="Previous" />
     <text name="Next" value="Next" />
   </texts>

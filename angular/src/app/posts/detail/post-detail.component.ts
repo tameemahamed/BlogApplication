@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { PostServiceProxy, PublicPostDetailDto } from '@shared/service-proxies/service-proxies';
 import { CommentThreadComponent } from '../comment-thread/comment-thread.component';
@@ -9,13 +9,21 @@ import { MarkdownPipe } from '@shared/pipes/markdown.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 /**
- * Post reading view with its comment discussion (prd.md E4-S4; the public
- * anonymous experience wraps this in Epic 7). Loaded by slug.
+ * Public post reading view with its comment discussion (prd.md E7-S2).
+ * Anonymous-readable by slug; interactive controls (upvote, comment) adapt
+ * to the viewer's authentication and bans.
  */
 @Component({
     templateUrl: './post-detail.component.html',
     standalone: true,
-    imports: [CommentThreadComponent, UpvoteButtonComponent, DatePipe, MarkdownPipe, LocalizePipe],
+    imports: [
+        CommentThreadComponent,
+        UpvoteButtonComponent,
+        RouterLink,
+        DatePipe,
+        MarkdownPipe,
+        LocalizePipe,
+    ],
 })
 export class PostDetailComponent extends AppComponentBase implements OnInit {
     post: PublicPostDetailDto | undefined;

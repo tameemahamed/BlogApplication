@@ -43,6 +43,7 @@ export class AppRouteGuard {
             return '/app/users';
         }
 
-        return '/app/home';
+        // plain users (no workspace permissions) land on the public home
+        return '/';
     }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Injector, Input, OnChanges } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { ToggleUpvoteInput, UpvoteServiceProxy } from '@shared/service-proxies/service-proxies';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -7,13 +8,14 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
  * Upvote toggle for posts, comments and replies (prd.md Epic 5). Renders the
  * live count for everyone; the toggle button appears only for users holding
  * Pages.Blog.Upvotes.Toggle (granted to every registered role by default -
- * bans revoke it via user-level prohibition, anonymous visitors never have it).
+ * bans revoke it via user-level prohibition). Anonymous visitors see the
+ * count plus a login call-to-action (prd.md E7-S3).
  */
 @Component({
     selector: 'upvote-button',
     templateUrl: './upvote-button.component.html',
     standalone: true,
-    imports: [LocalizePipe],
+    imports: [RouterLink, LocalizePipe],
 })
 export class UpvoteButtonComponent extends AppComponentBase implements OnChanges {
     @Input() targetType: 'post' | 'comment' = 'post';
@@ -43,6 +45,10 @@ export class UpvoteButtonComponent extends AppComponentBase implements OnChanges
 
     canUpvote(): boolean {
         return this.permission.isGranted('Pages.Blog.Upvotes.Toggle');
+    }
+
+    isAuthenticated(): boolean {
+        return !!this.appSession.userId;
     }
 
     toggle(): void {

@@ -16,7 +16,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ServiceProxyModule } from '../shared/service-proxies/service-proxy.module';
 import { SharedModule } from '../shared/shared.module';
-import { HomeComponent } from '../app/home/home.component';
 import { AboutComponent } from '../app/about/about.component';
 
 // layout
@@ -49,7 +48,6 @@ describe('AppComponent', () => {
                 SharedModule.forRoot(),
                 NgxPaginationModule,
                 AppComponent,
-                HomeComponent,
                 AboutComponent,
                 // layout
                 HeaderComponent,

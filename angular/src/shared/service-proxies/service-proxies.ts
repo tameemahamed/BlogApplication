@@ -4310,6 +4310,7 @@ export class PublicPostListDto implements IPublicPostListDto {
     publishedAt: moment.Moment | undefined;
     upvoteCount: number;
     upvotedByCurrentUser: boolean | undefined;
+    commentCount: number;
 
     constructor(data?: IPublicPostListDto) {
         if (data) {
@@ -4330,6 +4331,7 @@ export class PublicPostListDto implements IPublicPostListDto {
             this.publishedAt = _data["publishedAt"] ? moment(_data["publishedAt"].toString()) : <any>undefined;
             this.upvoteCount = _data["upvoteCount"];
             this.upvotedByCurrentUser = _data["upvotedByCurrentUser"];
+            this.commentCount = _data["commentCount"];
         }
     }
 
@@ -4350,6 +4352,7 @@ export class PublicPostListDto implements IPublicPostListDto {
         data["publishedAt"] = this.publishedAt ? this.publishedAt.toISOString() : <any>undefined;
         data["upvoteCount"] = this.upvoteCount;
         data["upvotedByCurrentUser"] = this.upvotedByCurrentUser;
+        data["commentCount"] = this.commentCount;
         return data;
     }
 
@@ -4370,6 +4373,7 @@ export interface IPublicPostListDto {
     publishedAt: moment.Moment | undefined;
     upvoteCount: number;
     upvotedByCurrentUser: boolean | undefined;
+    commentCount: number;
 }
 
 export class PublicPostListDtoPagedResultDto implements IPublicPostListDtoPagedResultDto {

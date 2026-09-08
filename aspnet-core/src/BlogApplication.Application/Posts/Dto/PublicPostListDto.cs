@@ -25,4 +25,10 @@ public class PublicPostListDto : EntityDto<Guid>
     public int UpvoteCount { get; set; }
 
     public bool? UpvotedByCurrentUser { get; set; }
+
+    /// <summary>
+    /// All visible comments of the post, replies included - matches the
+    /// thread's total (prd.md E7-S1).
+    /// </summary>
+    public int CommentCount { get; set; }
 }

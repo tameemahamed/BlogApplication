@@ -517,3 +517,17 @@ input[type='radio'] {
 .markdown-preview hr {
     border-top: 1px solid var(--border);
 }
+
+/* --------------------------------------------------------------------------
+   Public site (prd.md E7)
+
+   Bootstrap's border utilities hardcode a light gray; the public header and
+   footer separators (and the inline ban panels) use the palette token.
+   -------------------------------------------------------------------------- */
+
+.border,
+.border-top,
+.border-bottom {
+    border-color: var(--border) !important;
+}
+

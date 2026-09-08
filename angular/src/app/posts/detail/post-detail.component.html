@@ -1,53 +1,42 @@
 <div>
     @if (loading) {
-        <p class="text-muted mt-4">
-            {{ 'PleaseWait' | localize }}
-        </p>
+        <p class="text-muted">{{ 'PleaseWait' | localize }}</p>
     } @else if (!post) {
-        <div class="mt-4">
-            <h1>404</h1>
-            <p class="text-muted">
-                {{ 'PostNotFound' | localize }}
-            </p>
+        <div class="py-5">
+            <h1 class="h4">404</h1>
+            <p class="text-muted">{{ 'PostNotFound' | localize }}</p>
+            <a [routerLink]="['/']">{{ 'BackToPosts' | localize }}</a>
         </div>
     } @else {
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>{{ post.title }}</h1>
-                        <p class="text-muted">
-                            {{ 'Author' | localize }}: {{ post.authorUserName }}
-                            @if (post.publishedAt) {
-                                — {{ 'PublishDate' | localize }}:
-                                {{ post.publishedAt | date: 'yyyy-MM-dd' }}
-                            }
-                        </p>
-                        <div class="mt-1">
-                            <upvote-button
-                                targetType="post"
-                                [targetId]="post.id"
-                                [upvoteCount]="post.upvoteCount"
-                                [upvoted]="post.upvotedByCurrentUser">
-                            </upvote-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="content px-2 pb-4">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        @if (post.excerpt) {
-                            <p class="text-muted">{{ post.excerpt }}</p>
-                        }
-                        <div class="markdown-preview" [innerHtml]="post.contentMarkdown | markdown"></div>
-                    </div>
-                </div>
+        <a class="small" [routerLink]="['/']">{{ 'BackToPosts' | localize }}</a>
 
-                <comment-thread [postId]="post.id" [postAuthorId]="post.authorId"></comment-thread>
+        <article class="mt-3">
+            <h1 class="h3">{{ post.title }}</h1>
+            <p class="text-muted small">
+                {{ 'Author' | localize }}: {{ post.authorUserName }}
+                @if (post.publishedAt) {
+                    — {{ 'PublishDate' | localize }}: {{ post.publishedAt | date: 'yyyy-MM-dd' }}
+                }
+            </p>
+            <div class="mb-3">
+                <upvote-button
+                    targetType="post"
+                    [targetId]="post.id"
+                    [upvoteCount]="post.upvoteCount"
+                    [upvoted]="post.upvotedByCurrentUser">
+                </upvote-button>
             </div>
-        </section>
+
+            <div class="card">
+                <div class="card-body">
+                    @if (post.excerpt) {
+                        <p class="text-muted">{{ post.excerpt }}</p>
+                    }
+                    <div class="markdown-preview" [innerHtml]="post.contentMarkdown | markdown"></div>
+                </div>
+            </div>
+        </article>
+
+        <comment-thread [postId]="post.id" [postAuthorId]="post.authorId"></comment-thread>
     }
 </div>

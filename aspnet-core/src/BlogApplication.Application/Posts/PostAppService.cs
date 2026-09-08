@@ -10,6 +10,7 @@ using Abp.Timing;
 using Abp.UI;
 using BlogApplication.Authorization;
 using BlogApplication.Authorization.Users;
+using BlogApplication.Comments;
 using BlogApplication.Posts.Dto;
 using BlogApplication.Upvotes;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
     private readonly IRepository<Post, Guid> _postRepository;
     private readonly IRepository<User, long> _userRepository;
     private readonly IRepository<Upvote, Guid> _upvoteRepository;
+    private readonly IRepository<Comment, Guid> _commentRepository;
     private readonly ISlugGenerator _slugGenerator;
     private readonly IPermissionChecker _permissionChecker;
     private readonly IGuidGenerator _guidGenerator;
@@ -33,6 +35,7 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
         IRepository<Post, Guid> postRepository,
         IRepository<User, long> userRepository,
         IRepository<Upvote, Guid> upvoteRepository,
+        IRepository<Comment, Guid> commentRepository,
         ISlugGenerator slugGenerator,
         IPermissionChecker permissionChecker,
         IGuidGenerator guidGenerator)
@@ -40,6 +43,7 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
         _postRepository = postRepository;
         _userRepository = userRepository;
         _upvoteRepository = upvoteRepository;
+        _commentRepository = commentRepository;
         _slugGenerator = slugGenerator;
         _permissionChecker = permissionChecker;
         _guidGenerator = guidGenerator;
@@ -254,9 +258,10 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
     {
         var currentUserId = AbpSession.UserId;
         var postUpvotes = _upvoteRepository.GetAll().Where(u => u.TargetType == (int)UpvoteTargetType.Post);
+        var postComments = _commentRepository.GetAll();
 
         // Correlated subqueries deliver counts and the "did I upvote" flag in
-        // one query - required for top-sorting (prd.md E5-S5)
+        // one query - required for top-sorting (prd.md E5-S5; counts E7-S1)
         var query = _postRepository
             .GetAll()
             .Where(p => p.Status == PostStatus.Approved)
@@ -265,7 +270,8 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
                 Post = p,
                 UpvoteCount = postUpvotes.Count(u => u.TargetId == p.Id),
                 UpvotedByMe = currentUserId.HasValue &&
-                              postUpvotes.Any(u => u.TargetId == p.Id && u.UserId == currentUserId.Value)
+                              postUpvotes.Any(u => u.TargetId == p.Id && u.UserId == currentUserId.Value),
+                CommentCount = postComments.Count(c => c.PostId == p.Id)
             });
 
         if (input.SortByUpvotes)
@@ -291,6 +297,7 @@ public class PostAppService : BlogApplicationAppServiceBase, IPostAppService
             {
                 var dto = MapToPublicListDto(x.Post, authorNames);
                 dto.UpvoteCount = x.UpvoteCount;
+                dto.CommentCount = x.CommentCount;
                 // anonymous callers get no flag (prd.md A1)
                 dto.UpvotedByCurrentUser = currentUserId.HasValue ? x.UpvotedByMe : null;
                 return dto;

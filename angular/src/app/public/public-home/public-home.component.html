@@ -1,0 +1,63 @@
+<div class="d-flex align-items-center mb-4">
+    <h1 class="h4 mb-0">{{ 'Posts' | localize }}</h1>
+    <div class="btn-group ml-auto" role="group">
+        <button
+            type="button"
+            class="btn btn-sm"
+            [class.btn-primary]="!sortByUpvotes"
+            [class.btn-default]="sortByUpvotes"
+            (click)="sortBy(false)">
+            {{ 'Newest' | localize }}
+        </button>
+        <button
+            type="button"
+            class="btn btn-sm"
+            [class.btn-primary]="sortByUpvotes"
+            [class.btn-default]="!sortByUpvotes"
+            (click)="sortBy(true)">
+            {{ 'Top' | localize }}
+        </button>
+    </div>
+</div>
+
+@if (loading) {
+    <p class="text-muted">{{ 'PleaseWait' | localize }}</p>
+} @else if (loadFailed) {
+    <p class="text-muted">{{ 'LoadFailed' | localize }}</p>
+} @else if (posts.length === 0) {
+    <p class="text-muted">{{ 'NoPublishedPosts' | localize }}</p>
+} @else {
+    @for (post of posts; track post.id) {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="h5 card-title">
+                    <a [routerLink]="['/posts', post.slug]">{{ post.title }}</a>
+                </h2>
+                <p class="text-muted small mb-2">
+                    {{ 'Author' | localize }}: {{ post.authorUserName }}
+                    @if (post.publishedAt) {
+                        — {{ post.publishedAt | date: 'yyyy-MM-dd' }}
+                    }
+                </p>
+                @if (post.excerpt) {
+                    <p class="mb-2">{{ post.excerpt }}</p>
+                }
+                <p class="text-muted small mb-0">
+                    {{ post.commentCount }} {{ 'Comments' | localize }}
+                    —
+                    {{ post.upvoteCount }} {{ 'Upvotes' | localize }}
+                </p>
+            </div>
+        </div>
+    }
+
+    @if (totalItems > pageSize) {
+        <div class="d-flex justify-content-center">
+            <abp-pagination-controls
+                [id]="'publicPostsPagination'"
+                [previousLabel]="'Previous' | localize"
+                [nextLabel]="'Next' | localize"
+                (pageChange)="pageChanged($event)"></abp-pagination-controls>
+        </div>
+    }
+}

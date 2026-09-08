@@ -1,0 +1,41 @@
+<div class="public-shell">
+    <header class="border-bottom">
+        <div class="container py-3 d-flex align-items-center">
+            <a class="h5 mb-0 text-decoration-none" [routerLink]="['/']">BlogApplication</a>
+            <nav class="ml-4 d-none d-sm-block">
+                <a class="mr-3" [routerLink]="['/']">{{ 'Posts' | localize }}</a>
+                @if (isAuthenticated() && canAuthor()) {
+                    <a class="mr-3" [routerLink]="['/app/posts']">{{ 'MyPosts' | localize }}</a>
+                }
+                @if (isAuthenticated() && canApprove()) {
+                    <a class="mr-3" [routerLink]="['/app/posts/review']">{{ 'ReviewQueue' | localize }}</a>
+                }
+                @if (isAuthenticated() && canModerate()) {
+                    <a class="mr-3" [routerLink]="['/app/moderation']">{{ 'Moderation' | localize }}</a>
+                }
+            </nav>
+            <div class="ml-auto d-flex align-items-center">
+                <a href="javascript:;" (click)="themeService.toggle()">
+                    {{ (themeService.isDark ? 'SwitchToLightMode' : 'SwitchToDarkMode') | localize }}
+                </a>
+                @if (isAuthenticated()) {
+                    <span class="ml-3">{{ appSession.getShownLoginName() }}</span>
+                    <a class="ml-3" href="javascript:;" (click)="logout()">{{ 'Logout' | localize }}</a>
+                } @else {
+                    <a class="ml-3" [routerLink]="['/account/login']">{{ 'LogIn' | localize }}</a>
+                    <a class="ml-3" [routerLink]="['/account/register']">{{ 'Register' | localize }}</a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4">
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer class="border-top mt-4">
+        <div class="container py-3 text-muted small">
+            Copyright &copy; {{ currentYear }} BlogApplication
+        </div>
+    </footer>
+</div>

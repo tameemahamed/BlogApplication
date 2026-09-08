@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Injector, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
     BanUserInput,
@@ -35,6 +36,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
         MarkdownInputComponent,
         UpvoteButtonComponent,
         ActiveBansBannerComponent,
+        RouterLink,
         DatePipe,
         MarkdownPipe,
         LocalizePipe,
@@ -121,6 +123,11 @@ export class CommentThreadComponent extends AppComponentBase implements OnInit {
     // prd.md E6-S2: moderators/admins ban users directly from comment context
     canManageBans(): boolean {
         return this.permission.isGranted('Pages.Blog.Bans.Manage');
+    }
+
+    // prd.md E7-S3: anonymous visitors get login/register calls-to-action
+    isAuthenticated(): boolean {
+        return !!this.appSession.userId;
     }
 
     // ---- actions ------------------------------------------------------------

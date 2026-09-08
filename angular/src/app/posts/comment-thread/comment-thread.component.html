@@ -20,6 +20,12 @@
                 {{ 'Save' | localize }}
             </button>
         </div>
+    } @else if (!isAuthenticated()) {
+        <p class="text-muted mb-4">
+            {{ 'LoginToComment' | localize }}
+            <a class="ml-1" [routerLink]="['/account/login']">{{ 'LogIn' | localize }}</a>
+            <a class="ml-2" [routerLink]="['/account/register']">{{ 'Register' | localize }}</a>
+        </p>
     }
 
     @if (loading) {

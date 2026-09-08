@@ -42,7 +42,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
 
     getMenuItems(): MenuItem[] {
         return [
-            new MenuItem(this.l('HomePage'), '/app/home'),
+            new MenuItem(this.l('HomePage'), '/'),
             new MenuItem(this.l('About'), '/app/about'),
             new MenuItem(this.l('MyPosts'), '/app/posts', 'Pages.Blog.Posts.Create'),
             new MenuItem(this.l('ReviewQueue'), '/app/posts/review', 'Pages.Blog.Posts.Approve'),
