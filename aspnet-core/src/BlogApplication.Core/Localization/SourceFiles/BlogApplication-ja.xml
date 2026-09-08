@@ -53,5 +53,195 @@
     <text name="Yes" value="はい" />
     <text name="No" value="いいえ" />
     <text name="Optional" value="オプション" />
+
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin" value="メールアドレスが確認されていないため、ログインできません。" />
+    <text name="UserLockedOutMessage" value="アカウントはロックされています。しばらくしてからもう一度お試しください。" />
+    <text name="ResetPassword" value="パスワードのリセット" />
+    <text name="UpdatePassword" value="パスワードの更新" />
+    <text name="AdminPassword" value="管理者パスワード" />
+
+    <text name="MultiLevelMenu" value="マルチレベルメニュー" />
+    <text name="Back" value="戻る" />
+    <text name="SuccessfullyRegistered" value="登録が完了しました" />
+    <text name="WaitingForEmailActivation" value="メールアドレスを有効化してください" />
+    <text name="Roles" value="ロール" />
+    <text name="DisplayName" value="表示名" />
+    <text name="Edit" value="編集" />
+    <text name="Delete" value="削除" />
+    <text name="CreateNewRole" value="新しいロールを作成" />
+    <text name="RoleName" value="ロール名" />
+    <text name="Actions" value="操作" />
+    <text name="CouldNotCompleteLoginOperation" value="ログイン処理を完了できませんでした。しばらくしてからもう一度お試しください。" />
+    <text name="CouldNotValidateExternalUser" value="外部ユーザーを検証できませんでした" />
+    <text name="EditRole" value="ロールを編集" />
+    <text name="EditUser" value="ユーザを編集" />
+    <text name="ThisFieldIsRequired" value="この項目は必須です" />
+    <text name="PleaseWait" value="しばらくお待ちください..." />
+    <text name="Administration" value="管理" />
+    <text name="ClearAll" value="すべて閉じる" />
+    <text name="ClearOthers" value="他を閉じる" />
+    <text name="LabelOptions" value="タブの操作" />
+    <text name="Permissions" value="権限" />
+    <text name="RoleDescription" value="ロールの説明" />
+    <text name="Refresh" value="更新" />
+    <text name="Create" value="作成" />
+    <text name="UserDetails" value="ユーザの詳細" />
+    <text name="UserRoles" value="ユーザのロール" />
+    <text name="ConfirmPassword" value="パスワードの確認" />
+    <text name="Version" value="バージョン" />
+    <text name="On" value="オン" />
+    <text name="Off" value="オフ" />
+    <text name="AreYouSureWantToDelete" value="{0} を削除してもよろしいですか？" />
+    <text name="SuccessfullyDeleted" value="削除が完了しました" />
+    <text name="StartTyping" value="入力してください" />
+    <text name="Skins" value="スキン" />
+    <text name="Settings" value="設定" />
+    <text name="Filter" value="フィルター" />
+    <text name="CurrentPassword" value="現在のパスワード" />
+    <text name="NewPassword" value="新しいパスワード" />
+    <text name="ConfirmNewPassword" value="新しいパスワードの確認" />
+    <text name="PasswordsDoNotMatch" value="パスワードが一致しません" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="パスワードは 8 文字以上で、小文字、大文字、数字を含める必要があります" />
+    <text name="UserDeleteWarningMessage" value="ユーザ {0} が削除されます。" />
+    <text name="RoleDeleteWarningMessage" value="ロール {0} が削除され、割り当てられているすべてのユーザから解除されます。" />
+    <text name="SearchWithThreeDot" value="検索..." />
+    <text name="PleaseEnterAtLeastNCharacter" value="{0} 文字以上で入力してください" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="{0} 文字以内で入力してください" />
+    <text name="InvalidEmailAddress" value="メールアドレスが無効です" />
+    <text name="InvalidPattern" value="無効" />
+    <text name="PairsDoNotMatch" value="一致しません" />
+    <text name="All" value="すべて" />
+    <text name="TotalRecordsCount" value="合計: {0}" />
+    <text name="Search" value="検索" />
+    <text name="Clear" value="クリア" />
+    <text name="ResetPasswordStepOneInfo" value="1. 管理者パスワードを入力します" />
+    <text name="ResetPasswordStepTwoInfo" value="2. このランダムなパスワードをコピーしてユーザに送信します" />
+    <text name="UsersActivation" value="ユーザのアクティベーション" />
+
+    <text name="CreatePosts" value="投稿の作成" />
+    <text name="EditPosts" value="投稿の編集" />
+    <text name="DeletePosts" value="投稿の削除" />
+    <text name="ArchivePosts" value="投稿のアーカイブ" />
+    <text name="ApprovePosts" value="投稿の承認" />
+    <text name="CreateComments" value="コメントの作成" />
+    <text name="EditComments" value="コメントの編集" />
+    <text name="DeleteComments" value="コメントの削除" />
+    <text name="CreateReplies" value="返信の作成" />
+    <text name="ManageBans" value="ユーザーの禁止措置の管理" />
+    <text name="Menu" value="メニュー" />
+    <text name="SwitchToDarkMode" value="ダークモード" />
+    <text name="SwitchToLightMode" value="ライトモード" />
+    <text name="403PageHeader" value="アクセス拒否" />
+    <text name="403PageDescription" value="このリソースにアクセスする権限がありません。管理者に連絡してください。" />
+    <text name="403PageButton" value="ダッシュボードに戻る" />
+
+    <text name="Posts" value="投稿" />
+    <text name="MyPosts" value="自分の投稿" />
+    <text name="ReviewQueue" value="レビュー待ち" />
+    <text name="NewPost" value="新しい投稿" />
+    <text name="CreatePost" value="投稿を作成" />
+    <text name="EditPost" value="投稿を編集" />
+    <text name="PostTitle" value="タイトル" />
+    <text name="PostExcerpt" value="抜粋" />
+    <text name="PostContent" value="本文（Markdown）" />
+    <text name="PostStatus" value="ステータス" />
+    <text name="PostStatusDraft" value="下書き" />
+    <text name="PostStatusPendingReview" value="レビュー待ち" />
+    <text name="PostStatusApproved" value="承認済み" />
+    <text name="PostStatusRejected" value="却下" />
+    <text name="PostStatusArchived" value="アーカイブ済み" />
+    <text name="SubmitForReview" value="レビューに提出" />
+    <text name="Approve" value="承認" />
+    <text name="Reject" value="却下" />
+    <text name="ApprovePost" value="投稿を承認" />
+    <text name="RejectPost" value="投稿を却下" />
+    <text name="ArchivePost" value="アーカイブ" />
+    <text name="RejectionReason" value="却下理由" />
+    <text name="RejectPostReasonHint" value="この投稿を却下する理由を記入してください。理由は投稿者に表示されます。" />
+    <text name="RejectionFeedback" value="レビュアーのフィードバック" />
+    <text name="Author" value="投稿者" />
+    <text name="CreatedDate" value="作成日" />
+    <text name="PublishDate" value="公開日" />
+    <text name="PostSubmitConfirmMessage" value="投稿 {0} をレビューに提出しますか？" />
+    <text name="PostApproveConfirmMessage" value="投稿 {0} を承認して公開しますか？" />
+    <text name="PostArchiveWarningMessage" value="投稿 {0} は非公開になり、アーカイブされます。" />
+    <text name="PostDeleteWarningMessage" value="投稿 {0} が削除されます。" />
+    <text name="PostIsNotSubmittable" value="レビューに提出できるのは、下書き、却下、またはアーカイブ済みの投稿のみです。" />
+    <text name="PostIsNotPendingReview" value="この投稿はレビュー待ちではありません。" />
+    <text name="PostIsNotApproved" value="この投稿は承認されていません。" />
+    <text name="PostModifyNotAllowed" value="変更できるのは自分の投稿のみです。" />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="承認済みの投稿は投稿者が削除できません。代わりにアーカイブしてください。" />
+    <text name="PostCreated" value="投稿が下書きとして作成されました。" />
+    <text name="PostUpdated" value="投稿が更新されました。" />
+    <text name="PostSubmitted" value="投稿がレビューに提出されました。" />
+    <text name="PostApproved" value="投稿が承認され、公開されました。" />
+    <text name="PostRejected" value="投稿が却下されました。" />
+    <text name="PostArchived" value="投稿がアーカイブされました。" />
+    <text name="UnknownAuthor" value="不明な投稿者" />
+    <text name="NoPosts" value="まだ投稿を作成していません。" />
+    <text name="NoPendingReviewPosts" value="レビュー待ちの投稿はありません。" />
+    <text name="Write" value="記入" />
+    <text name="Preview" value="プレビュー" />
+    <text name="SaveAsDraft" value="下書きとして保存" />
+    <text name="ApprovedPostEditHint" value="この投稿を保存すると、レビュー待ちに戻ります。" />
+
+    <text name="Comments" value="コメント" />
+    <text name="Reply" value="返信" />
+    <text name="WriteAComment" value="コメントを書く" />
+    <text name="WriteAReply" value="返信を書く" />
+    <text name="NoCommentsYet" value="まだコメントはありません。" />
+    <text name="Edited" value="編集済み" />
+    <text name="CommentDeleted" value="コメントが削除されました。" />
+    <text name="CommentUpdated" value="コメントが更新されました。" />
+    <text name="CommentModifyNotAllowed" value="編集できるのは自分のコメントのみです。" />
+    <text name="CommentDeleteNotAllowed" value="削除できるのは自分のコメント、または自分の投稿へのコメントのみです。" />
+    <text name="PostNotApprovedForComments" value="コメントできるのは公開済みの投稿のみです。" />
+    <text name="CommentDeleteWarningMessage" value="コメントとその返信が削除されます。" />
+    <text name="PostNotFound" value="この投稿は存在しないか、公開されていません。" />
+
+    <text name="View" value="表示" />
+    <text name="Upvote" value="高評価" />
+    <text name="Upvoted" value="高評価済み" />
+    <text name="Upvotes" value="高評価" />
+    <text name="Moderation" value="モデレーション" />
+    <text name="Bans" value="禁止措置" />
+    <text name="Ban" value="禁止" />
+    <text name="Unban" value="禁止の解除" />
+
+    <text name="BanReason" value="理由" />
+    <text name="BanType" value="禁止の種類" />
+    <text name="BanTypeComment" value="コメント" />
+    <text name="BanTypeReply" value="返信" />
+    <text name="BanTypeUpvote" value="高評価" />
+    <text name="BannedFromCommenting" value="コメントが禁止されています" />
+    <text name="BannedFromReplying" value="返信が禁止されています" />
+    <text name="BannedFromUpvoting" value="高評価が禁止されています" />
+    <text name="ActiveRestrictions" value="現在の制限" />
+    <text name="ActiveBans" value="有効な禁止措置" />
+    <text name="BannedUsers" value="禁止中のユーザ" />
+    <text name="RecentComments" value="最近のコメント" />
+    <text name="BannedAt" value="禁止日時" />
+    <text name="NoActiveBans" value="有効な禁止措置はありません" />
+    <text name="NoBanOptionsLeft" value="すべての操作がすでに禁止されています。" />
+    <text name="NoBannedUsers" value="禁止中のユーザはいません" />
+    <text name="NoRecentComments" value="コメントはありません" />
+    <text name="AlreadyBanned" value="このユーザには、この種類の有効な禁止措置がすでにあります。" />
+    <text name="SelectAtLeastOneBanType" value="禁止する制限を少なくとも 1 つ選択してください。" />
+    <text name="CannotBanSelf" value="自分自身を禁止することはできません。" />
+    <text name="BanNotActive" value="このユーザには、この種類の有効な禁止措置がありません。" />
+    <text name="BanSuccess" value="禁止措置を適用しました。" />
+    <text name="UnbanSuccess" value="禁止措置を解除しました。" />
+    <text name="UnbanWarningMessage" value="この禁止措置を解除しますか？ユーザはすぐにこの操作を行えるようになります。" />
+
+    <text name="Newest" value="新着" />
+    <text name="Top" value="トップ" />
+    <text name="NoPublishedPosts" value="まだ公開された投稿はありません。" />
+    <text name="LoadFailed" value="コンテンツを読み込めませんでした。もう一度お試しください。" />
+    <text name="LoginToComment" value="ディスカッションに参加するにはアカウントが必要です。" />
+    <text name="LoginToUpvote" value="高評価するにはログインしてください" />
+    <text name="PageNotFound" value="お探しのページは存在しません。" />
+    <text name="BackToPosts" value="投稿一覧に戻る" />
+    <text name="Previous" value="前へ" />
+    <text name="Next" value="次へ" />
   </texts>
 </localizationDictionary>

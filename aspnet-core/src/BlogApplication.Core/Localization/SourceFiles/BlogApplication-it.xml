@@ -54,5 +54,187 @@
     <text name="No" value="No" />
     <text name="Optional" value="Opzionale" />
     <text name="SearchWithThreeDot">Cerca...</text>
+
+    <text name="ResetPassword" value="Reimposta password" />
+    <text name="UpdatePassword" value="Aggiorna password" />
+    <text name="AdminPassword" value="Password amministratore" />
+    <text name="RegisterFormUserNameInvalidMessage" value="Non inserire un indirizzo email come nome utente." />
+    <text name="MultiLevelMenu" value="Menu multilivello" />
+    <text name="Back" value="Indietro" />
+    <text name="SuccessfullyRegistered" value="Registrazione completata" />
+    <text name="WaitingForEmailActivation" value="Il tuo indirizzo email deve essere attivato" />
+    <text name="Roles" value="Ruoli" />
+    <text name="DisplayName" value="Nome visualizzato" />
+    <text name="Edit" value="Modifica" />
+    <text name="Delete" value="Elimina" />
+    <text name="CreateNewRole" value="Crea nuovo ruolo" />
+    <text name="RoleName" value="Nome del ruolo" />
+    <text name="Actions" value="Azioni" />
+    <text name="CouldNotCompleteLoginOperation" value="Impossibile completare il login. Riprova più tardi." />
+    <text name="CouldNotValidateExternalUser" value="Impossibile convalidare l'utente esterno" />
+    <text name="EditRole" value="Modifica ruolo" />
+    <text name="EditUser" value="Modifica utente" />
+    <text name="ThisFieldIsRequired" value="Campo obbligatorio" />
+    <text name="PleaseWait" value="Attendere..." />
+    <text name="Administration" value="Amministrazione" />
+    <text name="ClearAll" value="Cancella tutto" />
+    <text name="ClearOthers" value="Cancella gli altri" />
+    <text name="LabelOptions" value="Opzioni etichetta" />
+    <text name="Permissions" value="Autorizzazioni" />
+    <text name="RoleDescription" value="Descrizione del ruolo" />
+    <text name="Refresh" value="Aggiorna" />
+    <text name="Create" value="Crea" />
+    <text name="UserDetails" value="Dettagli utente" />
+    <text name="UserRoles" value="Ruoli utente" />
+    <text name="ConfirmPassword" value="Conferma password" />
+    <text name="Version" value="Versione" />
+    <text name="On" value="Attivo" />
+    <text name="Off" value="Inattivo" />
+    <text name="AreYouSureWantToDelete" value="Eliminare {0}?" />
+    <text name="SuccessfullyDeleted" value="Eliminazione completata" />
+    <text name="StartTyping" value="Inizia a digitare" />
+    <text name="Skins" value="Temi" />
+    <text name="Settings" value="Impostazioni" />
+    <text name="Filter" value="Filtra" />
+    <text name="CurrentPassword" value="Password attuale" />
+    <text name="NewPassword" value="Nuova password" />
+    <text name="ConfirmNewPassword" value="Conferma nuova password" />
+    <text name="PasswordsDoNotMatch" value="Le password non corrispondono" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="Le password devono contenere almeno 8 caratteri, una lettera minuscola, una maiuscola e un numero" />
+    <text name="UserDeleteWarningMessage" value="L'utente {0} sarà eliminato." />
+    <text name="RoleDeleteWarningMessage" value="Il ruolo {0} sarà eliminato e rimosso da tutti gli utenti assegnati." />
+    <text name="PleaseEnterAtLeastNCharacter" value="Inserisci almeno {0} caratteri" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="Inserisci non più di {0} caratteri" />
+    <text name="InvalidEmailAddress" value="Indirizzo email non valido" />
+    <text name="InvalidPattern" value="Non valido" />
+    <text name="PairsDoNotMatch" value="Non corrispondono" />
+    <text name="All" value="Tutti" />
+    <text name="TotalRecordsCount" value="Totale: {0}" />
+    <text name="Search" value="Cerca" />
+    <text name="Clear" value="Cancella" />
+    <text name="ResetPasswordStepOneInfo" value="1. Inserisci la password dell'amministratore" />
+    <text name="ResetPasswordStepTwoInfo" value="2. Copia questa password casuale per poterla inviare all'utente" />
+
+    <text name="UsersActivation" value="Attivazione utenti" />
+    <text name="CreatePosts" value="Crea articoli" />
+    <text name="EditPosts" value="Modifica articoli" />
+    <text name="DeletePosts" value="Elimina articoli" />
+    <text name="ArchivePosts" value="Archivia articoli" />
+    <text name="ApprovePosts" value="Approva articoli" />
+    <text name="CreateComments" value="Crea commenti" />
+    <text name="EditComments" value="Modifica commenti" />
+    <text name="DeleteComments" value="Elimina commenti" />
+    <text name="CreateReplies" value="Crea risposte" />
+    <text name="ManageBans" value="Gestisci i blocchi degli utenti" />
+    <text name="Menu" value="Menu" />
+    <text name="SwitchToDarkMode" value="Modalità scura" />
+    <text name="SwitchToLightMode" value="Modalità chiara" />
+    <text name="403PageHeader" value="Accesso negato" />
+    <text name="403PageDescription" value="Non hai il permesso di accedere a questa risorsa. Contatta l'amministratore." />
+    <text name="403PageButton" value="Torna alla dashboard" />
+    <text name="Posts" value="Articoli" />
+    <text name="MyPosts" value="I miei articoli" />
+    <text name="ReviewQueue" value="Coda di revisione" />
+    <text name="NewPost" value="Nuovo articolo" />
+    <text name="CreatePost" value="Crea articolo" />
+    <text name="EditPost" value="Modifica articolo" />
+    <text name="PostTitle" value="Titolo" />
+    <text name="PostExcerpt" value="Estratto" />
+    <text name="PostContent" value="Contenuto (Markdown)" />
+    <text name="PostStatus" value="Stato" />
+    <text name="PostStatusDraft" value="Bozza" />
+    <text name="PostStatusPendingReview" value="In attesa di revisione" />
+    <text name="PostStatusApproved" value="Approvato" />
+    <text name="PostStatusRejected" value="Rifiutato" />
+    <text name="PostStatusArchived" value="Archiviato" />
+    <text name="SubmitForReview" value="Invia in revisione" />
+    <text name="Approve" value="Approva" />
+    <text name="Reject" value="Rifiuta" />
+    <text name="ApprovePost" value="Approva articolo" />
+    <text name="RejectPost" value="Rifiuta articolo" />
+    <text name="ArchivePost" value="Archivia" />
+    <text name="RejectionReason" value="Motivo del rifiuto" />
+    <text name="RejectPostReasonHint" value="Spiega perché questo articolo viene rifiutato. Il motivo viene mostrato all'autore." />
+    <text name="RejectionFeedback" value="Commenti del revisore" />
+    <text name="Author" value="Autore" />
+    <text name="CreatedDate" value="Creato" />
+    <text name="PublishDate" value="Pubblicato" />
+    <text name="PostSubmitConfirmMessage" value="Inviare l'articolo {0} in revisione?" />
+    <text name="PostApproveConfirmMessage" value="Approvare e pubblicare l'articolo {0}?" />
+    <text name="PostArchiveWarningMessage" value="L'articolo {0} sarà rimosso dalla pubblicazione e archiviato." />
+    <text name="PostDeleteWarningMessage" value="L'articolo {0} sarà eliminato." />
+    <text name="PostIsNotSubmittable" value="Solo gli articoli in bozza, rifiutati o archiviati possono essere inviati in revisione." />
+    <text name="PostIsNotPendingReview" value="Questo articolo non è in attesa di revisione." />
+    <text name="PostIsNotApproved" value="Questo articolo non è approvato." />
+    <text name="PostModifyNotAllowed" value="Puoi modificare solo i tuoi articoli." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Gli articoli approvati non possono essere eliminati dall'autore. Archivia l'articolo." />
+    <text name="PostCreated" value="L'articolo è stato creato come bozza." />
+    <text name="PostUpdated" value="L'articolo è stato aggiornato." />
+    <text name="PostSubmitted" value="L'articolo è stato inviato in revisione." />
+    <text name="PostApproved" value="L'articolo è stato approvato e pubblicato." />
+    <text name="PostRejected" value="L'articolo è stato rifiutato." />
+    <text name="PostArchived" value="L'articolo è stato archiviato." />
+    <text name="UnknownAuthor" value="Autore sconosciuto" />
+    <text name="NoPosts" value="Non hai ancora creato nessun articolo." />
+    <text name="NoPendingReviewPosts" value="Non ci sono articoli in attesa di revisione." />
+    <text name="Write" value="Scrivi" />
+    <text name="Preview" value="Anteprima" />
+    <text name="SaveAsDraft" value="Salva come bozza" />
+    <text name="ApprovedPostEditHint" value="Salvando questo articolo tornerà in revisione." />
+    <text name="Comments" value="Commenti" />
+    <text name="Reply" value="Rispondi" />
+    <text name="WriteAComment" value="Scrivi un commento" />
+    <text name="WriteAReply" value="Scrivi una risposta" />
+    <text name="NoCommentsYet" value="Ancora nessun commento." />
+    <text name="Edited" value="Modificato" />
+    <text name="CommentDeleted" value="Il commento è stato eliminato." />
+    <text name="CommentUpdated" value="Il commento è stato aggiornato." />
+    <text name="CommentModifyNotAllowed" value="Puoi modificare solo i tuoi commenti." />
+    <text name="CommentDeleteNotAllowed" value="Puoi eliminare solo i tuoi commenti o i commenti sui tuoi articoli." />
+    <text name="PostNotApprovedForComments" value="I commenti sono consentiti solo sugli articoli pubblicati." />
+    <text name="CommentDeleteWarningMessage" value="Il commento e le sue risposte saranno rimossi." />
+    <text name="PostNotFound" value="Questo articolo non esiste o non è pubblicato." />
+    <text name="View" value="Visualizza" />
+    <text name="Upvote" value="Vota" />
+    <text name="Upvoted" value="Votato" />
+    <text name="Upvotes" value="Voti" />
+    <text name="Moderation" value="Moderazione" />
+    <text name="Bans" value="Blocchi" />
+    <text name="Ban" value="Blocca" />
+    <text name="Unban" value="Sblocca" />
+    <text name="BanReason" value="Motivo" />
+    <text name="BanType" value="Tipo di blocco" />
+    <text name="BanTypeComment" value="Commentare" />
+    <text name="BanTypeReply" value="Rispondere" />
+    <text name="BanTypeUpvote" value="Votare" />
+    <text name="BannedFromCommenting" value="Bloccato per i commenti" />
+    <text name="BannedFromReplying" value="Bloccato per le risposte" />
+    <text name="BannedFromUpvoting" value="Bloccato per i voti" />
+    <text name="ActiveRestrictions" value="Le tue restrizioni attive" />
+    <text name="ActiveBans" value="Blocchi attivi" />
+    <text name="BannedUsers" value="Utenti bloccati" />
+    <text name="RecentComments" value="Commenti recenti" />
+    <text name="BannedAt" value="Bloccato il" />
+    <text name="NoActiveBans" value="Nessun blocco attivo" />
+    <text name="NoBanOptionsLeft" value="Tutte le possibilità sono già bloccate." />
+    <text name="NoBannedUsers" value="Nessun utente bloccato" />
+    <text name="NoRecentComments" value="Nessun commento" />
+    <text name="AlreadyBanned" value="Questo utente ha già un blocco attivo di questo tipo." />
+    <text name="SelectAtLeastOneBanType" value="Seleziona almeno una restrizione da bloccare." />
+    <text name="CannotBanSelf" value="Non puoi bloccare te stesso." />
+    <text name="BanNotActive" value="Non esiste un blocco attivo di questo tipo per questo utente." />
+    <text name="BanSuccess" value="Blocco applicato." />
+    <text name="UnbanSuccess" value="Blocco revocato." />
+    <text name="UnbanWarningMessage" value="Revocare questo blocco? L'utente riacquisterà immediatamente questa possibilità." />
+    <text name="Newest" value="Più recenti" />
+    <text name="Top" value="Più votati" />
+    <text name="NoPublishedPosts" value="Nessun articolo è stato ancora pubblicato." />
+    <text name="LoadFailed" value="Impossibile caricare il contenuto. Riprova." />
+    <text name="LoginToComment" value="Serve un account per partecipare alla discussione." />
+    <text name="LoginToUpvote" value="Accedi per votare" />
+    <text name="PageNotFound" value="La pagina che stai cercando non esiste." />
+    <text name="BackToPosts" value="Torna agli articoli" />
+    <text name="Previous" value="Precedente" />
+    <text name="Next" value="Successivo" />
   </texts>
 </localizationDictionary>

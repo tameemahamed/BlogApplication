@@ -84,5 +84,171 @@
     <text name="EditUser">Bewerk gebruiker</text>
     <text name="TenantIdIsNotActive{0}">HuurderId {0} is niet actief</text>
     <text name="UnknownTenantId{0}">Onbekend huurderId {0}</text>
+
+    <text name="ResetPassword" value="Wachtwoord opnieuw instellen" />
+    <text name="UpdatePassword" value="Wachtwoord bijwerken" />
+    <text name="AdminPassword" value="Beheerderswachtwoord" />
+    <text name="ThisFieldIsRequired" value="Dit veld is verplicht" />
+    <text name="PleaseWait" value="Even geduld..." />
+    <text name="Administration" value="Beheer" />
+    <text name="ClearAll" value="Alles wissen" />
+    <text name="ClearOthers" value="Overige wissen" />
+    <text name="LabelOptions" value="Labelopties" />
+    <text name="Permissions" value="Machtigingen" />
+    <text name="RoleDescription" value="Rolbeschrijving" />
+    <text name="Refresh" value="Vernieuwen" />
+    <text name="Create" value="Aanmaken" />
+    <text name="UserDetails" value="Gebruikersdetails" />
+    <text name="UserRoles" value="Gebruikersrollen" />
+    <text name="ConfirmPassword" value="Wachtwoord bevestigen" />
+    <text name="Version" value="Versie" />
+    <text name="On" value="Aan" />
+    <text name="Off" value="Uit" />
+    <text name="AreYouSureWantToDelete" value="Weet je zeker dat je {0} wilt verwijderen?" />
+    <text name="SuccessfullyDeleted" value="Succesvol verwijderd" />
+    <text name="StartTyping" value="Begin met typen" />
+    <text name="Skins" value="Thema's" />
+    <text name="Settings" value="Instellingen" />
+    <text name="Filter" value="Filteren" />
+    <text name="CurrentPassword" value="Huidig wachtwoord" />
+    <text name="NewPassword" value="Nieuw wachtwoord" />
+    <text name="ConfirmNewPassword" value="Nieuw wachtwoord bevestigen" />
+    <text name="PasswordsDoNotMatch" value="Wachtwoorden komen niet overeen" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="Wachtwoorden moeten minimaal 8 tekens bevatten, met een kleine letter, een hoofdletter en een cijfer" />
+    <text name="UserDeleteWarningMessage" value="Gebruiker {0} wordt verwijderd." />
+    <text name="RoleDeleteWarningMessage" value="Rol {0} wordt verwijderd en losgekoppeld van alle toegewezen gebruikers." />
+    <text name="SearchWithThreeDot" value="Zoeken..." />
+    <text name="PleaseEnterAtLeastNCharacter" value="Voer ten minste {0} tekens in" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="Voer niet meer dan {0} tekens in" />
+    <text name="InvalidEmailAddress" value="Ongeldig e-mailadres" />
+    <text name="InvalidPattern" value="Ongeldig" />
+    <text name="PairsDoNotMatch" value="Komen niet overeen" />
+    <text name="All" value="Alle" />
+    <text name="TotalRecordsCount" value="Totaal: {0}" />
+    <text name="Search" value="Zoeken" />
+    <text name="Clear" value="Wissen" />
+    <text name="ResetPasswordStepOneInfo" value="1. Voer je beheerderswachtwoord in" />
+    <text name="ResetPasswordStepTwoInfo" value="2. Kopieer dit willekeurige wachtwoord zodat je het naar de gebruiker kunt sturen" />
+    <text name="UsersActivation" value="Gebruikersactivering" />
+    <text name="CreatePosts" value="Berichten aanmaken" />
+    <text name="EditPosts" value="Berichten bewerken" />
+    <text name="DeletePosts" value="Berichten verwijderen" />
+    <text name="ArchivePosts" value="Berichten archiveren" />
+    <text name="ApprovePosts" value="Berichten goedkeuren" />
+    <text name="CreateComments" value="Reacties aanmaken" />
+    <text name="EditComments" value="Reacties bewerken" />
+    <text name="DeleteComments" value="Reacties verwijderen" />
+    <text name="CreateReplies" value="Antwoorden aanmaken" />
+    <text name="ManageBans" value="Gebruikersblokkades beheren" />
+    <text name="Menu" value="Menu" />
+    <text name="SwitchToDarkMode" value="Donkere modus" />
+    <text name="SwitchToLightMode" value="Lichte modus" />
+    <text name="403PageHeader" value="Verboden" />
+    <text name="403PageDescription" value="Je hebt geen toestemming om deze bron te bekijken. Neem contact op met je beheerder." />
+    <text name="403PageButton" value="Terug naar dashboard" />
+    <text name="Posts" value="Berichten" />
+    <text name="MyPosts" value="Mijn berichten" />
+    <text name="ReviewQueue" value="Beoordelingswachtrij" />
+    <text name="NewPost" value="Nieuw bericht" />
+    <text name="CreatePost" value="Bericht aanmaken" />
+    <text name="EditPost" value="Bericht bewerken" />
+    <text name="PostTitle" value="Titel" />
+    <text name="PostExcerpt" value="Samenvatting" />
+    <text name="PostContent" value="Inhoud (Markdown)" />
+    <text name="PostStatus" value="Status" />
+    <text name="PostStatusDraft" value="Concept" />
+    <text name="PostStatusPendingReview" value="Wacht op beoordeling" />
+    <text name="PostStatusApproved" value="Goedgekeurd" />
+    <text name="PostStatusRejected" value="Afgewezen" />
+    <text name="PostStatusArchived" value="Gearchiveerd" />
+    <text name="SubmitForReview" value="Indienen ter beoordeling" />
+    <text name="Approve" value="Goedkeuren" />
+    <text name="Reject" value="Afwijzen" />
+    <text name="ApprovePost" value="Bericht goedkeuren" />
+    <text name="RejectPost" value="Bericht afwijzen" />
+    <text name="ArchivePost" value="Archiveren" />
+    <text name="RejectionReason" value="Reden van afwijzing" />
+    <text name="RejectPostReasonHint" value="Leg uit waarom dit bericht wordt afgewezen. De reden wordt aan de auteur getoond." />
+    <text name="RejectionFeedback" value="Feedback van de beoordelaar" />
+    <text name="Author" value="Auteur" />
+    <text name="CreatedDate" value="Aangemaakt" />
+    <text name="PublishDate" value="Gepubliceerd" />
+    <text name="PostSubmitConfirmMessage" value="Bericht {0} ter beoordeling indienen?" />
+    <text name="PostApproveConfirmMessage" value="Bericht {0} goedkeuren en publiceren?" />
+    <text name="PostArchiveWarningMessage" value="Bericht {0} wordt gedepubliceerd en gearchiveerd." />
+    <text name="PostDeleteWarningMessage" value="Bericht {0} wordt verwijderd." />
+    <text name="PostIsNotSubmittable" value="Alleen concepten, afgewezen of gearchiveerde berichten kunnen ter beoordeling worden ingediend." />
+    <text name="PostIsNotPendingReview" value="Dit bericht wacht niet op beoordeling." />
+    <text name="PostIsNotApproved" value="Dit bericht is niet goedgekeurd." />
+    <text name="PostModifyNotAllowed" value="Je kunt alleen je eigen berichten wijzigen." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Goedgekeurde berichten kunnen niet door de auteur worden verwijderd. Archiveer het bericht in plaats daarvan." />
+    <text name="PostCreated" value="Het bericht is aangemaakt als concept." />
+    <text name="PostUpdated" value="Het bericht is bijgewerkt." />
+    <text name="PostSubmitted" value="Het bericht is ter beoordeling ingediend." />
+    <text name="PostApproved" value="Het bericht is goedgekeurd en gepubliceerd." />
+    <text name="PostRejected" value="Het bericht is afgewezen." />
+    <text name="PostArchived" value="Het bericht is gearchiveerd." />
+    <text name="UnknownAuthor" value="Onbekende auteur" />
+    <text name="NoPosts" value="Je hebt nog geen berichten aangemaakt." />
+    <text name="NoPendingReviewPosts" value="Er zijn geen berichten die op beoordeling wachten." />
+    <text name="Write" value="Schrijven" />
+    <text name="Preview" value="Voorbeeld" />
+    <text name="SaveAsDraft" value="Opslaan als concept" />
+    <text name="ApprovedPostEditHint" value="Als je dit bericht opslaat, gaat het terug naar beoordeling." />
+    <text name="Comments" value="Reacties" />
+    <text name="Reply" value="Antwoorden" />
+    <text name="WriteAComment" value="Schrijf een reactie" />
+    <text name="WriteAReply" value="Schrijf een antwoord" />
+    <text name="NoCommentsYet" value="Nog geen reacties." />
+    <text name="Edited" value="Bewerkt" />
+    <text name="CommentDeleted" value="De reactie is verwijderd." />
+    <text name="CommentUpdated" value="De reactie is bijgewerkt." />
+    <text name="CommentModifyNotAllowed" value="Je kunt alleen je eigen reacties bewerken." />
+    <text name="CommentDeleteNotAllowed" value="Je kunt alleen je eigen reacties verwijderen, of reacties op je eigen berichten." />
+    <text name="PostNotApprovedForComments" value="Reacties zijn alleen toegestaan op gepubliceerde berichten." />
+    <text name="CommentDeleteWarningMessage" value="De reactie en de bijbehorende antwoorden worden verwijderd." />
+    <text name="PostNotFound" value="Dit bericht bestaat niet of is niet gepubliceerd." />
+    <text name="View" value="Bekijken" />
+    <text name="Upvote" value="Omhoog stemmen" />
+    <text name="Upvoted" value="Omhoog gestemd" />
+    <text name="Upvotes" value="Stemmen" />
+    <text name="Moderation" value="Moderatie" />
+    <text name="Bans" value="Blokkades" />
+    <text name="Ban" value="Blokkeren" />
+    <text name="Unban" value="Blokkade opheffen" />
+    <text name="BanReason" value="Reden" />
+    <text name="BanType" value="Type blokkade" />
+    <text name="BanTypeComment" value="Reageren" />
+    <text name="BanTypeReply" value="Antwoorden" />
+    <text name="BanTypeUpvote" value="Omhoog stemmen" />
+    <text name="BannedFromCommenting" value="Geblokkeerd voor reageren" />
+    <text name="BannedFromReplying" value="Geblokkeerd voor antwoorden" />
+    <text name="BannedFromUpvoting" value="Geblokkeerd voor omhoog stemmen" />
+    <text name="ActiveRestrictions" value="Je actieve beperkingen" />
+    <text name="ActiveBans" value="Actieve blokkades" />
+    <text name="BannedUsers" value="Geblokkeerde gebruikers" />
+    <text name="RecentComments" value="Recente reacties" />
+    <text name="BannedAt" value="Geblokkeerd op" />
+    <text name="NoActiveBans" value="Geen actieve blokkades" />
+    <text name="NoBanOptionsLeft" value="Alle mogelijkheden zijn al geblokkeerd." />
+    <text name="NoBannedUsers" value="Geen geblokkeerde gebruikers" />
+    <text name="NoRecentComments" value="Geen reacties" />
+    <text name="AlreadyBanned" value="Deze gebruiker heeft al een actieve blokkade van dit type." />
+    <text name="SelectAtLeastOneBanType" value="Selecteer ten minste één beperking om te blokkeren." />
+    <text name="CannotBanSelf" value="Je kunt jezelf niet blokkeren." />
+    <text name="BanNotActive" value="Er is geen actieve blokkade van dit type voor deze gebruiker." />
+    <text name="BanSuccess" value="Blokkade opgelegd." />
+    <text name="UnbanSuccess" value="Blokkade opgeheven." />
+    <text name="UnbanWarningMessage" value="Deze blokkade opheffen? De gebruiker krijgt deze mogelijkheid onmiddellijk terug." />
+    <text name="Newest" value="Nieuwste" />
+    <text name="Top" value="Populairste" />
+    <text name="NoPublishedPosts" value="Er zijn nog geen berichten gepubliceerd." />
+    <text name="LoadFailed" value="De inhoud kon niet worden geladen. Probeer het opnieuw." />
+    <text name="LoginToComment" value="Je hebt een account nodig om mee te doen aan de discussie." />
+    <text name="LoginToUpvote" value="Log in om omhoog te stemmen" />
+    <text name="PageNotFound" value="De pagina die je zoekt bestaat niet." />
+    <text name="BackToPosts" value="Terug naar berichten" />
+    <text name="Previous" value="Vorige" />
+    <text name="Next" value="Volgende" />
   </texts>
 </localizationDictionary>

@@ -127,5 +127,130 @@
     <text name="ResetPasswordStepOneInfo">1. Įveskite savo administratoriaus slaptažodį</text>
     <text name="ResetPasswordStepTwoInfo">2. Nusikopijuokite šį atsitiktinį slaptažodį, kad persiųstumėte vartotojui</text>
     <text name="UsersActivation">Vartotojų aktyvacija</text>
+
+    <text name="ResetPassword" value="Atstatyti slaptažodį" />
+    <text name="UpdatePassword" value="Atnaujinti slaptažodį" />
+    <text name="AdminPassword" value="Administratoriaus slaptažodis" />
+    <text name="SuccessfullyDeleted" value="Sėkmingai pašalinta" />
+    <text name="CreatePosts" value="Kurti įrašus" />
+    <text name="EditPosts" value="Redaguoti įrašus" />
+    <text name="DeletePosts" value="Trinti įrašus" />
+    <text name="ArchivePosts" value="Archyvuoti įrašus" />
+    <text name="ApprovePosts" value="Patvirtinti įrašus" />
+    <text name="CreateComments" value="Kurti komentarus" />
+    <text name="EditComments" value="Redaguoti komentarus" />
+    <text name="DeleteComments" value="Trinti komentarus" />
+    <text name="CreateReplies" value="Kurti atsakymus" />
+    <text name="ManageBans" value="Tvarkyti vartotojų blokavimus" />
+    <text name="Menu" value="Meniu" />
+    <text name="SwitchToDarkMode" value="Tamsusis režimas" />
+    <text name="SwitchToLightMode" value="Šviesusis režimas" />
+    <text name="403PageHeader" value="Draudžiama" />
+    <text name="403PageDescription" value="Jūs neturite teisės pasiekti šio šaltinio. Susisiekite su administratoriumi." />
+    <text name="403PageButton" value="Grįžti į prietaisų skydelį" />
+    <text name="Posts" value="Įrašai" />
+    <text name="MyPosts" value="Mano įrašai" />
+    <text name="ReviewQueue" value="Peržiūros eilė" />
+    <text name="NewPost" value="Naujas įrašas" />
+    <text name="CreatePost" value="Kurti įrašą" />
+    <text name="EditPost" value="Redaguoti įrašą" />
+    <text name="PostTitle" value="Pavadinimas" />
+    <text name="PostExcerpt" value="Ištrauka" />
+    <text name="PostContent" value="Turinys (Markdown)" />
+    <text name="PostStatus" value="Būsena" />
+    <text name="PostStatusDraft" value="Juodraštis" />
+    <text name="PostStatusPendingReview" value="Laukia peržiūros" />
+    <text name="PostStatusApproved" value="Patvirtintas" />
+    <text name="PostStatusRejected" value="Atmestas" />
+    <text name="PostStatusArchived" value="Archyvuotas" />
+    <text name="SubmitForReview" value="Pateikti peržiūrai" />
+    <text name="Approve" value="Patvirtinti" />
+    <text name="Reject" value="Atmesti" />
+    <text name="ApprovePost" value="Patvirtinti įrašą" />
+    <text name="RejectPost" value="Atmesti įrašą" />
+    <text name="ArchivePost" value="Archyvuoti" />
+    <text name="RejectionReason" value="Atmetimo priežastis" />
+    <text name="RejectPostReasonHint" value="Paaiškinkite, kodėl šis įrašas atmetamas. Priežastis rodoma autoriui." />
+    <text name="RejectionFeedback" value="Peržiūrėtojo pastabos" />
+    <text name="Author" value="Autorius" />
+    <text name="CreatedDate" value="Sukurta" />
+    <text name="PublishDate" value="Paskelbta" />
+    <text name="PostSubmitConfirmMessage" value="Pateikti įrašą {0} peržiūrai?" />
+    <text name="PostApproveConfirmMessage" value="Patvirtinti ir paskelbti įrašą {0}?" />
+    <text name="PostArchiveWarningMessage" value="Įrašas {0} bus neskelbiamas ir archyvuotas." />
+    <text name="PostDeleteWarningMessage" value="Įrašas {0} bus pašalintas." />
+    <text name="PostIsNotSubmittable" value="Peržiūrai pateikti galima tik juodraščius, atmestus arba archyvuotus įrašus." />
+    <text name="PostIsNotPendingReview" value="Šis įrašas nelaukia peržiūros." />
+    <text name="PostIsNotApproved" value="Šis įrašas nepatvirtintas." />
+    <text name="PostModifyNotAllowed" value="Galite keisti tik savo įrašus." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Patvirtintų įrašų autorius negali ištrinti. Vietoje to archyvuokite įrašą." />
+    <text name="PostCreated" value="Įrašas sukurtas kaip juodraštis." />
+    <text name="PostUpdated" value="Įrašas atnaujintas." />
+    <text name="PostSubmitted" value="Įrašas pateiktas peržiūrai." />
+    <text name="PostApproved" value="Įrašas patvirtintas ir paskelbtas." />
+    <text name="PostRejected" value="Įrašas atmestas." />
+    <text name="PostArchived" value="Įrašas archyvuotas." />
+    <text name="UnknownAuthor" value="Nežinomas autorius" />
+    <text name="NoPosts" value="Jūs dar nesukūrėte nė vieno įrašo." />
+    <text name="NoPendingReviewPosts" value="Nėra įrašų, laukiančių peržiūros." />
+    <text name="Write" value="Rašyti" />
+    <text name="Preview" value="Peržiūra" />
+    <text name="SaveAsDraft" value="Išsaugoti kaip juodraštį" />
+    <text name="ApprovedPostEditHint" value="Išsaugojus šį įrašą, jis bus grąžintas peržiūrai." />
+    <text name="Comments" value="Komentarai" />
+    <text name="Reply" value="Atsakyti" />
+    <text name="WriteAComment" value="Parašykite komentarą" />
+    <text name="WriteAReply" value="Parašykite atsakymą" />
+    <text name="NoCommentsYet" value="Komentarų dar nėra." />
+    <text name="Edited" value="Redaguota" />
+    <text name="CommentDeleted" value="Komentaras pašalintas." />
+    <text name="CommentUpdated" value="Komentaras atnaujintas." />
+    <text name="CommentModifyNotAllowed" value="Galite redaguoti tik savo komentarus." />
+    <text name="CommentDeleteNotAllowed" value="Galite trinti tik savo komentarus arba komentarus savo įrašuose." />
+    <text name="PostNotApprovedForComments" value="Komentuoti galima tik paskelbtuose įrašuose." />
+    <text name="CommentDeleteWarningMessage" value="Komentaras ir jo atsakymai bus pašalinti." />
+    <text name="PostNotFound" value="Šis įrašas neegzistuoja arba nėra paskelbtas." />
+    <text name="View" value="Peržiūrėti" />
+    <text name="Upvote" value="Balsuoti už" />
+    <text name="Upvoted" value="Balsuota už" />
+    <text name="Upvotes" value="Balsai" />
+    <text name="Moderation" value="Moderavimas" />
+    <text name="Bans" value="Blokavimai" />
+    <text name="Ban" value="Blokuoti" />
+    <text name="Unban" value="Atblokuoti" />
+    <text name="BanReason" value="Priežastis" />
+    <text name="BanType" value="Blokavimo tipas" />
+    <text name="BanTypeComment" value="Komentavimas" />
+    <text name="BanTypeReply" value="Atsakinėjimas" />
+    <text name="BanTypeUpvote" value="Balsavimas už" />
+    <text name="BannedFromCommenting" value="Blokuotas komentuoti" />
+    <text name="BannedFromReplying" value="Blokuotas atsakyti" />
+    <text name="BannedFromUpvoting" value="Blokuotas balsuoti už" />
+    <text name="ActiveRestrictions" value="Jūsų aktyvūs apribojimai" />
+    <text name="ActiveBans" value="Aktyvūs blokavimai" />
+    <text name="BannedUsers" value="Blokuoti vartotojai" />
+    <text name="RecentComments" value="Naujausi komentarai" />
+    <text name="BannedAt" value="Blokavimo data" />
+    <text name="NoActiveBans" value="Nėra aktyvių blokavimų" />
+    <text name="NoBanOptionsLeft" value="Visos galimybės jau užblokuotos." />
+    <text name="NoBannedUsers" value="Nėra blokuotų vartotojų" />
+    <text name="NoRecentComments" value="Nėra komentarų" />
+    <text name="AlreadyBanned" value="Šis vartotojas jau turi aktyvų šio tipo blokavimą." />
+    <text name="SelectAtLeastOneBanType" value="Pasirinkite bent vieną apribojimą, kurį norite blokuoti." />
+    <text name="CannotBanSelf" value="Negalite užblokuoti savęs." />
+    <text name="BanNotActive" value="Šiam vartotojui nėra aktyvaus šio tipo blokavimo." />
+    <text name="BanSuccess" value="Blokavimas pritaikytas." />
+    <text name="UnbanSuccess" value="Blokavimas panaikintas." />
+    <text name="UnbanWarningMessage" value="Panaikinti šį blokavimą? Vartotojas iš karto atgaus šią galimybę." />
+    <text name="Newest" value="Naujausi" />
+    <text name="Top" value="Populiariausi" />
+    <text name="NoPublishedPosts" value="Dar nėra paskelbtų įrašų." />
+    <text name="LoadFailed" value="Nepavyko įkelti turinio. Bandykite dar kartą." />
+    <text name="LoginToComment" value="Norėdami dalyvauti diskusijoje, turite turėti paskyrą." />
+    <text name="LoginToUpvote" value="Prisijunkite, kad galėtumėte balsuoti už" />
+    <text name="PageNotFound" value="Puslapis, kurio ieškote, neegzistuoja." />
+    <text name="BackToPosts" value="Grįžti į įrašus" />
+    <text name="Previous" value="Ankstesnis" />
+    <text name="Next" value="Kitas" />
   </texts>
 </localizationDictionary>

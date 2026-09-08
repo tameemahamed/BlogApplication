@@ -120,5 +120,122 @@
     <text name="403PageHeader">Yetkisiz Erişim</text>
     <text name="403PageDescription">Bu sayfaya erişmek için yetkiniz yok. Lütfen yöneticinizle iletişime geçin.</text>
     <text name="403PageButton">Dashboard'a dön</text>
+    <text name="CreatePosts" value="Gönderi oluştur" />
+    <text name="EditPosts" value="Gönderi düzenle" />
+    <text name="DeletePosts" value="Gönderi sil" />
+    <text name="ArchivePosts" value="Gönderiyi arşivle" />
+    <text name="ApprovePosts" value="Gönderileri onayla" />
+    <text name="CreateComments" value="Yorum oluştur" />
+    <text name="EditComments" value="Yorum düzenle" />
+    <text name="DeleteComments" value="Yorum sil" />
+    <text name="CreateReplies" value="Yanıt oluştur" />
+    <text name="ManageBans" value="Kullanıcı yasaklarını yönet" />
+    <text name="Menu" value="Menü" />
+    <text name="SwitchToDarkMode" value="Koyu mod" />
+    <text name="SwitchToLightMode" value="Açık mod" />
+    <text name="Posts" value="Gönderiler" />
+    <text name="MyPosts" value="Gönderilerim" />
+    <text name="ReviewQueue" value="İnceleme kuyruğu" />
+    <text name="NewPost" value="Yeni gönderi" />
+    <text name="CreatePost" value="Gönderi oluştur" />
+    <text name="EditPost" value="Gönderiyi düzenle" />
+    <text name="PostTitle" value="Başlık" />
+    <text name="PostExcerpt" value="Özet" />
+    <text name="PostContent" value="İçerik (Markdown)" />
+    <text name="PostStatus" value="Durum" />
+    <text name="PostStatusDraft" value="Taslak" />
+    <text name="PostStatusPendingReview" value="İnceleme bekliyor" />
+    <text name="PostStatusApproved" value="Onaylandı" />
+    <text name="PostStatusRejected" value="Reddedildi" />
+    <text name="PostStatusArchived" value="Arşivlendi" />
+    <text name="SubmitForReview" value="İncelemeye gönder" />
+    <text name="Approve" value="Onayla" />
+    <text name="Reject" value="Reddet" />
+    <text name="ApprovePost" value="Gönderiyi onayla" />
+    <text name="RejectPost" value="Gönderiyi reddet" />
+    <text name="ArchivePost" value="Arşivle" />
+    <text name="RejectionReason" value="Reddetme nedeni" />
+    <text name="RejectPostReasonHint" value="Bu gönderinin neden reddedildiğini açıklayın. Neden yazara gösterilir." />
+    <text name="RejectionFeedback" value="İnceleyen geri bildirimi" />
+    <text name="Author" value="Yazar" />
+    <text name="CreatedDate" value="Oluşturulma" />
+    <text name="PublishDate" value="Yayınlanma" />
+    <text name="PostSubmitConfirmMessage" value="{0} gönderisi incelemeye gönderilsin mi?" />
+    <text name="PostApproveConfirmMessage" value="{0} gönderisi onaylanıp yayınlansın mı?" />
+    <text name="PostArchiveWarningMessage" value="{0} gönderisi yayından kaldırılacak ve arşivlenecek." />
+    <text name="PostDeleteWarningMessage" value="{0} gönderisi silinecek." />
+    <text name="PostIsNotSubmittable" value="İncelemeye yalnızca taslak, reddedilmiş veya arşivlenmiş gönderiler gönderilebilir." />
+    <text name="PostIsNotPendingReview" value="Bu gönderi inceleme beklemiyor." />
+    <text name="PostIsNotApproved" value="Bu gönderi onaylanmadı." />
+    <text name="PostModifyNotAllowed" value="Yalnızca kendi gönderilerinizi değiştirebilirsiniz." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Onaylanmış gönderiler yazarı tarafından silinemez. Bunun yerine gönderiyi arşivleyin." />
+    <text name="PostCreated" value="Gönderi taslak olarak oluşturuldu." />
+    <text name="PostUpdated" value="Gönderi güncellendi." />
+    <text name="PostSubmitted" value="Gönderi incelemeye gönderildi." />
+    <text name="PostApproved" value="Gönderi onaylandı ve yayınlandı." />
+    <text name="PostRejected" value="Gönderi reddedildi." />
+    <text name="PostArchived" value="Gönderi arşivlendi." />
+    <text name="UnknownAuthor" value="Bilinmeyen yazar" />
+    <text name="NoPosts" value="Henüz hiç gönderi oluşturmadınız." />
+    <text name="NoPendingReviewPosts" value="İnceleme bekleyen gönderi yok." />
+    <text name="Write" value="Yaz" />
+    <text name="Preview" value="Önizleme" />
+    <text name="SaveAsDraft" value="Taslak olarak kaydet" />
+    <text name="ApprovedPostEditHint" value="Bu gönderiyi kaydetmek onu incelemeye geri döndürür." />
+    <text name="Comments" value="Yorumlar" />
+    <text name="Reply" value="Yanıtla" />
+    <text name="WriteAComment" value="Yorum yaz" />
+    <text name="WriteAReply" value="Yanıt yaz" />
+    <text name="NoCommentsYet" value="Henüz yorum yok." />
+    <text name="Edited" value="Düzenlendi" />
+    <text name="CommentDeleted" value="Yorum silindi." />
+    <text name="CommentUpdated" value="Yorum güncellendi." />
+    <text name="CommentModifyNotAllowed" value="Yalnızca kendi yorumlarınızı düzenleyebilirsiniz." />
+    <text name="CommentDeleteNotAllowed" value="Yalnızca kendi yorumlarınızı veya kendi gönderilerinizdeki yorumları silebilirsiniz." />
+    <text name="PostNotApprovedForComments" value="Yorumlara yalnızca yayınlanmış gönderilerde izin verilir." />
+    <text name="CommentDeleteWarningMessage" value="Yorum ve yanıtları kaldırılacak." />
+    <text name="PostNotFound" value="Bu gönderi mevcut değil veya yayınlanmadı." />
+    <text name="View" value="Görüntüle" />
+    <text name="Upvote" value="Yukarı oyla" />
+    <text name="Upvoted" value="Oyladınız" />
+    <text name="Upvotes" value="Oylar" />
+    <text name="Moderation" value="Moderasyon" />
+    <text name="Bans" value="Yasaklar" />
+    <text name="Ban" value="Yasakla" />
+    <text name="Unban" value="Yasağı kaldır" />
+    <text name="BanReason" value="Neden" />
+    <text name="BanType" value="Yasak türü" />
+    <text name="BanTypeComment" value="Yorum yapma" />
+    <text name="BanTypeReply" value="Yanıt verme" />
+    <text name="BanTypeUpvote" value="Yukarı oylama" />
+    <text name="BannedFromCommenting" value="Yorum yapmaktan yasaklı" />
+    <text name="BannedFromReplying" value="Yanıt vermekten yasaklı" />
+    <text name="BannedFromUpvoting" value="Yukarı oylamaktan yasaklı" />
+    <text name="ActiveRestrictions" value="Etkin kısıtlamalarınız" />
+    <text name="ActiveBans" value="Etkin yasaklar" />
+    <text name="BannedUsers" value="Yasaklı kullanıcılar" />
+    <text name="RecentComments" value="Son yorumlar" />
+    <text name="BannedAt" value="Yasaklanma tarihi" />
+    <text name="NoActiveBans" value="Etkin yasak yok" />
+    <text name="NoBanOptionsLeft" value="Tüm yetenekler zaten yasaklanmış." />
+    <text name="NoBannedUsers" value="Yasaklı kullanıcı yok" />
+    <text name="NoRecentComments" value="Yorum yok" />
+    <text name="AlreadyBanned" value="Bu kullanıcının bu türde etkin bir yasağı zaten var." />
+    <text name="SelectAtLeastOneBanType" value="Yasaklamak için en az bir kısıtlama seçin." />
+    <text name="CannotBanSelf" value="Kendinizi yasaklayamazsınız." />
+    <text name="BanNotActive" value="Bu kullanıcı için bu türde etkin bir yasak yok." />
+    <text name="BanSuccess" value="Yasak uygulandı." />
+    <text name="UnbanSuccess" value="Yasak kaldırıldı." />
+    <text name="UnbanWarningMessage" value="Bu yasak kaldırılsın mı? Kullanıcı bu yeteneği hemen geri kazanacak." />
+    <text name="Newest" value="En yeni" />
+    <text name="Top" value="En çok oylanan" />
+    <text name="NoPublishedPosts" value="Henüz hiç gönderi yayınlanmadı." />
+    <text name="LoadFailed" value="İçerik yüklenemedi. Lütfen tekrar deneyin." />
+    <text name="LoginToComment" value="Tartışmaya katılmak için bir hesabınız olmalı." />
+    <text name="LoginToUpvote" value="Yukarı oylamak için giriş yapın" />
+    <text name="PageNotFound" value="Aradığınız sayfa mevcut değil." />
+    <text name="BackToPosts" value="Gönderilere dön" />
+    <text name="Previous" value="Önceki" />
+    <text name="Next" value="Sonraki" />
   </texts>
 </localizationDictionary>

@@ -7,7 +7,6 @@
                 </div>
                 <div class="col-6 text-right">
                     <a href="javascript:;" class="btn btn-primary" (click)="createRole()">
-                        <i class="fa fa-plus-square"></i>
                         {{ 'Create' | localize }}
                     </a>
                 </div>
@@ -24,7 +23,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-primary" (click)="list()">
-                                        <i class="fas fa-search"></i>
+                                        {{ 'Search' | localize }}
                                     </button>
                                 </div>
                                 <input
@@ -55,11 +54,9 @@
                                     <tr>
                                         <th style="min-width: 150px" pSortableColumn="name">
                                             {{ 'RoleName' | localize }}
-                                            <p-sortIcon field="name"></p-sortIcon>
                                         </th>
                                         <th style="min-width: 150px" pSortableColumn="displayName">
                                             {{ 'DisplayName' | localize }}
-                                            <p-sortIcon field="displayName"></p-sortIcon>
                                         </th>
                                         <th style="min-width: 130px">
                                             {{ 'Actions' | localize }}
@@ -82,16 +79,14 @@
                                         <td>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm bg-secondary"
+                                                class="btn btn-default btn-sm"
                                                 (click)="editRole(record)">
-                                                <i class="fas fa-pencil-alt"></i>
                                                 {{ 'Edit' | localize }}
                                             </button>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm bg-danger mx-2"
+                                                class="btn btn-default btn-sm mx-2"
                                                 (click)="delete(record)">
-                                                <i class="fas fa-trash"></i>
                                                 {{ 'Delete' | localize }}
                                             </button>
                                         </td>
@@ -109,7 +104,7 @@
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
                             <button class="btn btn-secondary" (click)="refresh()">
-                                <i class="fas fa-redo-alt"></i>
+                                {{ 'Refresh' | localize }}
                             </button>
                         </div>
                         <div class="col-sm-8 col-12">

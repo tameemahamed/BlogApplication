@@ -106,5 +106,136 @@
     <text name="RoleDeleteWarningMessage">A função {0} será excluída e desassociada de todos os usuários pertencentes a ela.</text>
     <text name="TenantDeleteWarningMessage">O Tenant {0} será excluído.</text>
     <text name="SearchWithThreeDot">Pesquisar...</text>
+    <text name="AdminPassword" value="Senha do administrador" />
+    <text name="PleaseEnterAtLeastNCharacter" value="Por favor, insira pelo menos {0} caracteres" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="Por favor, insira no máximo {0} caracteres" />
+    <text name="InvalidEmailAddress" value="Endereço de e-mail inválido" />
+    <text name="InvalidPattern" value="Inválido" />
+    <text name="PairsDoNotMatch" value="Não coincidem" />
+    <text name="TotalRecordsCount" value="Total: {0}" />
+    <text name="Clear" value="Limpar" />
+    <text name="ResetPasswordStepOneInfo" value="1. Insira a senha do administrador" />
+    <text name="ResetPasswordStepTwoInfo" value="2. Copie esta senha aleatória para poder enviá-la ao usuário" />
+    <text name="UsersActivation" value="Ativação de usuários" />
+    <text name="CreatePosts" value="Criar posts" />
+    <text name="EditPosts" value="Editar posts" />
+    <text name="DeletePosts" value="Excluir posts" />
+    <text name="ArchivePosts" value="Arquivar posts" />
+    <text name="ApprovePosts" value="Aprovar posts" />
+    <text name="CreateComments" value="Criar comentários" />
+    <text name="EditComments" value="Editar comentários" />
+    <text name="DeleteComments" value="Excluir comentários" />
+    <text name="CreateReplies" value="Criar respostas" />
+    <text name="ManageBans" value="Gerenciar banimentos de usuários" />
+    <text name="Menu" value="Menu" />
+    <text name="SwitchToDarkMode" value="Modo escuro" />
+    <text name="SwitchToLightMode" value="Modo claro" />
+    <text name="403PageHeader" value="Acesso negado" />
+    <text name="403PageDescription" value="Você não tem permissão para acessar este recurso. Entre em contato com o administrador." />
+    <text name="403PageButton" value="Voltar para o Painel" />
+    <text name="Posts" value="Posts" />
+    <text name="MyPosts" value="Meus posts" />
+    <text name="ReviewQueue" value="Fila de revisão" />
+    <text name="NewPost" value="Novo post" />
+    <text name="CreatePost" value="Criar post" />
+    <text name="EditPost" value="Editar post" />
+    <text name="PostTitle" value="Título" />
+    <text name="PostExcerpt" value="Resumo" />
+    <text name="PostContent" value="Conteúdo (Markdown)" />
+    <text name="PostStatus" value="Status" />
+    <text name="PostStatusDraft" value="Rascunho" />
+    <text name="PostStatusPendingReview" value="Aguardando revisão" />
+    <text name="PostStatusApproved" value="Aprovado" />
+    <text name="PostStatusRejected" value="Rejeitado" />
+    <text name="PostStatusArchived" value="Arquivado" />
+    <text name="SubmitForReview" value="Enviar para revisão" />
+    <text name="Approve" value="Aprovar" />
+    <text name="Reject" value="Rejeitar" />
+    <text name="ApprovePost" value="Aprovar post" />
+    <text name="RejectPost" value="Rejeitar post" />
+    <text name="ArchivePost" value="Arquivar" />
+    <text name="RejectionReason" value="Motivo da rejeição" />
+    <text name="RejectPostReasonHint" value="Explique por que este post está sendo rejeitado. O motivo é mostrado ao autor." />
+    <text name="RejectionFeedback" value="Comentário do revisor" />
+    <text name="Author" value="Autor" />
+    <text name="CreatedDate" value="Criado em" />
+    <text name="PublishDate" value="Publicado em" />
+    <text name="PostSubmitConfirmMessage" value="Enviar o post {0} para revisão?" />
+    <text name="PostApproveConfirmMessage" value="Aprovar e publicar o post {0}?" />
+    <text name="PostArchiveWarningMessage" value="O post {0} será despublicado e arquivado." />
+    <text name="PostDeleteWarningMessage" value="O post {0} será excluído." />
+    <text name="PostIsNotSubmittable" value="Apenas posts em rascunho, rejeitados ou arquivados podem ser enviados para revisão." />
+    <text name="PostIsNotPendingReview" value="Este post não está aguardando revisão." />
+    <text name="PostIsNotApproved" value="Este post não está aprovado." />
+    <text name="PostModifyNotAllowed" value="Você só pode modificar seus próprios posts." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="Posts aprovados não podem ser excluídos pelo autor. Arquive o post em vez disso." />
+    <text name="PostCreated" value="O post foi criado como rascunho." />
+    <text name="PostUpdated" value="O post foi atualizado." />
+    <text name="PostSubmitted" value="O post foi enviado para revisão." />
+    <text name="PostApproved" value="O post foi aprovado e publicado." />
+    <text name="PostRejected" value="O post foi rejeitado." />
+    <text name="PostArchived" value="O post foi arquivado." />
+    <text name="UnknownAuthor" value="Autor desconhecido" />
+    <text name="NoPosts" value="Você ainda não criou nenhum post." />
+    <text name="NoPendingReviewPosts" value="Não há posts aguardando revisão." />
+    <text name="Write" value="Escrever" />
+    <text name="Preview" value="Pré-visualizar" />
+    <text name="SaveAsDraft" value="Salvar como rascunho" />
+    <text name="ApprovedPostEditHint" value="Salvar este post o retornará para revisão." />
+    <text name="Comments" value="Comentários" />
+    <text name="Reply" value="Responder" />
+    <text name="WriteAComment" value="Escreva um comentário" />
+    <text name="WriteAReply" value="Escreva uma resposta" />
+    <text name="NoCommentsYet" value="Ainda não há comentários." />
+    <text name="Edited" value="Editado" />
+    <text name="CommentDeleted" value="O comentário foi excluído." />
+    <text name="CommentUpdated" value="O comentário foi atualizado." />
+    <text name="CommentModifyNotAllowed" value="Você só pode editar seus próprios comentários." />
+    <text name="CommentDeleteNotAllowed" value="Você só pode excluir seus próprios comentários ou comentários em seus próprios posts." />
+    <text name="PostNotApprovedForComments" value="Comentários são permitidos apenas em posts publicados." />
+    <text name="CommentDeleteWarningMessage" value="O comentário e suas respostas serão removidos." />
+    <text name="PostNotFound" value="Este post não existe ou não está publicado." />
+    <text name="View" value="Ver" />
+    <text name="Upvote" value="Votar a favor" />
+    <text name="Upvoted" value="Voto a favor" />
+    <text name="Upvotes" value="Votos" />
+    <text name="Moderation" value="Moderação" />
+    <text name="Bans" value="Banimentos" />
+    <text name="Ban" value="Banir" />
+    <text name="Unban" value="Desbanir" />
+    <text name="BanReason" value="Motivo" />
+    <text name="BanType" value="Tipo de banimento" />
+    <text name="BanTypeComment" value="Comentar" />
+    <text name="BanTypeReply" value="Responder" />
+    <text name="BanTypeUpvote" value="Votar a favor" />
+    <text name="BannedFromCommenting" value="Banido de comentar" />
+    <text name="BannedFromReplying" value="Banido de responder" />
+    <text name="BannedFromUpvoting" value="Banido de votar a favor" />
+    <text name="ActiveRestrictions" value="Suas restrições ativas" />
+    <text name="ActiveBans" value="Banimentos ativos" />
+    <text name="BannedUsers" value="Usuários banidos" />
+    <text name="RecentComments" value="Comentários recentes" />
+    <text name="BannedAt" value="Banido em" />
+    <text name="NoActiveBans" value="Nenhum banimento ativo" />
+    <text name="NoBanOptionsLeft" value="Todas as permissões já estão banidas." />
+    <text name="NoBannedUsers" value="Nenhum usuário banido" />
+    <text name="NoRecentComments" value="Nenhum comentário" />
+    <text name="AlreadyBanned" value="Este usuário já possui um banimento ativo deste tipo." />
+    <text name="SelectAtLeastOneBanType" value="Selecione ao menos uma restrição para banir." />
+    <text name="CannotBanSelf" value="Você não pode banir a si mesmo." />
+    <text name="BanNotActive" value="Não há banimento ativo deste tipo para este usuário." />
+    <text name="BanSuccess" value="Banimento aplicado." />
+    <text name="UnbanSuccess" value="Banimento removido." />
+    <text name="UnbanWarningMessage" value="Remover este banimento? O usuário recuperará esta permissão imediatamente." />
+    <text name="Newest" value="Mais recentes" />
+    <text name="Top" value="Mais votados" />
+    <text name="NoPublishedPosts" value="Nenhum post foi publicado ainda." />
+    <text name="LoadFailed" value="Não foi possível carregar o conteúdo. Tente novamente." />
+    <text name="LoginToComment" value="Você precisa de uma conta para participar da discussão." />
+    <text name="LoginToUpvote" value="Entre para votar a favor" />
+    <text name="PageNotFound" value="A página que você procura não existe." />
+    <text name="BackToPosts" value="Voltar para os posts" />
+    <text name="Previous" value="Anterior" />
+    <text name="Next" value="Próximo" />
   </texts>
 </localizationDictionary>

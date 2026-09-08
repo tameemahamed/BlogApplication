@@ -34,7 +34,6 @@
                         "styles": [
                             "node_modules/sweetalert2/dist/sweetalert2.css",
                             "src/assets/freeze-ui/freeze-ui.css",
-                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                             "node_modules/admin-lte-css-only/css/adminlte.min.css",
                             "src/shared/core.less",
                             "src/assets/blog-theme.css"
@@ -137,7 +136,6 @@
                         "styles": [
                             "node_modules/sweetalert2/dist/sweetalert2.css",
                             "src/assets/freeze-ui/freeze-ui.css",
-                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                             "node_modules/admin-lte-css-only/css/adminlte.min.css",
                             "src/shared/core.less",
                             "src/assets/blog-theme.css"

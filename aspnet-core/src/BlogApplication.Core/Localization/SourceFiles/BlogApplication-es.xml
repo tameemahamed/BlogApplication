@@ -116,5 +116,126 @@
     <text name="Clear">Borrar</text>
     <text name="ResetPasswordStepOneInfo">1. Ingrese su contraseña de administrador</text>
     <text name="ResetPasswordStepTwoInfo">2. Copie esta contraseña aleatoria para poder enviársela al usuario</text>
+    <text name="UsersActivation" value="Activación de usuarios" />
+    <text name="CreatePosts" value="Crear publicaciones" />
+    <text name="EditPosts" value="Editar publicaciones" />
+    <text name="DeletePosts" value="Eliminar publicaciones" />
+    <text name="ArchivePosts" value="Archivar publicaciones" />
+    <text name="ApprovePosts" value="Aprobar publicaciones" />
+    <text name="CreateComments" value="Crear comentarios" />
+    <text name="EditComments" value="Editar comentarios" />
+    <text name="DeleteComments" value="Eliminar comentarios" />
+    <text name="CreateReplies" value="Crear respuestas" />
+    <text name="ManageBans" value="Gestionar bloqueos de usuarios" />
+    <text name="Menu" value="Menú" />
+    <text name="SwitchToDarkMode" value="Modo oscuro" />
+    <text name="SwitchToLightMode" value="Modo claro" />
+    <text name="403PageHeader" value="Prohibido" />
+    <text name="403PageDescription" value="No tiene permiso para acceder a este recurso. Póngase en contacto con su administrador." />
+    <text name="403PageButton" value="Volver al panel de control" />
+    <text name="Posts" value="Publicaciones" />
+    <text name="MyPosts" value="Mis publicaciones" />
+    <text name="ReviewQueue" value="Cola de revisión" />
+    <text name="NewPost" value="Nueva publicación" />
+    <text name="CreatePost" value="Crear publicación" />
+    <text name="EditPost" value="Editar publicación" />
+    <text name="PostTitle" value="Título" />
+    <text name="PostExcerpt" value="Extracto" />
+    <text name="PostContent" value="Contenido (Markdown)" />
+    <text name="PostStatus" value="Estado" />
+    <text name="PostStatusDraft" value="Borrador" />
+    <text name="PostStatusPendingReview" value="Pendiente de revisión" />
+    <text name="PostStatusApproved" value="Aprobada" />
+    <text name="PostStatusRejected" value="Rechazada" />
+    <text name="PostStatusArchived" value="Archivada" />
+    <text name="SubmitForReview" value="Enviar a revisión" />
+    <text name="Approve" value="Aprobar" />
+    <text name="Reject" value="Rechazar" />
+    <text name="ApprovePost" value="Aprobar publicación" />
+    <text name="RejectPost" value="Rechazar publicación" />
+    <text name="ArchivePost" value="Archivar" />
+    <text name="RejectionReason" value="Motivo del rechazo" />
+    <text name="RejectPostReasonHint" value="Explique por qué se rechaza esta publicación. El motivo se muestra al autor." />
+    <text name="RejectionFeedback" value="Comentarios del revisor" />
+    <text name="Author" value="Autor" />
+    <text name="CreatedDate" value="Creado" />
+    <text name="PublishDate" value="Publicado" />
+    <text name="PostSubmitConfirmMessage" value="¿Enviar la publicación {0} a revisión?" />
+    <text name="PostApproveConfirmMessage" value="¿Aprobar y publicar la publicación {0}?" />
+    <text name="PostArchiveWarningMessage" value="La publicación {0} se retirará y se archivará." />
+    <text name="PostDeleteWarningMessage" value="La publicación {0} será eliminada." />
+    <text name="PostIsNotSubmittable" value="Solo se pueden enviar a revisión las publicaciones en borrador, rechazadas o archivadas." />
+    <text name="PostIsNotPendingReview" value="Esta publicación no está pendiente de revisión." />
+    <text name="PostIsNotApproved" value="Esta publicación no está aprobada." />
+    <text name="PostModifyNotAllowed" value="Solo puede modificar sus propias publicaciones." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="El autor no puede eliminar las publicaciones aprobadas. Archive la publicación en su lugar." />
+    <text name="PostCreated" value="La publicación se ha creado como borrador." />
+    <text name="PostUpdated" value="La publicación se ha actualizado." />
+    <text name="PostSubmitted" value="La publicación se ha enviado a revisión." />
+    <text name="PostApproved" value="La publicación se ha aprobado y publicado." />
+    <text name="PostRejected" value="La publicación ha sido rechazada." />
+    <text name="PostArchived" value="La publicación se ha archivado." />
+    <text name="UnknownAuthor" value="Autor desconocido" />
+    <text name="NoPosts" value="Todavía no ha creado ninguna publicación." />
+    <text name="NoPendingReviewPosts" value="No hay publicaciones pendientes de revisión." />
+    <text name="Write" value="Escribir" />
+    <text name="Preview" value="Vista previa" />
+    <text name="SaveAsDraft" value="Guardar como borrador" />
+    <text name="ApprovedPostEditHint" value="Al guardar esta publicación, volverá a revisión." />
+    <text name="Comments" value="Comentarios" />
+    <text name="Reply" value="Responder" />
+    <text name="WriteAComment" value="Escribir un comentario" />
+    <text name="WriteAReply" value="Escribir una respuesta" />
+    <text name="NoCommentsYet" value="Todavía no hay comentarios." />
+    <text name="Edited" value="Editado" />
+    <text name="CommentDeleted" value="El comentario ha sido eliminado." />
+    <text name="CommentUpdated" value="El comentario ha sido actualizado." />
+    <text name="CommentModifyNotAllowed" value="Solo puede editar sus propios comentarios." />
+    <text name="CommentDeleteNotAllowed" value="Solo puede eliminar sus propios comentarios o los comentarios de sus propias publicaciones." />
+    <text name="PostNotApprovedForComments" value="Solo se permiten comentarios en las publicaciones publicadas." />
+    <text name="CommentDeleteWarningMessage" value="El comentario y sus respuestas se eliminarán." />
+    <text name="PostNotFound" value="Esta publicación no existe o no está publicada." />
+    <text name="View" value="Ver" />
+    <text name="Upvote" value="Votar a favor" />
+    <text name="Upvoted" value="Votado a favor" />
+    <text name="Upvotes" value="Votos a favor" />
+    <text name="Moderation" value="Moderación" />
+    <text name="Bans" value="Bloqueos" />
+    <text name="Ban" value="Bloquear" />
+    <text name="Unban" value="Desbloquear" />
+    <text name="BanReason" value="Motivo" />
+    <text name="BanType" value="Tipo de bloqueo" />
+    <text name="BanTypeComment" value="Comentar" />
+    <text name="BanTypeReply" value="Responder" />
+    <text name="BanTypeUpvote" value="Votar" />
+    <text name="BannedFromCommenting" value="Bloqueado para comentar" />
+    <text name="BannedFromReplying" value="Bloqueado para responder" />
+    <text name="BannedFromUpvoting" value="Bloqueado para votar" />
+    <text name="ActiveRestrictions" value="Sus restricciones activas" />
+    <text name="ActiveBans" value="Bloqueos activos" />
+    <text name="BannedUsers" value="Usuarios bloqueados" />
+    <text name="RecentComments" value="Comentarios recientes" />
+    <text name="BannedAt" value="Bloqueado el" />
+    <text name="NoActiveBans" value="No hay bloqueos activos" />
+    <text name="NoBanOptionsLeft" value="Todas las capacidades ya están bloqueadas." />
+    <text name="NoBannedUsers" value="No hay usuarios bloqueados" />
+    <text name="NoRecentComments" value="No hay comentarios" />
+    <text name="AlreadyBanned" value="Este usuario ya tiene un bloqueo activo de este tipo." />
+    <text name="SelectAtLeastOneBanType" value="Seleccione al menos una restricción para bloquear." />
+    <text name="CannotBanSelf" value="No puede bloquearse a sí mismo." />
+    <text name="BanNotActive" value="No hay ningún bloqueo activo de este tipo para este usuario." />
+    <text name="BanSuccess" value="Bloqueo aplicado." />
+    <text name="UnbanSuccess" value="Bloqueo levantado." />
+    <text name="UnbanWarningMessage" value="¿Levantar este bloqueo? El usuario recuperará esta capacidad de inmediato." />
+    <text name="Newest" value="Más recientes" />
+    <text name="Top" value="Destacados" />
+    <text name="NoPublishedPosts" value="Todavía no se ha publicado ninguna publicación." />
+    <text name="LoadFailed" value="No se pudo cargar el contenido. Inténtelo de nuevo." />
+    <text name="LoginToComment" value="Necesita una cuenta para participar en la conversación." />
+    <text name="LoginToUpvote" value="Inicie sesión para votar a favor" />
+    <text name="PageNotFound" value="La página que busca no existe." />
+    <text name="BackToPosts" value="Volver a las publicaciones" />
+    <text name="Previous" value="Anterior" />
+    <text name="Next" value="Siguiente" />
   </texts>
 </localizationDictionary>

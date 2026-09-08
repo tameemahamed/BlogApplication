@@ -1,4 +1,5 @@
-﻿using Abp.Dependency;
+﻿using Abp;
+using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
 using Abp.MultiTenancy;
@@ -13,15 +14,22 @@ public static class SeedHelper
 {
     public static void SeedHostDb(IIocResolver iocResolver)
     {
-        WithDbContext<BlogApplicationDbContext>(iocResolver, SeedHostDb);
+        var guidGenerator = iocResolver.Resolve<IGuidGenerator>();
+        WithDbContext<BlogApplicationDbContext>(iocResolver, context => SeedHostDb(context, guidGenerator));
     }
 
-    public static void SeedHostDb(BlogApplicationDbContext context)
+    public static void SeedHostDb(BlogApplicationDbContext context, IGuidGenerator guidGenerator)
     {
         context.SuppressAutoSetTenantId = true;
 
-        // Host seed (single-tenant application)
+        // Host seed (single-tenant application): languages, roles, settings
         new InitialHostDbBuilder(context).Create();
+
+        // Demo content (prd.md E8-S2). Deliberately kept out of
+        // InitialHostDbBuilder: the unit tests build a bare host database
+        // through that builder and their count-based assertions must not see
+        // demo rows.
+        new BlogDemoDataCreator(context, guidGenerator).Create();
     }
 
     private static void WithDbContext<TDbContext>(IIocResolver iocResolver, Action<TDbContext> contextAction)

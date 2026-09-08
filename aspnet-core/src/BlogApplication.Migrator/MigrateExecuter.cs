@@ -1,3 +1,4 @@
+using Abp;
 using Abp.Data;
 using Abp.Dependency;
 using Abp.Domain.Uow;
@@ -19,16 +20,19 @@ public class MigrateExecuter : ITransientDependency
     private readonly Log _log;
     private readonly AbpZeroDbMigrator _migrator;
     private readonly IDbPerTenantConnectionStringResolver _connectionStringResolver;
+    private readonly IGuidGenerator _guidGenerator;
 
     public MigrateExecuter(
         AbpZeroDbMigrator migrator,
         Log log,
-        IDbPerTenantConnectionStringResolver connectionStringResolver)
+        IDbPerTenantConnectionStringResolver connectionStringResolver,
+        IGuidGenerator guidGenerator)
     {
         _log = log;
 
         _migrator = migrator;
         _connectionStringResolver = connectionStringResolver;
+        _guidGenerator = guidGenerator;
     }
 
     public bool Run(bool skipConnVerification)
@@ -56,7 +60,7 @@ public class MigrateExecuter : ITransientDependency
 
         try
         {
-            _migrator.CreateOrMigrateForHost(SeedHelper.SeedHostDb);
+            _migrator.CreateOrMigrateForHost(context => SeedHelper.SeedHostDb(context, _guidGenerator));
         }
         catch (Exception ex)
         {

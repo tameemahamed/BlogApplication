@@ -1,6 +1,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Runtime.Session;
+using Abp.Runtime.Validation;
 using Abp.UI;
 using BlogApplication.Authorization;
 using BlogApplication.Authorization.Roles;
@@ -336,5 +337,25 @@ public class CommentAppService_Tests : BlogApplicationTestBase
             ContentMarkdown = "still allowed"
         });
         reply.ContentMarkdown.ShouldBe("still allowed");
+    }
+
+    [Fact]
+    public async Task Should_Reject_Oversized_Comment_And_Reply()
+    {
+        var post = await CreateApprovedPostAsync("Length limits");
+        await CreateUserAsync("commenter.ten");
+        LoginAsHost("commenter.ten");
+
+        var oversized = new string('x', CommentConsts.MaxContentLength + 1);
+
+        await Should.ThrowAsync<AbpValidationException>(() => CommentAsync(post.Id, oversized));
+
+        var comment = await CommentAsync(post.Id, "within the limit");
+        await Should.ThrowAsync<AbpValidationException>(() => _commentAppService.CreateReplyAsync(
+            new CreateReplyInput
+            {
+                ParentCommentId = comment.Id,
+                ContentMarkdown = oversized
+            }));
     }
 }

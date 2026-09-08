@@ -7,7 +7,6 @@
                 </div>
                 <div class="col-6 text-right">
                     <a href="javascript:;" class="btn btn-primary" (click)="createUser()">
-                        <i class="fa fa-plus-square"></i>
                         {{ 'Create' | localize }}
                     </a>
                 </div>
@@ -24,7 +23,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-primary" (click)="list()">
-                                        <i class="fas fa-search"></i>
+                                        {{ 'Search' | localize }}
                                     </button>
                                 </div>
                                 <input
@@ -129,15 +128,12 @@
                                 <tr>
                                     <th style="min-width: 150px" pSortableColumn="userName">
                                         {{ 'UserName' | localize }}
-                                        <p-sortIcon field="userName"></p-sortIcon>
                                     </th>
                                     <th style="min-width: 150px" pSortableColumn="name">
                                         {{ 'FullName' | localize }}
-                                        <p-sortIcon field="name"></p-sortIcon>
                                     </th>
                                     <th style="min-width: 150px" pSortableColumn="emailAddress">
                                         {{ 'EmailAddress' | localize }}
-                                        <p-sortIcon field="emailAddress"></p-sortIcon>
                                     </th>
                                     <th style="min-width: 150px">
                                         {{ 'IsActive' | localize }}
@@ -173,29 +169,26 @@
                                     <td>
                                         <button
                                             type="button"
-                                            class="btn btn-sm bg-secondary"
+                                            class="btn btn-default btn-sm"
                                             (click)="editUser(record)">
-                                            <i class="fas fa-pencil-alt"></i>
                                             {{ 'Edit' | localize }}
                                         </button>
                                         <button
                                             type="button"
-                                            class="btn btn-sm bg-danger mx-2"
+                                            class="btn btn-default btn-sm mx-2"
                                             (click)="delete(record)">
-                                            <i class="fas fa-trash"></i>
                                             {{ 'Delete' | localize }}
                                         </button>
                                         <button
                                             type="button"
-                                            class="btn btn-sm bg-secondary"
+                                            class="btn btn-default btn-sm"
                                             (click)="resetPassword(record)">
-                                            <i class="fas fa-lock"></i>
                                             {{ 'ResetPassword' | localize }}
                                         </button>
                                         @if (canManageBans()) {
                                             <button
                                                 type="button"
-                                                class="btn btn-sm bg-secondary mx-2"
+                                                class="btn btn-default btn-sm mx-2"
                                                 (click)="showBansDialog(record)">
                                                 {{ 'Bans' | localize }}
                                             </button>
@@ -215,7 +208,7 @@
                     <div class="row">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
                             <button class="btn btn-secondary" (click)="refresh()">
-                                <i class="fas fa-redo-alt"></i>
+                                {{ 'Refresh' | localize }}
                             </button>
                         </div>
                         <div class="col-sm-8 col-12">

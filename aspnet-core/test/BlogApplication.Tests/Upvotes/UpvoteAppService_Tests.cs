@@ -1,4 +1,5 @@
 using Abp.Authorization;
+using Abp.Runtime.Session;
 using Abp.UI;
 using BlogApplication.Authorization;
 using BlogApplication.Authorization.Roles;
@@ -9,8 +10,10 @@ using BlogApplication.Posts;
 using BlogApplication.Posts.Dto;
 using BlogApplication.Upvotes;
 using BlogApplication.Upvotes.Dto;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -260,5 +263,27 @@ public class UpvoteAppService_Tests : BlogApplicationTestBase
             new GetCommentThreadInput { PostId = post.Id, SkipCount = 0, MaxResultCount = 10 });
         thread.Comments[0].UpvoteCount.ShouldBe(1);
         thread.Comments[0].UpvotedByCurrentUser.ShouldBe(true);
+    }
+
+    [Fact]
+    public async Task Should_Keep_Single_Upvote_Row_Per_User_And_Target()
+    {
+        var post = await CreateApprovedPostAsync("Unique row");
+        var input = new ToggleUpvoteInput { TargetType = (int)UpvoteTargetType.Post, TargetId = post.Id };
+        var userId = AbpSession.GetUserId();
+
+        await _upvoteAppService.ToggleAsync(input);
+        await _upvoteAppService.ToggleAsync(input);
+        await _upvoteAppService.ToggleAsync(input);
+
+        await UsingDbContextAsync(async context =>
+        {
+            var rows = await context.Upvotes
+                .Where(u => u.UserId == userId &&
+                            u.TargetType == (int)UpvoteTargetType.Post &&
+                            u.TargetId == post.Id)
+                .ToListAsync();
+            rows.Count.ShouldBe(1);
+        });
     }
 }

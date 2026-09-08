@@ -15,7 +15,7 @@
     width: 100%;
     height: 100%;
     z-index: 999999999;
-    background-color: #fff;
+    background-color: var(--bg);
     opacity: 0.8;
     transition: opacity 0.25s;
 }
@@ -34,7 +34,7 @@
     transform: translate(-50%, -50%);
     font-size: 20px;
     font-family: sans-serif;
-    color: #343a40;
+    color: var(--text-muted);
     text-align: center;
     text-transform: uppercase;
 }
@@ -47,7 +47,7 @@
     border-radius: 50%;
     border-width: 2px;
     border-style: solid;
-    border-color: transparent #228ae6 #228ae6;
+    border-color: transparent var(--accent) var(--accent);
     position: absolute;
     top: calc(50% - 75px);
     left: calc(50% - 75px);

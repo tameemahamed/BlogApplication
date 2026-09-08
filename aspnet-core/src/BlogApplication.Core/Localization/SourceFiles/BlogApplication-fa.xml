@@ -117,5 +117,131 @@
     <text name="ResetPasswordStepOneInfo">1. رمز عبور ادمین را وارد کنید</text>
     <text name="ResetPasswordStepTwoInfo">2. رمز تصادفی را کپی کنید تا آن را برای کاربر ارسال نمایید</text>
     <text name="UsersActivation">فعالسازی کاربران</text>
+
+    <text name="CreatePosts" value="ایجاد نوشته‌ها" />
+    <text name="EditPosts" value="ویرایش نوشته‌ها" />
+    <text name="DeletePosts" value="حذف نوشته‌ها" />
+    <text name="ArchivePosts" value="بایگانی نوشته‌ها" />
+    <text name="ApprovePosts" value="تایید نوشته‌ها" />
+    <text name="CreateComments" value="ایجاد دیدگاه‌ها" />
+    <text name="EditComments" value="ویرایش دیدگاه‌ها" />
+    <text name="DeleteComments" value="حذف دیدگاه‌ها" />
+    <text name="CreateReplies" value="ایجاد پاسخ‌ها" />
+    <text name="ManageBans" value="مدیریت مسدودسازی کاربران" />
+    <text name="Menu" value="منو" />
+    <text name="SwitchToDarkMode" value="حالت تیره" />
+    <text name="SwitchToLightMode" value="حالت روشن" />
+    <text name="403PageHeader" value="دسترسی غیرمجاز" />
+    <text name="403PageDescription" value="شما اجازه دسترسی به این منبع را ندارید. لطفا با مدیر سیستم تماس بگیرید." />
+    <text name="403PageButton" value="بازگشت به داشبورد" />
+
+    <text name="Posts" value="نوشته‌ها" />
+    <text name="MyPosts" value="نوشته‌های من" />
+    <text name="ReviewQueue" value="صف بررسی" />
+    <text name="NewPost" value="نوشته جدید" />
+    <text name="CreatePost" value="ایجاد نوشته" />
+    <text name="EditPost" value="ویرایش نوشته" />
+    <text name="PostTitle" value="عنوان" />
+    <text name="PostExcerpt" value="خلاصه" />
+    <text name="PostContent" value="متن (Markdown)" />
+    <text name="PostStatus" value="وضعیت" />
+    <text name="PostStatusDraft" value="پیش‌نویس" />
+    <text name="PostStatusPendingReview" value="در انتظار بررسی" />
+    <text name="PostStatusApproved" value="تایید شده" />
+    <text name="PostStatusRejected" value="رد شده" />
+    <text name="PostStatusArchived" value="بایگانی شده" />
+    <text name="SubmitForReview" value="ارسال برای بررسی" />
+    <text name="Approve" value="تایید" />
+    <text name="Reject" value="رد" />
+    <text name="ApprovePost" value="تایید نوشته" />
+    <text name="RejectPost" value="رد نوشته" />
+    <text name="ArchivePost" value="بایگانی" />
+    <text name="RejectionReason" value="دلیل رد" />
+    <text name="RejectPostReasonHint" value="دلیل رد این نوشته را توضیح دهید. این دلیل به نویسنده نمایش داده می‌شود." />
+    <text name="RejectionFeedback" value="بازخورد بازبین" />
+    <text name="Author" value="نویسنده" />
+    <text name="CreatedDate" value="تاریخ ایجاد" />
+    <text name="PublishDate" value="تاریخ انتشار" />
+    <text name="PostSubmitConfirmMessage" value="نوشته {0} برای بررسی ارسال شود؟" />
+    <text name="PostApproveConfirmMessage" value="نوشته {0} تایید و منتشر شود؟" />
+    <text name="PostArchiveWarningMessage" value="نوشته {0} از انتشار خارج و بایگانی می‌شود." />
+    <text name="PostDeleteWarningMessage" value="نوشته {0} حذف خواهد شد." />
+    <text name="PostIsNotSubmittable" value="فقط نوشته‌های پیش‌نویس، رد شده یا بایگانی شده را می‌توان برای بررسی ارسال کرد." />
+    <text name="PostIsNotPendingReview" value="این نوشته در انتظار بررسی نیست." />
+    <text name="PostIsNotApproved" value="این نوشته تایید نشده است." />
+    <text name="PostModifyNotAllowed" value="فقط می‌توانید نوشته‌های خودتان را تغییر دهید." />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="نوشته‌های تایید شده توسط نویسنده حذف نمی‌شوند. به جای آن نوشته را بایگانی کنید." />
+    <text name="PostCreated" value="نوشته به صورت پیش‌نویس ایجاد شد." />
+    <text name="PostUpdated" value="نوشته بروزرسانی شد." />
+    <text name="PostSubmitted" value="نوشته برای بررسی ارسال شد." />
+    <text name="PostApproved" value="نوشته تایید و منتشر شد." />
+    <text name="PostRejected" value="نوشته رد شد." />
+    <text name="PostArchived" value="نوشته بایگانی شد." />
+    <text name="UnknownAuthor" value="نویسنده ناشناس" />
+    <text name="NoPosts" value="هنوز هیچ نوشته‌ای ایجاد نکرده‌اید." />
+    <text name="NoPendingReviewPosts" value="نوشته‌ای در انتظار بررسی وجود ندارد." />
+    <text name="Write" value="نوشتن" />
+    <text name="Preview" value="پیش‌نمایش" />
+    <text name="SaveAsDraft" value="ذخیره به عنوان پیش‌نویس" />
+    <text name="ApprovedPostEditHint" value="با ذخیره این نوشته، به حالت در انتظار بررسی بازمی‌گردد." />
+
+    <text name="Comments" value="دیدگاه‌ها" />
+    <text name="Reply" value="پاسخ" />
+    <text name="WriteAComment" value="نوشتن دیدگاه" />
+    <text name="WriteAReply" value="نوشتن پاسخ" />
+    <text name="NoCommentsYet" value="هنوز دیدگاهی ثبت نشده است." />
+    <text name="Edited" value="ویرایش شده" />
+    <text name="CommentDeleted" value="دیدگاه حذف شد." />
+    <text name="CommentUpdated" value="دیدگاه بروزرسانی شد." />
+    <text name="CommentModifyNotAllowed" value="فقط می‌توانید دیدگاه‌های خودتان را ویرایش کنید." />
+    <text name="CommentDeleteNotAllowed" value="فقط می‌توانید دیدگاه‌های خودتان یا دیدگاه‌های نوشته خودتان را حذف کنید." />
+    <text name="PostNotApprovedForComments" value="ثبت دیدگاه فقط برای نوشته‌های منتشر شده امکان‌پذیر است." />
+    <text name="CommentDeleteWarningMessage" value="دیدگاه و پاسخ‌های آن حذف خواهند شد." />
+    <text name="PostNotFound" value="این نوشته وجود ندارد یا منتشر نشده است." />
+
+    <text name="View" value="مشاهده" />
+    <text name="Upvote" value="پسندیدن" />
+    <text name="Upvoted" value="پسندیده شده" />
+    <text name="Upvotes" value="پسندها" />
+    <text name="Moderation" value="مدیریت محتوا" />
+    <text name="Bans" value="مسدودسازی‌ها" />
+    <text name="Ban" value="مسدودسازی" />
+    <text name="Unban" value="رفع مسدودیت" />
+
+    <text name="BanReason" value="دلیل" />
+    <text name="BanType" value="نوع مسدودیت" />
+    <text name="BanTypeComment" value="ثبت دیدگاه" />
+    <text name="BanTypeReply" value="ثبت پاسخ" />
+    <text name="BanTypeUpvote" value="پسندیدن" />
+    <text name="BannedFromCommenting" value="ثبت دیدگاه مسدود است" />
+    <text name="BannedFromReplying" value="ثبت پاسخ مسدود است" />
+    <text name="BannedFromUpvoting" value="پسندیدن مسدود است" />
+    <text name="ActiveRestrictions" value="محدودیت‌های فعال شما" />
+    <text name="ActiveBans" value="مسدودیت‌های فعال" />
+    <text name="BannedUsers" value="کاربران مسدود شده" />
+    <text name="RecentComments" value="دیدگاه‌های اخیر" />
+    <text name="BannedAt" value="زمان مسدودسازی" />
+    <text name="NoActiveBans" value="مسدودیت فعالی وجود ندارد" />
+    <text name="NoBanOptionsLeft" value="همه امکانات قبلا مسدود شده‌اند." />
+    <text name="NoBannedUsers" value="کاربر مسدود شده‌ای وجود ندارد" />
+    <text name="NoRecentComments" value="دیدگاهی وجود ندارد" />
+    <text name="AlreadyBanned" value="این کاربر از قبل مسدودیت فعالی از این نوع دارد." />
+    <text name="SelectAtLeastOneBanType" value="حداقل یک محدودیت را برای مسدودسازی انتخاب کنید." />
+    <text name="CannotBanSelf" value="نمی‌توانید خودتان را مسدود کنید." />
+    <text name="BanNotActive" value="مسدودیت فعالی از این نوع برای این کاربر وجود ندارد." />
+    <text name="BanSuccess" value="مسدودسازی اعمال شد." />
+    <text name="UnbanSuccess" value="مسدودسازی رفع شد." />
+    <text name="UnbanWarningMessage" value="این مسدودیت رفع شود؟ کاربر بلافاصله این امکان را بازمی‌یابد." />
+
+    <text name="Newest" value="جدیدترین" />
+    <text name="Top" value="برترین" />
+    <text name="NoPublishedPosts" value="هنوز هیچ نوشته‌ای منتشر نشده است." />
+    <text name="LoadFailed" value="بارگذاری محتوا انجام نشد. لطفا مجددا تلاش کنید." />
+    <text name="LoginToComment" value="برای شرکت در گفتگو به حساب کاربری نیاز دارید." />
+    <text name="LoginToUpvote" value="برای پسندیدن وارد شوید" />
+    <text name="PageNotFound" value="صفحه‌ای که به دنبال آن هستید وجود ندارد." />
+    <text name="BackToPosts" value="بازگشت به نوشته‌ها" />
+    <text name="Previous" value="قبلی" />
+    <text name="Next" value="بعدی" />
   </texts>
 </localizationDictionary>

@@ -97,7 +97,188 @@
     <text name="DeleteTenantConfirm">确认删除该租户？</text>
     <text name="EditTenant">编辑租户</text>
     <text name="SearchWithThreeDot">搜索...</text>
-    
+
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin" value="邮箱地址尚未确认，无法登录。" />
+    <text name="UserLockedOutMessage" value="该账号已被锁定，请稍后重试。" />
+    <text name="ResetPassword" value="重置密码" />
+    <text name="UpdatePassword" value="更新密码" />
+    <text name="NameSurname" value="姓名" />
+    <text name="SavedSuccessfully" value="保存成功" />
+    <text name="AdminPassword" value="管理员密码" />
+    <text name="Save" value="保存" />
+    <text name="Register" value="注册" />
+    <text name="OrLoginWith" value="或使用以下方式登录" />
+    <text name="WaitingForActivationMessage" value="您的账号正在等待系统管理员激活。" />
+    <text name="RegisterFormUserNameInvalidMessage" value="用户名请勿使用邮箱地址。" />
+    <text name="FullName" value="姓名" />
+    <text name="Optional" value="可选" />
+
+    <text name="MultiLevelMenu" value="多级菜单" />
+    <text name="Back" value="返回" />
+    <text name="SuccessfullyRegistered" value="注册成功" />
+    <text name="WaitingForEmailActivation" value="您的邮箱地址需要激活" />
+    <text name="CouldNotCompleteLoginOperation" value="无法完成登录操作，请稍后重试。" />
+    <text name="CouldNotValidateExternalUser" value="无法验证外部用户" />
+    <text name="ThisFieldIsRequired" value="此项为必填项" />
+    <text name="PleaseWait" value="请稍候..." />
+    <text name="Administration" value="管理" />
+    <text name="Permissions" value="权限" />
+    <text name="RoleDescription" value="角色说明" />
+    <text name="Refresh" value="刷新" />
+    <text name="Version" value="版本" />
+    <text name="On" value="开启" />
+    <text name="Off" value="关闭" />
+    <text name="AreYouSureWantToDelete" value="确定要删除 {0} 吗？" />
+    <text name="SuccessfullyDeleted" value="删除成功" />
+    <text name="StartTyping" value="开始输入" />
+    <text name="Skins" value="皮肤" />
+    <text name="Settings" value="设置" />
+    <text name="Filter" value="筛选" />
+    <text name="CurrentPassword" value="当前密码" />
+    <text name="NewPassword" value="新密码" />
+    <text name="ConfirmNewPassword" value="确认新密码" />
+    <text name="PasswordsDoNotMatch" value="两次输入的密码不一致" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="密码长度至少为 8 个字符，且必须包含小写字母、大写字母和数字" />
+    <text name="UserDeleteWarningMessage" value="用户 {0} 将被删除。" />
+    <text name="RoleDeleteWarningMessage" value="角色 {0} 将被删除，并取消所有已分配用户的关联。" />
+    <text name="PleaseEnterAtLeastNCharacter" value="请至少输入 {0} 个字符" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="请输入不超过 {0} 个字符" />
+    <text name="InvalidEmailAddress" value="邮箱地址无效" />
+    <text name="InvalidPattern" value="无效" />
+    <text name="PairsDoNotMatch" value="不一致" />
+    <text name="TotalRecordsCount" value="共 {0} 条" />
+    <text name="Search" value="搜索" />
+    <text name="Clear" value="清除" />
+    <text name="ResetPasswordStepOneInfo" value="1. 输入您的管理员密码" />
+    <text name="ResetPasswordStepTwoInfo" value="2. 复制此随机密码，以便发送给用户" />
+    <text name="UsersActivation" value="用户激活" />
+
+    <text name="CreatePosts" value="创建文章" />
+    <text name="EditPosts" value="编辑文章" />
+    <text name="DeletePosts" value="删除文章" />
+    <text name="ArchivePosts" value="归档文章" />
+    <text name="ApprovePosts" value="审核文章" />
+    <text name="CreateComments" value="发表评论" />
+    <text name="EditComments" value="编辑评论" />
+    <text name="DeleteComments" value="删除评论" />
+    <text name="CreateReplies" value="发表回复" />
+    <text name="ManageBans" value="管理用户封禁" />
+    <text name="Menu" value="菜单" />
+    <text name="SwitchToDarkMode" value="深色模式" />
+    <text name="SwitchToLightMode" value="浅色模式" />
+    <text name="403PageHeader" value="无权访问" />
+    <text name="403PageDescription" value="您没有访问该资源的权限，请联系管理员。" />
+    <text name="403PageButton" value="返回仪表盘" />
+
+    <text name="Posts" value="文章" />
+    <text name="MyPosts" value="我的文章" />
+    <text name="ReviewQueue" value="审核队列" />
+    <text name="NewPost" value="新建文章" />
+    <text name="CreatePost" value="创建文章" />
+    <text name="EditPost" value="编辑文章" />
+    <text name="PostTitle" value="标题" />
+    <text name="PostExcerpt" value="摘要" />
+    <text name="PostContent" value="正文（Markdown）" />
+    <text name="PostStatus" value="状态" />
+    <text name="PostStatusDraft" value="草稿" />
+    <text name="PostStatusPendingReview" value="待审核" />
+    <text name="PostStatusApproved" value="已通过" />
+    <text name="PostStatusRejected" value="已拒绝" />
+    <text name="PostStatusArchived" value="已归档" />
+    <text name="SubmitForReview" value="提交审核" />
+    <text name="Approve" value="通过" />
+    <text name="Reject" value="拒绝" />
+    <text name="ApprovePost" value="通过文章" />
+    <text name="RejectPost" value="拒绝文章" />
+    <text name="ArchivePost" value="归档" />
+    <text name="RejectionReason" value="拒绝原因" />
+    <text name="RejectPostReasonHint" value="请说明拒绝该文章的原因。该原因将显示给作者。" />
+    <text name="RejectionFeedback" value="审核意见" />
+    <text name="Author" value="作者" />
+    <text name="CreatedDate" value="创建时间" />
+    <text name="PublishDate" value="发布时间" />
+    <text name="PostSubmitConfirmMessage" value="确定将文章 {0} 提交审核？" />
+    <text name="PostApproveConfirmMessage" value="确定通过并发布文章 {0}？" />
+    <text name="PostArchiveWarningMessage" value="文章 {0} 将被取消发布并归档。" />
+    <text name="PostDeleteWarningMessage" value="文章 {0} 将被删除。" />
+    <text name="PostIsNotSubmittable" value="只有草稿、已拒绝或已归档的文章可以提交审核。" />
+    <text name="PostIsNotPendingReview" value="该文章不在待审核状态。" />
+    <text name="PostIsNotApproved" value="该文章未通过审核。" />
+    <text name="PostModifyNotAllowed" value="只能修改自己的文章。" />
+    <text name="ApprovedPostCannotBeDeletedByAuthor" value="已通过审核的文章不能由作者删除，请改为归档。" />
+    <text name="PostCreated" value="文章已保存为草稿。" />
+    <text name="PostUpdated" value="文章已更新。" />
+    <text name="PostSubmitted" value="文章已提交审核。" />
+    <text name="PostApproved" value="文章已通过审核并发布。" />
+    <text name="PostRejected" value="文章已被拒绝。" />
+    <text name="PostArchived" value="文章已归档。" />
+    <text name="UnknownAuthor" value="未知作者" />
+    <text name="NoPosts" value="您还没有创建任何文章。" />
+    <text name="NoPendingReviewPosts" value="没有待审核的文章。" />
+    <text name="Write" value="编写" />
+    <text name="Preview" value="预览" />
+    <text name="SaveAsDraft" value="保存为草稿" />
+    <text name="ApprovedPostEditHint" value="保存该文章后，它将回到待审核状态。" />
+
+    <text name="Comments" value="评论" />
+    <text name="Reply" value="回复" />
+    <text name="WriteAComment" value="发表评论" />
+    <text name="WriteAReply" value="发表回复" />
+    <text name="NoCommentsYet" value="暂无评论。" />
+    <text name="Edited" value="已编辑" />
+    <text name="CommentDeleted" value="评论已删除。" />
+    <text name="CommentUpdated" value="评论已更新。" />
+    <text name="CommentModifyNotAllowed" value="只能编辑自己的评论。" />
+    <text name="CommentDeleteNotAllowed" value="只能删除自己的评论，或自己文章下的评论。" />
+    <text name="PostNotApprovedForComments" value="只有已发布的文章才能评论。" />
+    <text name="CommentDeleteWarningMessage" value="该评论及其回复将被删除。" />
+    <text name="PostNotFound" value="该文章不存在或尚未发布。" />
+
+    <text name="View" value="查看" />
+    <text name="Upvote" value="点赞" />
+    <text name="Upvoted" value="已点赞" />
+    <text name="Upvotes" value="点赞数" />
+    <text name="Moderation" value="内容管理" />
+    <text name="Bans" value="封禁" />
+    <text name="Ban" value="封禁" />
+    <text name="Unban" value="解封" />
+
+    <text name="BanReason" value="原因" />
+    <text name="BanType" value="封禁类型" />
+    <text name="BanTypeComment" value="发表评论" />
+    <text name="BanTypeReply" value="发表回复" />
+    <text name="BanTypeUpvote" value="点赞" />
+    <text name="BannedFromCommenting" value="已被禁止发表评论" />
+    <text name="BannedFromReplying" value="已被禁止发表回复" />
+    <text name="BannedFromUpvoting" value="已被禁止点赞" />
+    <text name="ActiveRestrictions" value="您的当前限制" />
+    <text name="ActiveBans" value="生效中的封禁" />
+    <text name="BannedUsers" value="已封禁用户" />
+    <text name="RecentComments" value="最近评论" />
+    <text name="BannedAt" value="封禁时间" />
+    <text name="NoActiveBans" value="没有生效中的封禁" />
+    <text name="NoBanOptionsLeft" value="所有操作均已被封禁。" />
+    <text name="NoBannedUsers" value="没有已封禁的用户" />
+    <text name="NoRecentComments" value="暂无评论" />
+    <text name="AlreadyBanned" value="该用户已有此类型的生效封禁。" />
+    <text name="SelectAtLeastOneBanType" value="请至少选择一项要封禁的限制。" />
+    <text name="CannotBanSelf" value="不能封禁自己。" />
+    <text name="BanNotActive" value="该用户没有此类型的生效封禁。" />
+    <text name="BanSuccess" value="封禁已生效。" />
+    <text name="UnbanSuccess" value="封禁已解除。" />
+    <text name="UnbanWarningMessage" value="确定解除此封禁？该用户将立即恢复此操作权限。" />
+
+    <text name="Newest" value="最新" />
+    <text name="Top" value="热门" />
+    <text name="NoPublishedPosts" value="尚未发布任何文章。" />
+    <text name="LoadFailed" value="无法加载内容，请重试。" />
+    <text name="LoginToComment" value="您需要一个账号才能参与讨论。" />
+    <text name="LoginToUpvote" value="登录后即可点赞" />
+    <text name="PageNotFound" value="您访问的页面不存在。" />
+    <text name="BackToPosts" value="返回文章列表" />
+    <text name="Previous" value="上一页" />
+    <text name="Next" value="下一页" />
+
   </texts>
 </localizationDictionary>
 
